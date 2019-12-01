@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "react-scripts test",
-    "start:server": "nodemon api/server.js --ignore src/ --ignore build/ --ignore public/",
-    "start:client": "react-scripts start",
+    "clean:server": "rimraf server-dist && mkdir -p server-dist",
+    "dev": "npm-run-all dev:server dev:client",
+    "dev:server": "npm-run-all --parallel clean:server webpack:server start:server",
+    "webpack:server": "webpack --config webpack.server.config.js --watch",
+    "start:server": "nodemon --watch server-dist --exec \"node server-dist/server.js\" --ignore src/ --ignore build/ --ignore public/",
+    "dev:client": "react-scripts start",
     "build:client": "react-scripts build",
     "git": "node scripts/git.js marcbrathwaite expense-tracker"
   },
@@ -22,15 +26,19 @@
   },
   "homepage": "https://github.com/HackerYou/con-ed-full-stack#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "eslint": "^6.6.0",
     "express": "^4.17.1",
     "init-package-json": "^1.10.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.10",
     "nodemon": "^1.19.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.2.0"
+    "react-scripts": "^3.2.0",
+    "validator": "^12.1.0",
+    "winston": "^3.2.1"
   },
   "browserslist": [
     ">0.2%",
@@ -45,6 +53,18 @@
     ]
   },
   "devDependencies": {
-    "standard": "^12.0.1"
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0",
+    "standard": "^12.0.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-node-externals": "^1.7.2"
   }
 }

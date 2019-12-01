@@ -1,0 +1,16 @@
+{
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    [
+      "transform-object-rest-spread",
+      {
+        "useBuiltIns": true
+      }
+    ],
+    "@babel/plugin-syntax-dynamic-import",
+    "transform-class-properties"
+  ]
+}

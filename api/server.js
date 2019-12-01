@@ -1,13 +1,12 @@
-'use strict'
+import mongoose from 'mongoose'
+import express from 'express'
 
-const mongoose = require('mongoose')
-const express = require('express')
+import backendRouter from './routes'
 
 // 1. Create main express intance
 const app = express()
 
 // 2. Require routes
-const { router: bookRoutes } = require('./routes/books/bookRoutes')
 
 // 3. Require conatants
 const { URL, PORT } = require('./utils/constants')
@@ -17,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // 5. Utilise routes
-app.use('/api/books', bookRoutes)
+app.use(backendRouter)
 
 // 6. Define configuration for mongodb
 const MONGO_CONFIG = {
@@ -34,6 +33,6 @@ mongoose
       console.log(`Server is running on PORT: ${PORT}`)
     })
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err)
   })
