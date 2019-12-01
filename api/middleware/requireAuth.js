@@ -1,4 +1,4 @@
-import TokenHandler from '../utils/TokenHandler'
+import TokenManager from '../utils/TokenManager'
 import logger from '../utils/logger'
 
 import { UserManager } from '../managers'
@@ -23,7 +23,7 @@ export async function requireAuth(req, res, next) {
       throw new Error('No Token in the request header')
     }
     // verify token
-    const decoded = await TokenHandler.verifyToken(token)
+    const decoded = await TokenManager.verifyJWTToken(token)
     // Check if user  still exists
     const currentUser = await UserManager.shareInstance.getUser(decoded.id)
     if (!currentUser) {
