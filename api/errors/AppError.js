@@ -1,9 +1,9 @@
 export class AppError extends Error {
   constructor(message, statusCode) {
     super(message)
-
+    this.name = 'AppError'
     this.statusCode = statusCode
-    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error'
+    this.status = `${statusCode}`.startsWith('4') ? 'failure' : 'error'
     this.isOperational = true
 
     // all stack trace functionality

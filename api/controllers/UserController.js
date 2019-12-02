@@ -1,33 +1,28 @@
+// Managers
 import { UserManager } from '../managers'
 
+// Controller
 import { BaseController } from './BaseController'
+
+// Erros
+import { AppError } from '../errors'
 
 import logger from '../utils/logger'
 import { filterObj } from '../utils'
 
 export class UserController extends BaseController {
   static async getCurrentUser(req, res, next) {
-    try {
-      const { user } = req
-      if (!user) {
-        throw new Error('User not found')
-      }
-      res.status(200).json({
-        statusCd: 200,
-        status: 'success',
-        data: { user }
-      })
-    } catch (e) {
-      // FIXME: Global error
-      logger.error(
-        `[UserController - getCurrentUser] User not found: ${e.message}`
-      )
-      res.status(404).json({
-        statusCd: 400,
-        status: 'failure',
-        message: `User not found: ${e.message}`
-      })
+    const { user } = req
+    if (!user) {
+      logger.error('[UserController - getCurrentUser] User not found')
+
+      return next(new AppError('User not found', 404))
     }
+    res.status(200).json({
+      statusCd: 200,
+      status: 'success',
+      data: { user }
+    })
   }
 
   static async getUsers(req, res, next) {
@@ -41,11 +36,10 @@ export class UserController extends BaseController {
         }
       })
     } catch (e) {
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: `System: ${e.message}`
-      })
+      logger.error(
+        `[UserController - getUsers] Get Users failure: ${e.message}`
+      )
+      next(e)
     }
   }
 
@@ -55,15 +49,24 @@ export class UserController extends BaseController {
       const { password, newPassword, newPasswordConfirm } = req.body
       const { user } = req
       if (!user) {
-        throw new Error('User not found')
+        logger.error('[UserController - updatePassword] User not found')
+
+        return next(new AppError('User not found', 404))
       }
 
       // get userId
       const { id } = user
 
       if (!password || !newPassword || !newPasswordConfirm) {
-        throw new Error(
-          'Invalid arguments missing either password, newPassword or newPasswordConfirm'
+        logger.error(
+          `[UserController - updatePassword] Missing either name, email, password or passwordConfirm in request body`
+        )
+
+        return next(
+          new AppError(
+            'Missing either name, email, password or passwordConfirm in request body',
+            400
+          )
         )
       }
 
@@ -77,31 +80,27 @@ export class UserController extends BaseController {
         newPasswordConfirm
       )
       UserController.createSendToken(userModel, token, 200, res)
-      // res.status(200).json({
-      //   statusCd: 200,
-      //   status: 'success',
-      //   token,
-      //   data: { user: userModel }
-      // })
     } catch (e) {
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: `System: ${e.message}`
-      })
+      logger.error(
+        `[UserController - updatePassword] Update Password failure: ${e.message}`
+      )
+      next(e)
     }
   }
 
   static async updateUserInfo(req, res, next) {
     try {
-      // Create error in password is send in request
+      // Create error if password is sent in request
       if (req.body.password || req.body.passwordConfirm) {
-        throw new Error('This is route is not for password updates - 400')
+        // TODO: logger
+        return next(
+          new AppError('This is route is not for password updates', 400)
+        )
       }
 
       const { user } = req
       if (!user) {
-        throw new Error('User not found')
+        return next(new AppError('User not found', 404))
       }
 
       // get userId
@@ -123,11 +122,8 @@ export class UserController extends BaseController {
         }
       })
     } catch (e) {
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: `System: ${e.message}`
-      })
+      // TODO: logger
+      next(e)
     }
   }
 
@@ -135,7 +131,8 @@ export class UserController extends BaseController {
     try {
       const { user } = req
       if (!user) {
-        throw new Error('User not found')
+        // TODO: logger
+        return next(new AppError('User not found', 404))
       }
 
       // get userId
@@ -148,11 +145,8 @@ export class UserController extends BaseController {
         data: null
       })
     } catch (e) {
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: `System: ${e.message}`
-      })
+      // TODO: logger
+      next(e)
     }
   }
 }

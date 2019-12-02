@@ -1,6 +1,13 @@
+// Managers
 import { UserManager } from '../managers'
+
+// Controllers
 import { BaseController } from './BaseController'
 
+// Errors
+import { AppError } from '../errors'
+
+// Utils
 import logger from '../utils/logger'
 
 export class AuthController extends BaseController {
@@ -10,14 +17,14 @@ export class AuthController extends BaseController {
 
       if (!name || !email || !password || !passwordConfirm) {
         logger.error(
-          '[AuthController - signUp] Missing parameter [name, email, password, passwordConfirm] in request body'
+          '[AuthController - signUp] Missing either name, email, password or passwordConfirm in request body'
         )
-
-        return res.status(400).json({
-          statusCd: 400,
-          status: 'failure',
-          message: 'Invalid arguments'
-        })
+        return next(
+          new AppError(
+            'Invalid Arguments - Missing either name, email, password or passwordConfirm in request body',
+            400
+          )
+        )
       }
 
       const { token, user } = await UserManager.shareInstance.signUp({
@@ -29,21 +36,11 @@ export class AuthController extends BaseController {
 
       logger.info(`[AuthController - signUp] SignUp success`)
       AuthController.createSendToken(user, token, 201, res)
-      // res.status(201).json({
-      //   statusCd: 201,
-      //   status: 'success',
-      //   token,
-      //   data: { user }
-      // })
     } catch (e) {
       logger.error(
         `[AuthController - signUp] SignUp request failed: ${e.message}`
       )
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: 'SignUp failure'
-      })
+      next(e)
     }
   }
 
@@ -54,14 +51,14 @@ export class AuthController extends BaseController {
       // Check if email and password exist
       if (!email || !password) {
         logger.error(
-          '[AuthController - login] Missing email or password from request body'
+          '[AuthController - login] Missing email or password in request body'
         )
-        // FIXME: possibly throw an error and handle downstream
-        return res.status(400).json({
-          statusCd: 400,
-          status: 'failure',
-          message: 'Invalid Arguments'
-        })
+        return next(
+          new AppError(
+            'Invalid Arguments - Missing email or password in request body',
+            400
+          )
+        )
       }
 
       const { token, user } = await UserManager.shareInstance.login({
@@ -70,20 +67,9 @@ export class AuthController extends BaseController {
       })
 
       AuthController.createSendToken(user, token, 200, res)
-
-      // res.status(200).json({
-      //   statusCd: 200,
-      //   status: 'success',
-      //   token,
-      //   data: { user }
-      // })
     } catch (e) {
       logger.error(`[AuthController - Login] Login failed: ${e.message}`)
-      res.status(401).json({
-        statusCd: 401,
-        status: 'failure',
-        message: 'Unauthorized access'
-      })
+      next(e)
     }
   }
 
@@ -95,14 +81,11 @@ export class AuthController extends BaseController {
       // Check if email and password exist
       if (!email) {
         logger.error(
-          '[AuthController - forgotPassword] Missing email from request body'
+          '[AuthController - forgotPassword] Missing email in request body'
         )
-        // FIXME: possibly throw an error and handle downstream
-        return res.status(400).json({
-          statusCd: 400,
-          status: 'failure',
-          message: 'Invalid Arguments'
-        })
+        return next(
+          new AppError('Invalid Arguments - Missing email in request body', 400)
+        )
       }
 
       await UserManager.shareInstance.forgotPassword(email, { host, protocol })
@@ -115,11 +98,7 @@ export class AuthController extends BaseController {
       logger.error(
         `[AuthController - forgotPassword] Forgot Password function failed: ${e.message}`
       )
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: 'Forgot Password failed'
-      })
+      next(e)
     }
   }
 
@@ -131,14 +110,15 @@ export class AuthController extends BaseController {
 
       if (!password || !passwordConfirm) {
         logger.error(
-          '[AuthController - resetPassword] Missing parameter [password, passwordConfirm] in request body'
+          '[AuthController - resetPassword] Missing password or passwordConfirm in request body'
         )
 
-        return res.status(400).json({
-          statusCd: 400,
-          status: 'failure',
-          message: 'Invalid arguments'
-        })
+        return next(
+          new AppError(
+            'Invalid Arguments - Missing password or passwordConfirm in request body',
+            400
+          )
+        )
       }
 
       const {
@@ -151,22 +131,11 @@ export class AuthController extends BaseController {
       )
 
       AuthController.createSendToken(user, jwtToken, 200, res)
-
-      // res.status(200).json({
-      //   statusCd: 200,
-      //   status: 'success',
-      //   token: jwtToken,
-      //   data: { user }
-      // })
     } catch (e) {
       logger.error(
         `[AuthController - resetPassword] reset password function failed: ${e.message}`
       )
-      res.status(500).json({
-        statusCd: 500,
-        status: 'failure',
-        message: 'Reset Password failed'
-      })
+      next(e)
     }
   }
 }

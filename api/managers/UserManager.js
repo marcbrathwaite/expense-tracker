@@ -1,11 +1,11 @@
-import crypto from 'crypto'
-
 // Models
 import { User } from '../models'
-
 // Services
 import { EmailService } from '../services'
-
+//Managers
+import { BaseManager } from './BaseManager'
+//Errors
+import { AppError } from '../errors'
 // utils
 import TokenManager from '../utils/TokenManager'
 import logger from '../utils/logger'
@@ -13,8 +13,9 @@ import logger from '../utils/logger'
 // Constants
 import { BACKEND_BASEURL } from '../config'
 
-export class UserManager {
+export class UserManager extends BaseManager {
   constructor() {
+    super()
     const instance = this.constructor.instance
     if (instance) {
       return instance
@@ -47,7 +48,7 @@ export class UserManager {
       }
     } catch (e) {
       logger.error(`[UserManager - signUp] Unable to signup user: ${e.message}`)
-      throw new Error(`Unable to signup user: ${e.message}`)
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -69,7 +70,7 @@ export class UserManager {
         ))
       ) {
         logger.error('[UserManager - login] Incorrect email or password')
-        throw new Error('Incorrect email or password')
+        throw new AppError('Incorrect email or password', 401)
       }
       // if everything is ok , respond with token
       const token = TokenManager.signJWTToken(existingUser._id)
@@ -79,8 +80,8 @@ export class UserManager {
         user: existingUser.serialize()
       }
     } catch (e) {
-      logger.error(`[UserManager - login] login failure: ${e.message}`)
-      throw new Error(`[UserManager - login] login failure: ${e.message}`)
+      logger.error(`[UserManager - login] Login failure: ${e.message}`)
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -91,7 +92,7 @@ export class UserManager {
 
       if (!user) {
         logger.error(`[UserManager - forgotPassword] User not found`)
-        throw new Error('User not found')
+        throw new AppError('User not found', 404)
       }
 
       // Generate random reset token
@@ -117,44 +118,54 @@ export class UserManager {
         user.passwordResetExpires = undefined
         await user.save({ validateBeforeSave: false })
         logger.error(
-          `[UserManager - forgot Password] email failed: ${e.message}`
+          `[UserManager - forgotPassword] email failed: ${e.message}`
         )
-        throw new Error('Email failed')
+        throw new AppError('Internal Server Failure', 500)
       }
     } catch (e) {
-      throw new Error(`Forgot Password failure: ${e.message}`)
+      logger.error(
+        `[UserManager - forgotPassword] Forgot Password failure: ${e.message}`
+      )
+      throw UserManager.parseError(e, 'User')
     }
   }
 
   async resetPassword(token, password, passwordConfirm) {
-    // has token
-    const hashedToken = TokenManager.hashPasswordResetToken(token)
-    // get user based on hased token and checking if expire date is greater than now
-    const user = await User.findOne({
-      passwordResetToken: hashedToken,
-      passwordResetExpires: { $gt: Date.now() }
-    })
+    try {
+      // hash resettoken
+      const hashedToken = TokenManager.hashPasswordResetToken(token)
+      // get user based on hased token and checking if expire date is greater than now
+      const user = await User.findOne({
+        passwordResetToken: hashedToken,
+        passwordResetExpires: { $gt: Date.now() }
+      })
 
-    // if token has not expired, and there is user, set new password
-    if (!user) {
+      // if token has not expired, and there is user, set new password
+      if (!user) {
+        logger.error(
+          '[UserManager - resetPassword] Token is invalid or has expired'
+        )
+        throw new AppError('Password Reset Token invalid or expired', 400)
+      }
+
+      user.password = password
+      user.passwordConfirm = passwordConfirm
+      user.passwordResetToken = undefined
+      user.passwordResetExpires = undefined
+      await user.save()
+
+      // Log the user in, send JWT to client
+      const jwtToken = TokenManager.signJWTToken(user._id)
+
+      return {
+        token: jwtToken,
+        user: user.serialize()
+      }
+    } catch (e) {
       logger.error(
-        '[UserManager - resetPassword] Token is invalid or has expired'
+        `[UserManager - resetPassword] Reset Password failure: ${e.message}`
       )
-      throw new Error('Token is invalid or has expired')
-    }
-
-    user.password = password
-    user.passwordConfirm = passwordConfirm
-    user.passwordResetToken = undefined
-    user.passwordResetExpires = undefined
-    await user.save()
-
-    // Log the user in, send JWT to client
-    const jwtToken = TokenManager.signJWTToken(user._id)
-
-    return {
-      token: jwtToken,
-      user: user.serialize()
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -165,7 +176,7 @@ export class UserManager {
       // check if Posted current password is correct
       if (!(await user.correctPassword(oldpassword, user.password))) {
         logger.error('[UserManager - updatePassword] Password no not match')
-        throw new Error('Password does not match - 400')
+        throw new AppError('Incorrect Password', 400)
       }
 
       user.password = newPassword
@@ -180,7 +191,10 @@ export class UserManager {
         user: user.serialize()
       }
     } catch (e) {
-      throw new Error(`Update password error - 500: ${e.message}`)
+      logger.error(
+        `[UserManager - updatePassword] Update Password failure: ${e.message}`
+      )
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -195,7 +209,10 @@ export class UserManager {
 
       return updatedUser.serialize()
     } catch (e) {
-      throw new Error(`UpdateUserInfo : ${e.message}`)
+      logger.error(
+        `[UserManager - updateUserInfo] Update User Info failure failure: ${e.message}`
+      )
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -203,7 +220,10 @@ export class UserManager {
     try {
       await this._user.findByIdAndUpdate(id, { active: false })
     } catch (e) {
-      throw new Error('Deactivate user failed')
+      logger.error(
+        `[UserManager - deactivateUse] Deactivate User failure: ${e.message}`
+      )
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -211,7 +231,8 @@ export class UserManager {
     try {
       return this._user.findById(id)
     } catch (e) {
-      throw new Error('DB Error')
+      logger.error(`[UserManager - getUser] Get User failure: ${e.message}`)
+      throw UserManager.parseError(e, 'User')
     }
   }
 
@@ -224,7 +245,8 @@ export class UserManager {
       }
       return users
     } catch (e) {
-      throw new Error('DB Error')
+      logger.error(`[UserManager - getUsers] Get Users failure: ${e.message}`)
+      throw UserManager.parseError(e, 'User')
     }
   }
 }

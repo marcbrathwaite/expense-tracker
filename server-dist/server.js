@@ -107,9 +107,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hpp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
 /* harmony import */ var hpp__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hpp__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9);
-/* harmony import */ var _routers_defaultRouter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(44);
+/* harmony import */ var _routers_defaultRouter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(49);
 /* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(11);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(35);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(39);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_11__);
 
 
@@ -236,13 +236,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _routers_authRouter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
-/* harmony import */ var _routers_userRouter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(40);
+/* harmony import */ var _routers_userRouter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(45);
+/* harmony import */ var _routers_transactionRouter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(51);
+
 
 
 
 var router = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router();
 router.use('/auth', _routers_authRouter__WEBPACK_IMPORTED_MODULE_1__["default"]);
 router.use('/users', _routers_userRouter__WEBPACK_IMPORTED_MODULE_2__["default"]);
+router.use('/transactions', _routers_transactionRouter__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),
@@ -272,14 +275,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AuthController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AuthController", function() { return _AuthController__WEBPACK_IMPORTED_MODULE_0__["AuthController"]; });
 
-/* harmony import */ var _UserController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37);
+/* harmony import */ var _UserController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(41);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserController", function() { return _UserController__WEBPACK_IMPORTED_MODULE_1__["UserController"]; });
 
-/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(36);
+/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(40);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BaseController", function() { return _BaseController__WEBPACK_IMPORTED_MODULE_2__["BaseController"]; });
 
-/* harmony import */ var _ErrorController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(50);
+/* harmony import */ var _ErrorController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ErrorController", function() { return _ErrorController__WEBPACK_IMPORTED_MODULE_3__["ErrorController"]; });
+
+/* harmony import */ var _TransactionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(52);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransactionController", function() { return _TransactionController__WEBPACK_IMPORTED_MODULE_4__["TransactionController"]; });
+
 
 
 
@@ -306,15 +313,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
-/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(36);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(33);
+/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(40);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(33);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(37);
 
 
 
 
 
 
+// Managers
+ // Controllers
 
+ // Errors
+
+ // Utils
 
 
 var AuthController =
@@ -345,12 +358,8 @@ function (_BaseController) {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error('[AuthController - signUp] Missing parameter [name, email, password, passwordConfirm] in request body');
-              return _context.abrupt("return", res.status(400).json({
-                statusCd: 400,
-                status: 'failure',
-                message: 'Invalid arguments'
-              }));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error('[AuthController - signUp] Missing either name, email, password or passwordConfirm in request body');
+              return _context.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('Invalid Arguments - Missing either name, email, password or passwordConfirm in request body', 400)));
 
             case 5:
               _context.next = 7;
@@ -365,26 +374,16 @@ function (_BaseController) {
               _ref = _context.sent;
               token = _ref.token;
               user = _ref.user;
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].info("[AuthController - signUp] SignUp success");
-              AuthController.createSendToken(user, token, 201, res); // res.status(201).json({
-              //   statusCd: 201,
-              //   status: 'success',
-              //   token,
-              //   data: { user }
-              // })
-
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].info("[AuthController - signUp] SignUp success");
+              AuthController.createSendToken(user, token, 201, res);
               _context.next = 18;
               break;
 
             case 14:
               _context.prev = 14;
               _context.t0 = _context["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error("[AuthController - signUp] SignUp request failed: ".concat(_context.t0.message));
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: 'SignUp failure'
-              });
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[AuthController - signUp] SignUp request failed: ".concat(_context.t0.message));
+              next(_context.t0);
 
             case 18:
             case "end":
@@ -410,13 +409,8 @@ function (_BaseController) {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error('[AuthController - login] Missing email or password from request body'); // FIXME: possibly throw an error and handle downstream
-
-              return _context2.abrupt("return", res.status(400).json({
-                statusCd: 400,
-                status: 'failure',
-                message: 'Invalid Arguments'
-              }));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error('[AuthController - login] Missing email or password in request body');
+              return _context2.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('Invalid Arguments - Missing email or password in request body', 400)));
 
             case 5:
               _context2.next = 7;
@@ -429,25 +423,15 @@ function (_BaseController) {
               _ref2 = _context2.sent;
               token = _ref2.token;
               user = _ref2.user;
-              AuthController.createSendToken(user, token, 200, res); // res.status(200).json({
-              //   statusCd: 200,
-              //   status: 'success',
-              //   token,
-              //   data: { user }
-              // })
-
+              AuthController.createSendToken(user, token, 200, res);
               _context2.next = 17;
               break;
 
             case 13:
               _context2.prev = 13;
               _context2.t0 = _context2["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error("[AuthController - Login] Login failed: ".concat(_context2.t0.message));
-              res.status(401).json({
-                statusCd: 401,
-                status: 'failure',
-                message: 'Unauthorized access'
-              });
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[AuthController - Login] Login failed: ".concat(_context2.t0.message));
+              next(_context2.t0);
 
             case 17:
             case "end":
@@ -474,13 +458,8 @@ function (_BaseController) {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error('[AuthController - forgotPassword] Missing email from request body'); // FIXME: possibly throw an error and handle downstream
-
-              return _context3.abrupt("return", res.status(400).json({
-                statusCd: 400,
-                status: 'failure',
-                message: 'Invalid Arguments'
-              }));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error('[AuthController - forgotPassword] Missing email in request body');
+              return _context3.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('Invalid Arguments - Missing email in request body', 400)));
 
             case 7:
               _context3.next = 9;
@@ -501,12 +480,8 @@ function (_BaseController) {
             case 12:
               _context3.prev = 12;
               _context3.t0 = _context3["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error("[AuthController - forgotPassword] Forgot Password function failed: ".concat(_context3.t0.message));
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: 'Forgot Password failed'
-              });
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[AuthController - forgotPassword] Forgot Password function failed: ".concat(_context3.t0.message));
+              next(_context3.t0);
 
             case 16:
             case "end":
@@ -534,12 +509,8 @@ function (_BaseController) {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error('[AuthController - resetPassword] Missing parameter [password, passwordConfirm] in request body');
-              return _context4.abrupt("return", res.status(400).json({
-                statusCd: 400,
-                status: 'failure',
-                message: 'Invalid arguments'
-              }));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error('[AuthController - resetPassword] Missing password or passwordConfirm in request body');
+              return _context4.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('Invalid Arguments - Missing password or passwordConfirm in request body', 400)));
 
             case 6:
               _context4.next = 8;
@@ -549,25 +520,15 @@ function (_BaseController) {
               _ref3 = _context4.sent;
               jwtToken = _ref3.token;
               user = _ref3.user;
-              AuthController.createSendToken(user, jwtToken, 200, res); // res.status(200).json({
-              //   statusCd: 200,
-              //   status: 'success',
-              //   token: jwtToken,
-              //   data: { user }
-              // })
-
+              AuthController.createSendToken(user, jwtToken, 200, res);
               _context4.next = 18;
               break;
 
             case 14:
               _context4.prev = 14;
               _context4.t0 = _context4["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error("[AuthController - resetPassword] reset password function failed: ".concat(_context4.t0.message));
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: 'Reset Password failed'
-              });
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[AuthController - resetPassword] reset password function failed: ".concat(_context4.t0.message));
+              next(_context4.t0);
 
             case 18:
             case "end":
@@ -620,6 +581,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserManager", function() { return _UserManager__WEBPACK_IMPORTED_MODULE_0__["UserManager"]; });
 
+/* harmony import */ var _TransactionManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransactionManager", function() { return _TransactionManager__WEBPACK_IMPORTED_MODULE_1__["TransactionManager"]; });
+
+/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BaseManager", function() { return _BaseManager__WEBPACK_IMPORTED_MODULE_2__["BaseManager"]; });
+
+
+
 
 
 /***/ }),
@@ -635,20 +604,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21);
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(30);
-/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(25);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(33);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(35);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(30);
+/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(54);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(33);
+/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(24);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(37);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(39);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
- // Models
 
+
+
+
+// Models
  // Services
+
+ //Managers
+
+ //Errors
 
  // utils
 
@@ -658,19 +642,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var UserManager =
 /*#__PURE__*/
-function () {
+function (_BaseManager) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default()(UserManager, _BaseManager);
+
   function UserManager() {
+    var _this;
+
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, UserManager);
 
-    var instance = this.constructor.instance;
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(UserManager).call(this));
+    var instance = _this.constructor.instance;
 
     if (instance) {
-      return instance;
+      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(_this, instance);
     }
 
-    this.constructor.instance = this; // Assign User model
+    _this.constructor.instance = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this); // Assign User model
 
-    this._user = _models__WEBPACK_IMPORTED_MODULE_4__["User"];
+    _this._user = _models__WEBPACK_IMPORTED_MODULE_7__["User"];
+    return _this;
   } // shared instance of UserManager
 
 
@@ -688,10 +678,10 @@ function () {
 
             case 3:
               newUser = _context.sent;
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('[UserManager - signUp] Successfully added user to the database'); // Create token
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].info('[UserManager - signUp] Successfully added user to the database'); // Create token
 
-              token = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_6__["default"].signJWTToken(newUser._id);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('[UserManager - signUp] JWT created');
+              token = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__["default"].signJWTToken(newUser._id);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].info('[UserManager - signUp] JWT created');
               return _context.abrupt("return", {
                 token: token,
                 user: newUser.serialize()
@@ -700,8 +690,8 @@ function () {
             case 10:
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error("[UserManager - signUp] Unable to signup user: ".concat(_context.t0.message));
-              throw new Error("Unable to signup user: ".concat(_context.t0.message));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - signUp] Unable to signup user: ".concat(_context.t0.message));
+              throw UserManager.parseError(_context.t0, 'User');
 
             case 14:
             case "end":
@@ -727,7 +717,7 @@ function () {
             case 3:
               existingUser = _context2.sent;
               // make sure we get the password although we specified in the model that it wont be sent by default
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('[UserManager - login] get User from database');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].info('[UserManager - login] get User from database');
               _context2.t0 = !existingUser;
 
               if (_context2.t0) {
@@ -747,12 +737,12 @@ function () {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error('[UserManager - login] Incorrect email or password');
-              throw new Error('Incorrect email or password');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error('[UserManager - login] Incorrect email or password');
+              throw new _errors__WEBPACK_IMPORTED_MODULE_10__["AppError"]('Incorrect email or password', 401);
 
             case 13:
               // if everything is ok , respond with token
-              token = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_6__["default"].signJWTToken(existingUser._id);
+              token = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__["default"].signJWTToken(existingUser._id);
               return _context2.abrupt("return", {
                 token: token,
                 user: existingUser.serialize()
@@ -761,8 +751,8 @@ function () {
             case 17:
               _context2.prev = 17;
               _context2.t1 = _context2["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error("[UserManager - login] login failure: ".concat(_context2.t1.message));
-              throw new Error("[UserManager - login] login failure: ".concat(_context2.t1.message));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - login] Login failure: ".concat(_context2.t1.message));
+              throw UserManager.parseError(_context2.t1, 'User');
 
             case 21:
             case "end":
@@ -793,8 +783,8 @@ function () {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error("[UserManager - forgotPassword] User not found");
-              throw new Error('User not found');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - forgotPassword] User not found");
+              throw new _errors__WEBPACK_IMPORTED_MODULE_10__["AppError"]('User not found', 404);
 
             case 7:
               // Generate random reset token
@@ -808,11 +798,11 @@ function () {
             case 10:
               // Send to users email
               host = urlConfig.host, protocol = urlConfig.protocol;
-              resetURL = "".concat(protocol, "://").concat(host).concat(_config__WEBPACK_IMPORTED_MODULE_8__["BACKEND_BASEURL"], "/reset-password/").concat(resetToken);
+              resetURL = "".concat(protocol, "://").concat(host).concat(_config__WEBPACK_IMPORTED_MODULE_13__["BACKEND_BASEURL"], "/reset-password/").concat(resetToken);
               message = "Forgot your password? Submit a PATCH request with your new password and passwordConfirm to ".concat(resetURL, "\nIf you didn't forget your password, please ignore this email");
               _context3.prev = 13;
               _context3.next = 16;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_services__WEBPACK_IMPORTED_MODULE_5__["EmailService"].shareInstance.sendEmail({
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_services__WEBPACK_IMPORTED_MODULE_8__["EmailService"].shareInstance.sendEmail({
                 email: user.email,
                 subject: 'Your password reset token is valid for 10mins',
                 message: message
@@ -834,19 +824,20 @@ function () {
               }));
 
             case 24:
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error("[UserManager - forgot Password] email failed: ".concat(_context3.t0.message));
-              throw new Error('Email failed');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - forgotPassword] email failed: ".concat(_context3.t0.message));
+              throw new _errors__WEBPACK_IMPORTED_MODULE_10__["AppError"]('Internal Server Failure', 500);
 
             case 26:
-              _context3.next = 31;
+              _context3.next = 32;
               break;
 
             case 28:
               _context3.prev = 28;
               _context3.t1 = _context3["catch"](0);
-              throw new Error("Forgot Password failure: ".concat(_context3.t1.message));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - forgotPassword] Forgot Password failure: ".concat(_context3.t1.message));
+              throw UserManager.parseError(_context3.t1, 'User');
 
-            case 31:
+            case 32:
             case "end":
               return _context3.stop();
           }
@@ -861,50 +852,57 @@ function () {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              // has token
-              hashedToken = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_6__["default"].hashPasswordResetToken(token); // get user based on hased token and checking if expire date is greater than now
+              _context4.prev = 0;
+              // hash resettoken
+              hashedToken = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__["default"].hashPasswordResetToken(token); // get user based on hased token and checking if expire date is greater than now
 
-              _context4.next = 3;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_models__WEBPACK_IMPORTED_MODULE_4__["User"].findOne({
+              _context4.next = 4;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_models__WEBPACK_IMPORTED_MODULE_7__["User"].findOne({
                 passwordResetToken: hashedToken,
                 passwordResetExpires: {
                   $gt: Date.now()
                 }
               }));
 
-            case 3:
+            case 4:
               user = _context4.sent;
 
               if (user) {
-                _context4.next = 7;
+                _context4.next = 8;
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error('[UserManager - resetPassword] Token is invalid or has expired');
-              throw new Error('Token is invalid or has expired');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error('[UserManager - resetPassword] Token is invalid or has expired');
+              throw new _errors__WEBPACK_IMPORTED_MODULE_10__["AppError"]('Password Reset Token invalid or expired', 400);
 
-            case 7:
+            case 8:
               user.password = password;
               user.passwordConfirm = passwordConfirm;
               user.passwordResetToken = undefined;
               user.passwordResetExpires = undefined;
-              _context4.next = 13;
+              _context4.next = 14;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(user.save());
 
-            case 13:
+            case 14:
               // Log the user in, send JWT to client
-              jwtToken = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_6__["default"].signJWTToken(user._id);
+              jwtToken = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__["default"].signJWTToken(user._id);
               return _context4.abrupt("return", {
                 token: jwtToken,
                 user: user.serialize()
               });
 
-            case 15:
+            case 18:
+              _context4.prev = 18;
+              _context4.t0 = _context4["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - resetPassword] Reset Password failure: ".concat(_context4.t0.message));
+              throw UserManager.parseError(_context4.t0, 'User');
+
+            case 22:
             case "end":
               return _context4.stop();
           }
         }
-      });
+      }, null, null, [[0, 18]]);
     }
   }, {
     key: "updatePassword",
@@ -929,8 +927,8 @@ function () {
                 break;
               }
 
-              _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].error('[UserManager - updatePassword] Password no not match');
-              throw new Error('Password does not match - 400');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error('[UserManager - updatePassword] Password no not match');
+              throw new _errors__WEBPACK_IMPORTED_MODULE_10__["AppError"]('Incorrect Password', 400);
 
             case 9:
               user.password = newPassword;
@@ -940,7 +938,7 @@ function () {
 
             case 13:
               // Log the user in, send JWT to client
-              jwtToken = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_6__["default"].signJWTToken(user._id);
+              jwtToken = _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__["default"].signJWTToken(user._id);
               return _context5.abrupt("return", {
                 token: jwtToken,
                 user: user.serialize()
@@ -949,9 +947,10 @@ function () {
             case 17:
               _context5.prev = 17;
               _context5.t0 = _context5["catch"](0);
-              throw new Error("Update password error - 500: ".concat(_context5.t0.message));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - updatePassword] Update Password failure: ".concat(_context5.t0.message));
+              throw UserManager.parseError(_context5.t0, 'User');
 
-            case 20:
+            case 21:
             case "end":
               return _context5.stop();
           }
@@ -981,9 +980,10 @@ function () {
             case 7:
               _context6.prev = 7;
               _context6.t0 = _context6["catch"](0);
-              throw new Error("UpdateUserInfo : ".concat(_context6.t0.message));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - updateUserInfo] Update User Info failure failure: ".concat(_context6.t0.message));
+              throw UserManager.parseError(_context6.t0, 'User');
 
-            case 10:
+            case 11:
             case "end":
               return _context6.stop();
           }
@@ -1004,15 +1004,16 @@ function () {
               }));
 
             case 3:
-              _context7.next = 8;
+              _context7.next = 9;
               break;
 
             case 5:
               _context7.prev = 5;
               _context7.t0 = _context7["catch"](0);
-              throw new Error('Deactivate user failed');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - deactivateUse] Deactivate User failure: ".concat(_context7.t0.message));
+              throw UserManager.parseError(_context7.t0, 'User');
 
-            case 8:
+            case 9:
             case "end":
               return _context7.stop();
           }
@@ -1032,9 +1033,10 @@ function () {
             case 4:
               _context8.prev = 4;
               _context8.t0 = _context8["catch"](0);
-              throw new Error('DB Error');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - getUser] Get User failure: ".concat(_context8.t0.message));
+              throw UserManager.parseError(_context8.t0, 'User');
 
-            case 7:
+            case 8:
             case "end":
               return _context8.stop();
           }
@@ -1070,9 +1072,10 @@ function () {
             case 9:
               _context9.prev = 9;
               _context9.t0 = _context9["catch"](0);
-              throw new Error('DB Error');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_12__["default"].error("[UserManager - getUsers] Get Users failure: ".concat(_context9.t0.message));
+              throw UserManager.parseError(_context9.t0, 'User');
 
-            case 12:
+            case 13:
             case "end":
               return _context9.stop();
           }
@@ -1091,27 +1094,25 @@ function () {
   }]);
 
   return UserManager;
-}();
+}(_BaseManager__WEBPACK_IMPORTED_MODULE_9__["BaseManager"]);
 
 /***/ }),
 /* 20 */
-/***/ (function(module, exports) {
-
-module.exports = require("crypto");
-
-/***/ }),
-/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "User", function() { return _userModel__WEBPACK_IMPORTED_MODULE_0__["User"]; });
+
+/* harmony import */ var _transactionModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(50);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transaction", function() { return _transactionModel__WEBPACK_IMPORTED_MODULE_1__["Transaction"]; });
+
 
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1121,11 +1122,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(validator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
+/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
 /* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bcryptjs__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
+/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(24);
 
 
 
@@ -1258,7 +1259,7 @@ userSchema.methods.changePasswordAfter = function (JWTTimestamp) {
 }; // return the params we want to send to to UI
 
 
-userSchema.methods.serialize = function serialize() {
+userSchema.methods.serialize = function () {
   var self = this;
   var email = self.email,
       name = self.name,
@@ -1287,19 +1288,19 @@ userSchema.methods.createPasswordResetToken = function () {
 var User = mongoose__WEBPACK_IMPORTED_MODULE_1___default.a.model('users', userSchema);
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("validator");
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcryptjs");
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1310,7 +1311,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
 /* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(26);
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_4__);
@@ -1374,6 +1375,12 @@ function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (TokenManager);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+module.exports = require("crypto");
 
 /***/ }),
 /* 26 */
@@ -1522,7 +1529,78 @@ module.exports = require("nodemailer");
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var winston__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34);
+/* harmony import */ var _AppError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AppError", function() { return _AppError__WEBPACK_IMPORTED_MODULE_0__["AppError"]; });
+
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppError", function() { return AppError; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(35);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(17);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36);
+/* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+var AppError =
+/*#__PURE__*/
+function (_Error) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(AppError, _Error);
+
+  function AppError(message, statusCode) {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, AppError);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default()(AppError).call(this, message));
+    _this.name = 'AppError';
+    _this.statusCode = statusCode;
+    _this.status = "".concat(statusCode).startsWith('4') ? 'failure' : 'error';
+    _this.isOperational = true; // all stack trace functionality
+
+    Error.captureStackTrace(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), _this.constructor);
+    return _this;
+  }
+
+  return AppError;
+}(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5___default()(Error));
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/assertThisInitialized");
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/wrapNativeSuper");
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var winston__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(38);
 /* harmony import */ var winston__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(winston__WEBPACK_IMPORTED_MODULE_0__);
 
 var combine = winston__WEBPACK_IMPORTED_MODULE_0__["format"].combine,
@@ -1545,13 +1623,13 @@ var logger = Object(winston__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
 /* harmony default export */ __webpack_exports__["default"] = (logger);
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = require("winston");
 
 /***/ }),
-/* 35 */
+/* 39 */
 /***/ (function(module, exports) {
 
 exports.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/expense-tracker';
@@ -1559,7 +1637,7 @@ exports.MONGODB_PORT = process.env.PORT || 4000;
 exports.BACKEND_BASEURL = '/api/v1';
 
 /***/ }),
-/* 36 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1609,7 +1687,7 @@ function () {
 }();
 
 /***/ }),
-/* 37 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1628,15 +1706,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
-/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(36);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(33);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(38);
+/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(40);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(33);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(37);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(42);
 
 
 
 
 
 
+// Managers
+ // Controller
+
+ // Erros
 
 
 
@@ -1660,7 +1743,6 @@ function (_BaseController) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
               user = req.user;
 
               if (user) {
@@ -1668,7 +1750,8 @@ function (_BaseController) {
                 break;
               }
 
-              throw new Error('User not found');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error('[UserController - getCurrentUser] User not found');
+              return _context.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('User not found', 404)));
 
             case 4:
               res.status(200).json({
@@ -1678,26 +1761,13 @@ function (_BaseController) {
                   user: user
                 }
               });
-              _context.next = 11;
-              break;
 
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              // FIXME: Global error
-              _utils_logger__WEBPACK_IMPORTED_MODULE_8__["default"].error("[UserController - getCurrentUser] User not found: ".concat(_context.t0.message));
-              res.status(404).json({
-                statusCd: 400,
-                status: 'failure',
-                message: "User not found: ".concat(_context.t0.message)
-              });
-
-            case 11:
+            case 5:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[0, 7]]);
+      });
     }
   }, {
     key: "getUsers",
@@ -1720,19 +1790,16 @@ function (_BaseController) {
                   users: users
                 }
               });
-              _context2.next = 10;
+              _context2.next = 11;
               break;
 
             case 7:
               _context2.prev = 7;
               _context2.t0 = _context2["catch"](0);
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: "System: ".concat(_context2.t0.message)
-              });
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[UserController - getUsers] Get Users failure: ".concat(_context2.t0.message));
+              next(_context2.t0);
 
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
@@ -1754,56 +1821,49 @@ function (_BaseController) {
               user = req.user;
 
               if (user) {
-                _context3.next = 5;
+                _context3.next = 6;
                 break;
               }
 
-              throw new Error('User not found');
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error('[UserController - updatePassword] User not found');
+              return _context3.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('User not found', 404)));
 
-            case 5:
+            case 6:
               // get userId
               id = user.id;
 
               if (!(!password || !newPassword || !newPasswordConfirm)) {
-                _context3.next = 8;
+                _context3.next = 10;
                 break;
               }
 
-              throw new Error('Invalid arguments missing either password, newPassword or newPasswordConfirm');
-
-            case 8:
-              _context3.next = 10;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_6__["UserManager"].shareInstance.updatePassword(id, password, newPassword, newPasswordConfirm));
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[UserController - updatePassword] Missing either name, email, password or passwordConfirm in request body");
+              return _context3.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('Missing either name, email, password or passwordConfirm in request body', 400)));
 
             case 10:
+              _context3.next = 12;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_6__["UserManager"].shareInstance.updatePassword(id, password, newPassword, newPasswordConfirm));
+
+            case 12:
               _ref = _context3.sent;
               token = _ref.token;
               userModel = _ref.user;
-              UserController.createSendToken(userModel, token, 200, res); // res.status(200).json({
-              //   statusCd: 200,
-              //   status: 'success',
-              //   token,
-              //   data: { user: userModel }
-              // })
-
-              _context3.next = 19;
+              UserController.createSendToken(userModel, token, 200, res);
+              _context3.next = 22;
               break;
 
-            case 16:
-              _context3.prev = 16;
+            case 18:
+              _context3.prev = 18;
               _context3.t0 = _context3["catch"](0);
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: "System: ".concat(_context3.t0.message)
-              });
+              _utils_logger__WEBPACK_IMPORTED_MODULE_9__["default"].error("[UserController - updatePassword] Update Password failure: ".concat(_context3.t0.message));
+              next(_context3.t0);
 
-            case 19:
+            case 22:
             case "end":
               return _context3.stop();
           }
         }
-      }, null, null, [[0, 16]]);
+      }, null, null, [[0, 18]]);
     }
   }, {
     key: "updateUserInfo",
@@ -1820,7 +1880,7 @@ function (_BaseController) {
                 break;
               }
 
-              throw new Error('This is route is not for password updates - 400');
+              return _context4.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('This is route is not for password updates', 400)));
 
             case 3:
               user = req.user;
@@ -1830,13 +1890,13 @@ function (_BaseController) {
                 break;
               }
 
-              throw new Error('User not found');
+              return _context4.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('User not found', 404)));
 
             case 6:
               // get userId
               id = user.id; // filter out unwanted field names that are not allowed to be updated
 
-              filteredBody = Object(_utils__WEBPACK_IMPORTED_MODULE_9__["filterObj"])(req.body, 'name', 'email');
+              filteredBody = Object(_utils__WEBPACK_IMPORTED_MODULE_10__["filterObj"])(req.body, 'name', 'email');
               _context4.next = 10;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_6__["UserManager"].shareInstance.updateUserInfo(id, filteredBody));
 
@@ -1855,11 +1915,8 @@ function (_BaseController) {
             case 14:
               _context4.prev = 14;
               _context4.t0 = _context4["catch"](0);
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: "System: ".concat(_context4.t0.message)
-              });
+              // TODO: logger
+              next(_context4.t0);
 
             case 17:
             case "end":
@@ -1884,7 +1941,7 @@ function (_BaseController) {
                 break;
               }
 
-              throw new Error('User not found');
+              return _context5.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_8__["AppError"]('User not found', 404)));
 
             case 4:
               // get userId
@@ -1904,11 +1961,8 @@ function (_BaseController) {
             case 10:
               _context5.prev = 10;
               _context5.t0 = _context5["catch"](0);
-              res.status(500).json({
-                statusCd: 500,
-                status: 'failure',
-                message: "System: ".concat(_context5.t0.message)
-              });
+              // TODO: logger
+              next(_context5.t0);
 
             case 13:
             case "end":
@@ -1923,14 +1977,14 @@ function (_BaseController) {
 }(_BaseController__WEBPACK_IMPORTED_MODULE_7__["BaseController"]);
 
 /***/ }),
-/* 38 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterObj", function() { return filterObj; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -1978,13 +2032,49 @@ function filterObj(obj) {
 }
 
 /***/ }),
-/* 39 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = require("@babel/runtime/helpers/defineProperty");
 
 /***/ }),
-/* 40 */
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorController", function() { return ErrorController; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var ErrorController =
+/*#__PURE__*/
+function () {
+  function ErrorController() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ErrorController);
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ErrorController, null, [{
+    key: "handleError",
+    value: function handleError(err, req, res, next) {
+      err.statusCode = err.statusCode || 500;
+      err.status = err.status || 'error';
+      res.status(err.statusCode).json({
+        statusCd: err.statusCode,
+        status: err.status,
+        message: err.message
+      });
+    }
+  }]);
+
+  return ErrorController;
+}();
+
+/***/ }),
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1992,7 +2082,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
-/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(46);
 
 
 
@@ -2007,22 +2097,22 @@ userRouter.delete('/current_user', _controllers__WEBPACK_IMPORTED_MODULE_1__["Us
 /* harmony default export */ __webpack_exports__["default"] = (userRouter);
 
 /***/ }),
-/* 41 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _requireAuth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
+/* harmony import */ var _requireAuth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requireAuth", function() { return _requireAuth__WEBPACK_IMPORTED_MODULE_0__["requireAuth"]; });
 
-/* harmony import */ var _requireRole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
+/* harmony import */ var _requireRole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(48);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requireRole", function() { return _requireRole__WEBPACK_IMPORTED_MODULE_1__["requireRole"]; });
 
 
 
 
 /***/ }),
-/* 42 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2030,8 +2120,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requireAuth", function() { return requireAuth; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33);
+/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(37);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
 
 
@@ -2119,7 +2209,7 @@ function requireAuth(req, res, next) {
 }
 
 /***/ }),
-/* 43 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2147,14 +2237,14 @@ function requireRole() {
 }
 
 /***/ }),
-/* 44 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33);
 
 
 var defaultRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router();
@@ -2164,110 +2254,340 @@ defaultRouter.all('*', function (req, res, next) {
 /* harmony default export */ __webpack_exports__["default"] = (defaultRouter);
 
 /***/ }),
-/* 45 */,
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AppError", function() { return _AppError__WEBPACK_IMPORTED_MODULE_0__["AppError"]; });
-
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppError", function() { return AppError; });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(48);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(17);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(49);
-/* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-var AppError =
-/*#__PURE__*/
-function (_Error) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(AppError, _Error);
-
-  function AppError(message, statusCode) {
-    var _this;
-
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, AppError);
-
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default()(AppError).call(this, message));
-    _this.statusCode = statusCode;
-    _this.status = "".concat(statusCode).startsWith('4') ? 'fail' : 'error';
-    _this.isOperational = true; // all stack trace functionality
-
-    Error.captureStackTrace(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), _this.constructor);
-    return _this;
-  }
-
-  return AppError;
-}(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5___default()(Error));
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports) {
-
-module.exports = require("@babel/runtime/helpers/assertThisInitialized");
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports) {
-
-module.exports = require("@babel/runtime/helpers/wrapNativeSuper");
-
-/***/ }),
 /* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorController", function() { return ErrorController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transaction", function() { return Transaction; });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+var transactionSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
+  date: {
+    type: Date,
+    required: [true, 'Please enter a transaction date']
+  },
+  type: {
+    type: String,
+    required: [true, 'Please enter a transaction type'],
+    enum: ['expense', 'income'],
+    lowercase: true
+  },
+  amount: {
+    type: Number,
+    required: [true, 'Please enter a transacton amount']
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  _user: {
+    type: mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema.Types.ObjectId,
+    ref: 'users'
+  }
+}); // pre save hooks
+
+transactionSchema.pre('save', function (next) {
+  this.amount = parseFloat(this.amount);
+  next();
+}); // instance methods
+
+transactionSchema.methods.serialize = function () {
+  var self = this;
+  var id = self._id,
+      date = self.date,
+      type = self.type,
+      amount = self.amount,
+      description = self.description,
+      user = self._user;
+  return {
+    id: id,
+    date: date,
+    type: type,
+    amount: amount,
+    description: description,
+    user: user
+  };
+};
+
+var Transaction = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model('transactions', transactionSchema);
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46);
+/* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
+
+ // controllers
+
+
+var transactionRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router(); // require user to be authenticated for these routes
+
+transactionRouter.use(_middleware__WEBPACK_IMPORTED_MODULE_1__["requireAuth"]);
+transactionRouter.post('/', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].addTransaction);
+/* harmony default export */ __webpack_exports__["default"] = (transactionRouter);
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionController", function() { return TransactionController; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(33);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37);
+
+
+
+// Managers
+ // Errors
+
+ // Utils
+
+
+var TransactionController =
+/*#__PURE__*/
+function () {
+  function TransactionController() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, TransactionController);
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(TransactionController, null, [{
+    key: "addTransaction",
+    value: function addTransaction(req, res, next) {
+      var user, id, _req$body, date, type, amount, description, transaction, newTransaction;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function addTransaction$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              user = req.user;
+
+              if (user) {
+                _context.next = 4;
+                break;
+              }
+
+              return _context.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_4__["AppError"]('User not found', 404)));
+
+            case 4:
+              // get userId
+              id = user.id; // get params out of req body
+
+              _req$body = req.body, date = _req$body.date, type = _req$body.type, amount = _req$body.amount, description = _req$body.description;
+
+              if (!(!date || !type || !amount)) {
+                _context.next = 8;
+                break;
+              }
+
+              return _context.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_4__["AppError"]('Missing either date, type, or amount in request body', 400)));
+
+            case 8:
+              transaction = {
+                date: date,
+                type: type,
+                amount: amount,
+                _user: id
+              };
+
+              if (description) {
+                transaction.description = description;
+              }
+
+              _context.next = 12;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_3__["TransactionManager"].shareInstance.addTransaction(transaction));
+
+            case 12:
+              newTransaction = _context.sent;
+              res.status(201).json({
+                statusCd: 201,
+                status: 'success',
+                data: {
+                  newTransaction: newTransaction
+                }
+              });
+              _context.next = 20;
+              break;
+
+            case 16:
+              _context.prev = 16;
+              _context.t0 = _context["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].error("[TransactionController - addTransaction] Add Transaction failure: ".concat(_context.t0.message));
+              next(_context.t0);
+
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, null, [[0, 16]]);
+    }
+  }]);
+
+  return TransactionController;
+}();
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionManager", function() { return TransactionManager; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
+/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(54);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(33);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(37);
+
+
+
+
+
+
+
+// Model
+ // Managers
+
+ // Errors
+
+ // Utils
+
+
+var TransactionManager =
+/*#__PURE__*/
+function (_BaseManager) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default()(TransactionManager, _BaseManager);
+
+  function TransactionManager() {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, TransactionManager);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(TransactionManager).call(this));
+    var instance = _this.constructor.instance;
+
+    if (instance) {
+      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(_this, instance);
+    }
+
+    _this.constructor.instance = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this); // Assign User model
+
+    _this._transaction = _models__WEBPACK_IMPORTED_MODULE_7__["Transaction"];
+    return _this;
+  } // shared instance of UserManager
+
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(TransactionManager, [{
+    key: "addTransaction",
+    value: function addTransaction(transaction) {
+      var newTransaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function addTransaction$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(new this._transaction(transaction).save());
+
+            case 3:
+              newTransaction = _context.sent;
+              return _context.abrupt("return", newTransaction.serialize());
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_10__["default"].error("[TransactionManager - addTransaction] Error message: ".concat(_context.t0.message));
+              throw TransactionManager.parseError(_context.t0, 'Transaction');
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this, [[0, 7]]);
+    }
+  }], [{
+    key: "shareInstance",
+    get: function get() {
+      if (this._sharedInstance === undefined) {
+        this._sharedInstance = new TransactionManager();
+      }
+
+      return this._sharedInstance;
+    }
+  }]);
+
+  return TransactionManager;
+}(_BaseManager__WEBPACK_IMPORTED_MODULE_8__["BaseManager"]);
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseManager", function() { return BaseManager; });
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33);
 
 
-var ErrorController =
+//Errors
+
+var BaseManager =
 /*#__PURE__*/
 function () {
-  function ErrorController() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ErrorController);
+  function BaseManager() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, BaseManager);
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ErrorController, null, [{
-    key: "handleError",
-    value: function handleError(err, req, res, next) {
-      err.statusCode = err.statusCode || 500;
-      err.status = err.status || 'error';
-      res.status(err.statusCode).json({
-        statusCd: err.statusCode,
-        status: err.status,
-        message: err.message
-      });
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(BaseManager, null, [{
+    key: "parseError",
+    value: function parseError(err, entity) {
+      var error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]('Internal Server Error', 500);
+
+      if (err.name === 'MongoError' && err.code === 11000) {
+        error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " already exists"), 409);
+      } else if (err.name === 'AppError') {
+        error = err;
+      }
+
+      return error;
     }
   }]);
 
-  return ErrorController;
+  return BaseManager;
 }();
 
 /***/ })

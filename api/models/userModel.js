@@ -102,7 +102,7 @@ userSchema.methods.changePasswordAfter = function(JWTTimestamp) {
 }
 
 // return the params we want to send to to UI
-userSchema.methods.serialize = function serialize() {
+userSchema.methods.serialize = function() {
   const self = this
   const { email, name, role, _id: id } = self
   return { id, email, name, role }
