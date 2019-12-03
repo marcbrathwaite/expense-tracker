@@ -5,6 +5,7 @@ import { AppError } from '../errors'
 
 // Utils
 import logger from '../utils/logger'
+import { filterObj } from '../utils'
 
 export class TransactionController {
   static async addTransaction(req, res, next) {
@@ -49,11 +50,54 @@ export class TransactionController {
       res.status(201).json({
         statusCd: 201,
         status: 'success',
-        data: { newTransaction }
+        data: { transaction: newTransaction }
       })
     } catch (e) {
       logger.error(
         `[TransactionController - addTransaction] Add Transaction failure: ${e.message}`
+      )
+      next(e)
+    }
+  }
+
+  static async updateTransaction(req, res, next) {
+    try {
+      const { user } = req
+      if (!user) {
+        // TODO: logger
+        return next(new AppError('User not found', 404))
+      }
+
+      // get userId
+      const { id: userId } = user
+      // Get transaction id
+      const { transactionId } = req.params
+
+      // filter off unneccesary fields
+      const filteredBody = filterObj(
+        req.body,
+        'date',
+        'type',
+        'amount',
+        'description'
+      )
+
+      // call Manager function to update transaction
+      const updatedTransaction = await TransactionManager.shareInstance.updateTransaction(
+        transactionId,
+        userId,
+        filteredBody
+      )
+      res.status(200).json({
+        statusCd: 200,
+        status: 'success',
+        data: {
+          transaction: updatedTransaction
+        }
+      })
+    } catch (e) {
+      logger.error(
+        `[TransactionController - updateTransaction] Update Transaction failure: ${e.message}`
       )
       next(e)
     }

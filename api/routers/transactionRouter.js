@@ -10,5 +10,9 @@ const transactionRouter = express.Router()
 transactionRouter.use(requireAuth)
 
 transactionRouter.post('/', TransactionController.addTransaction)
+transactionRouter.patch(
+  '/:transactionId',
+  TransactionController.updateTransaction
+)
 
 export default transactionRouter

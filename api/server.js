@@ -50,7 +50,8 @@ app.use(ErrorController.handleError)
 // 6. Define configuration for mongodb
 const MONGO_CONFIG = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 }
 
 // 7. Start server

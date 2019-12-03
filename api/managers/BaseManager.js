@@ -7,6 +7,8 @@ export class BaseManager {
     let error = new AppError('Internal Server Error', 500)
     if (err.name === 'MongoError' && err.code === 11000) {
       error = new AppError(`${entity} already exists`, 409)
+    } else if (err.name === 'CastError') {
+      error = new AppError(`${entity} not found`, 404)
     } else if (err.name === 'AppError') {
       error = err
     }

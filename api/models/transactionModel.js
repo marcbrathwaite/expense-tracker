@@ -31,11 +31,18 @@ transactionSchema.pre('save', function(next) {
   next()
 })
 
+transactionSchema.pre('findByIdAndUpdate', function(next) {
+  if (this.isModified('amount')) {
+    this.amount = parseFloat(this.amount)
+  }
+  next()
+})
+
 // instance methods
 transactionSchema.methods.serialize = function() {
   const self = this
-  const { _id: id, date, type, amount, description, _user: user } = self
-  return { id, date, type, amount, description, user }
+  const { _id: id, date, type, amount, description } = self
+  return { id, date, type, amount, description }
 }
 
 export const Transaction = mongoose.model('transactions', transactionSchema)

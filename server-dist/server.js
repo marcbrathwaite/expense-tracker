@@ -156,7 +156,8 @@ app.use(_controllers__WEBPACK_IMPORTED_MODULE_10__["ErrorController"].handleErro
 
 var MONGO_CONFIG = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 }; // 7. Start server
 
 mongoose__WEBPACK_IMPORTED_MODULE_1___default.a.connect(_config__WEBPACK_IMPORTED_MODULE_11__["MONGODB_URI"], MONGO_CONFIG).then(function _callee() {
@@ -967,7 +968,9 @@ function (_BaseManager) {
             case 0:
               _context6.prev = 0;
               _context6.next = 3;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this._user.findByIdAndUpdate(id, newUserInfo, {
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this._user.findOneAndUpdate({
+                _id: id
+              }, newUserInfo, {
                 new: true,
                 // return updated info
                 runValidators: true
@@ -2291,6 +2294,13 @@ var transactionSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
 transactionSchema.pre('save', function (next) {
   this.amount = parseFloat(this.amount);
   next();
+});
+transactionSchema.pre('findByIdAndUpdate', function (next) {
+  if (this.isModified('amount')) {
+    this.amount = parseFloat(this.amount);
+  }
+
+  next();
 }); // instance methods
 
 transactionSchema.methods.serialize = function () {
@@ -2299,15 +2309,13 @@ transactionSchema.methods.serialize = function () {
       date = self.date,
       type = self.type,
       amount = self.amount,
-      description = self.description,
-      user = self._user;
+      description = self.description;
   return {
     id: id,
     date: date,
     type: type,
     amount: amount,
-    description: description,
-    user: user
+    description: description
   };
 };
 
@@ -2331,6 +2339,7 @@ var transactionRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router();
 
 transactionRouter.use(_middleware__WEBPACK_IMPORTED_MODULE_1__["requireAuth"]);
 transactionRouter.post('/', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].addTransaction);
+transactionRouter.patch('/:transactionId', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].updateTransaction);
 /* harmony default export */ __webpack_exports__["default"] = (transactionRouter);
 
 /***/ }),
@@ -2349,6 +2358,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
 /* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(33);
 /* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(42);
 
 
 
@@ -2356,6 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
  // Errors
 
  // Utils
+
 
 
 var TransactionController =
@@ -2418,7 +2429,7 @@ function () {
                 statusCd: 201,
                 status: 'success',
                 data: {
-                  newTransaction: newTransaction
+                  transaction: newTransaction
                 }
               });
               _context.next = 20;
@@ -2436,6 +2447,60 @@ function () {
           }
         }
       }, null, null, [[0, 16]]);
+    }
+  }, {
+    key: "updateTransaction",
+    value: function updateTransaction(req, res, next) {
+      var user, userId, transactionId, filteredBody, updatedTransaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function updateTransaction$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              user = req.user;
+
+              if (user) {
+                _context2.next = 4;
+                break;
+              }
+
+              return _context2.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_4__["AppError"]('User not found', 404)));
+
+            case 4:
+              // get userId
+              userId = user.id; // Get transaction id
+
+              transactionId = req.params.transactionId; // filter off unneccesary fields
+
+              filteredBody = Object(_utils__WEBPACK_IMPORTED_MODULE_6__["filterObj"])(req.body, 'date', 'type', 'amount', 'description'); // call Manager function to update transaction
+
+              _context2.next = 9;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_3__["TransactionManager"].shareInstance.updateTransaction(transactionId, userId, filteredBody));
+
+            case 9:
+              updatedTransaction = _context2.sent;
+              res.status(200).json({
+                statusCd: 200,
+                status: 'success',
+                data: {
+                  transaction: updatedTransaction
+                }
+              });
+              _context2.next = 17;
+              break;
+
+            case 13:
+              _context2.prev = 13;
+              _context2.t0 = _context2["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].error("[TransactionController - updateTransaction] Update Transaction failure: ".concat(_context2.t0.message));
+              next(_context2.t0);
+
+            case 17:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, null, null, [[0, 13]]);
     }
   }]);
 
@@ -2535,6 +2600,51 @@ function (_BaseManager) {
         }
       }, null, this, [[0, 7]]);
     }
+  }, {
+    key: "updateTransaction",
+    value: function updateTransaction(transactionId, userId, transactionInfo) {
+      var updatedTransaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function updateTransaction$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this._transaction.findOneAndUpdate({
+                _id: transactionId,
+                _user: userId
+              }, transactionInfo, {
+                new: true,
+                runValidators: true
+              }));
+
+            case 3:
+              updatedTransaction = _context2.sent;
+
+              if (updatedTransaction) {
+                _context2.next = 7;
+                break;
+              }
+
+              _utils_logger__WEBPACK_IMPORTED_MODULE_10__["default"].error('[TransactionManager - updateTransaction] Transaction not found');
+              throw new _errors__WEBPACK_IMPORTED_MODULE_9__["AppError"]('Transaction not found', 404);
+
+            case 7:
+              return _context2.abrupt("return", updatedTransaction.serialize());
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_10__["default"].error("[TransactionManager - updateTransaction] Update Transaction error: ".concat(_context2.t0.message));
+              throw TransactionManager.parseError(_context2.t0, 'Transaction');
+
+            case 14:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, null, this, [[0, 10]]);
+    }
   }], [{
     key: "shareInstance",
     get: function get() {
@@ -2579,6 +2689,8 @@ function () {
 
       if (err.name === 'MongoError' && err.code === 11000) {
         error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " already exists"), 409);
+      } else if (err.name === 'CastError') {
+        error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " not found"), 404);
       } else if (err.name === 'AppError') {
         error = err;
       }

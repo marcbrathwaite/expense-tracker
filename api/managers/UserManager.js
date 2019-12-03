@@ -202,10 +202,14 @@ export class UserManager extends BaseManager {
     try {
       // we can use this method because password is not being changed which requires the presave and with save validation is done onthe entire doc
       // Update user document
-      const updatedUser = await this._user.findByIdAndUpdate(id, newUserInfo, {
-        new: true, // return updated info
-        runValidators: true
-      })
+      const updatedUser = await this._user.findOneAndUpdate(
+        { _id: id },
+        newUserInfo,
+        {
+          new: true, // return updated info
+          runValidators: true
+        }
+      )
 
       return updatedUser.serialize()
     } catch (e) {

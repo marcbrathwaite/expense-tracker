@@ -40,4 +40,32 @@ export class TransactionManager extends BaseManager {
       throw TransactionManager.parseError(e, 'Transaction')
     }
   }
+
+  async updateTransaction(transactionId, userId, transactionInfo) {
+    try {
+      const updatedTransaction = await this._transaction.findOneAndUpdate(
+        {
+          _id: transactionId,
+          _user: userId
+        },
+        transactionInfo,
+        {
+          new: true,
+          runValidators: true
+        }
+      )
+      if (!updatedTransaction) {
+        logger.error(
+          '[TransactionManager - updateTransaction] Transaction not found'
+        )
+        throw new AppError('Transaction not found', 404)
+      }
+      return updatedTransaction.serialize()
+    } catch (e) {
+      logger.error(
+        `[TransactionManager - updateTransaction] Update Transaction error: ${e.message}`
+      )
+      throw TransactionManager.parseError(e, 'Transaction')
+    }
+  }
 }
