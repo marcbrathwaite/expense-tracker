@@ -35,6 +35,8 @@
     "hpp": "^0.2.2",
     "init-package-json": "^1.10.3",
     "jsonwebtoken": "^8.5.1",
+    "lodash.tointeger": "^4.0.4",
+    "lodash.tonumber": "^4.0.3",
     "mongoose": "^5.7.10",
     "nodemailer": "^6.3.1",
     "nodemon": "^1.19.4",

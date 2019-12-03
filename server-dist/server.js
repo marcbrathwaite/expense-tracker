@@ -107,9 +107,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hpp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
 /* harmony import */ var hpp__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hpp__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9);
-/* harmony import */ var _routers_defaultRouter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(49);
+/* harmony import */ var _routers_defaultRouter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(54);
 /* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(11);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(39);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(41);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_11__);
 
 
@@ -237,8 +237,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _routers_authRouter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
-/* harmony import */ var _routers_userRouter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(45);
-/* harmony import */ var _routers_transactionRouter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(51);
+/* harmony import */ var _routers_userRouter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(49);
+/* harmony import */ var _routers_transactionRouter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(53);
 
 
 
@@ -276,16 +276,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AuthController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AuthController", function() { return _AuthController__WEBPACK_IMPORTED_MODULE_0__["AuthController"]; });
 
-/* harmony import */ var _UserController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(41);
+/* harmony import */ var _UserController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserController", function() { return _UserController__WEBPACK_IMPORTED_MODULE_1__["UserController"]; });
 
-/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(40);
+/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BaseController", function() { return _BaseController__WEBPACK_IMPORTED_MODULE_2__["BaseController"]; });
 
-/* harmony import */ var _ErrorController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
+/* harmony import */ var _ErrorController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(47);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ErrorController", function() { return _ErrorController__WEBPACK_IMPORTED_MODULE_3__["ErrorController"]; });
 
-/* harmony import */ var _TransactionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(52);
+/* harmony import */ var _TransactionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransactionController", function() { return _TransactionController__WEBPACK_IMPORTED_MODULE_4__["TransactionController"]; });
 
 
@@ -314,9 +314,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
-/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(40);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(33);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(37);
+/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(43);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(36);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(39);
 
 
 
@@ -582,10 +582,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserManager", function() { return _UserManager__WEBPACK_IMPORTED_MODULE_0__["UserManager"]; });
 
-/* harmony import */ var _TransactionManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
+/* harmony import */ var _TransactionManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransactionManager", function() { return _TransactionManager__WEBPACK_IMPORTED_MODULE_1__["TransactionManager"]; });
 
-/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54);
+/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(35);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BaseManager", function() { return _BaseManager__WEBPACK_IMPORTED_MODULE_2__["BaseManager"]; });
 
 
@@ -609,17 +609,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(20);
 /* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(30);
-/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(54);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(33);
-/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(24);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(37);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(39);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(21);
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(32);
+/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(35);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(36);
+/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(25);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(39);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(41);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_13__);
 
 
@@ -1101,21 +1101,27 @@ function (_BaseManager) {
 
 /***/ }),
 /* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/assertThisInitialized");
+
+/***/ }),
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
+/* harmony import */ var _userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "User", function() { return _userModel__WEBPACK_IMPORTED_MODULE_0__["User"]; });
 
-/* harmony import */ var _transactionModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(50);
+/* harmony import */ var _transactionModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(31);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transaction", function() { return _transactionModel__WEBPACK_IMPORTED_MODULE_1__["Transaction"]; });
 
 
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1125,11 +1131,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
+/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(validator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
+/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
 /* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bcryptjs__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(24);
+/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
 
 
 
@@ -1291,19 +1297,19 @@ userSchema.methods.createPasswordResetToken = function () {
 var User = mongoose__WEBPACK_IMPORTED_MODULE_1___default.a.model('users', userSchema);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("validator");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcryptjs");
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1314,13 +1320,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(26);
 /* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(26);
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(27);
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(27);
+/* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28);
 /* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(28);
+/* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(29);
 /* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_config_keys__WEBPACK_IMPORTED_MODULE_6__);
 
 
@@ -1380,34 +1386,34 @@ function () {
 /* harmony default export */ __webpack_exports__["default"] = (TokenManager);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("util");
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("jsonwebtoken");
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 if (false) {} else {
   // return dev set of keys
-  module.exports = __webpack_require__(29);
+  module.exports = __webpack_require__(30);
 }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -1423,18 +1429,83 @@ module.exports = {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EmailService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transaction", function() { return Transaction; });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+var transactionSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
+  date: {
+    type: Date,
+    required: [true, 'Please enter a transaction date']
+  },
+  type: {
+    type: String,
+    required: [true, 'Please enter a transaction type'],
+    enum: ['expense', 'income'],
+    lowercase: true
+  },
+  amount: {
+    type: Number,
+    required: [true, 'Please enter a transacton amount']
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  _user: {
+    type: mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema.Types.ObjectId,
+    ref: 'users'
+  }
+}); // pre save hooks
+
+transactionSchema.pre('save', function (next) {
+  this.amount = parseFloat(this.amount);
+  next();
+});
+transactionSchema.pre('findByIdAndUpdate', function (next) {
+  if (this.isModified('amount')) {
+    this.amount = parseFloat(this.amount);
+  }
+
+  next();
+}); // instance methods
+
+transactionSchema.methods.serialize = function () {
+  var self = this;
+  var id = self._id,
+      date = self.date,
+      type = self.type,
+      amount = self.amount,
+      description = self.description;
+  return {
+    id: id,
+    date: date,
+    type: type,
+    amount: amount,
+    description: description
+  };
+};
+
+var Transaction = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model('transactions', transactionSchema);
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EmailService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EmailService", function() { return _EmailService__WEBPACK_IMPORTED_MODULE_0__["EmailService"]; });
 
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1446,9 +1517,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var nodemailer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(32);
+/* harmony import */ var nodemailer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(34);
 /* harmony import */ var nodemailer__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(nodemailer__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28);
+/* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(29);
 /* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_config_keys__WEBPACK_IMPORTED_MODULE_4__);
 
 
@@ -1521,24 +1592,67 @@ function () {
 }();
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = require("nodemailer");
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseManager", function() { return BaseManager; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(36);
+
+
+//Errors
+
+var BaseManager =
+/*#__PURE__*/
+function () {
+  function BaseManager() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, BaseManager);
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(BaseManager, null, [{
+    key: "parseError",
+    value: function parseError(err, entity) {
+      var error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]('Internal Server Error', 500);
+
+      if (err.name === 'MongoError' && err.code === 11000) {
+        error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " already exists"), 409);
+      } else if (err.name === 'CastError') {
+        error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " not found"), 404);
+      } else if (err.name === 'AppError') {
+        error = err;
+      }
+
+      return error;
+    }
+  }]);
+
+  return BaseManager;
+}();
+
+/***/ }),
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AppError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(37);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AppError", function() { return _AppError__WEBPACK_IMPORTED_MODULE_0__["AppError"]; });
 
 
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1550,11 +1664,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(35);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
 /* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(17);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36);
+/* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(38);
 /* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -1586,24 +1700,18 @@ function (_Error) {
 }(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_5___default()(Error));
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = require("@babel/runtime/helpers/assertThisInitialized");
-
-/***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = require("@babel/runtime/helpers/wrapNativeSuper");
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var winston__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(38);
+/* harmony import */ var winston__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40);
 /* harmony import */ var winston__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(winston__WEBPACK_IMPORTED_MODULE_0__);
 
 var combine = winston__WEBPACK_IMPORTED_MODULE_0__["format"].combine,
@@ -1626,13 +1734,13 @@ var logger = Object(winston__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
 /* harmony default export */ __webpack_exports__["default"] = (logger);
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports) {
 
 module.exports = require("winston");
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports) {
 
 exports.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/expense-tracker';
@@ -1640,7 +1748,296 @@ exports.MONGODB_PORT = process.env.PORT || 4000;
 exports.BACKEND_BASEURL = '/api/v1';
 
 /***/ }),
-/* 40 */
+/* 42 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionManager", function() { return TransactionManager; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(20);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var lodash_tonumber__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(55);
+/* harmony import */ var lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var lodash_tointeger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(56);
+/* harmony import */ var lodash_tointeger__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_tointeger__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(21);
+/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(35);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(36);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(39);
+
+
+
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+ // Model
+
+ // Managers
+
+ // Errors
+
+ // Utils
+
+
+var TransactionManager =
+/*#__PURE__*/
+function (_BaseManager) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7___default()(TransactionManager, _BaseManager);
+
+  function TransactionManager() {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, TransactionManager);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TransactionManager).call(this));
+    var instance = _this.constructor.instance;
+
+    if (instance) {
+      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(_this, instance);
+    }
+
+    _this.constructor.instance = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6___default()(_this); // Assign User model
+
+    _this._transaction = _models__WEBPACK_IMPORTED_MODULE_10__["Transaction"];
+    return _this;
+  } // shared instance of UserManager
+
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(TransactionManager, [{
+    key: "addTransaction",
+    value: function addTransaction(transaction) {
+      var newTransaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function addTransaction$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(new this._transaction(transaction).save());
+
+            case 3:
+              newTransaction = _context.sent;
+              return _context.abrupt("return", newTransaction.serialize());
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_13__["default"].error("[TransactionManager - addTransaction] Error message: ".concat(_context.t0.message));
+              throw TransactionManager.parseError(_context.t0, 'Transaction');
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this, [[0, 7]]);
+    }
+  }, {
+    key: "updateTransaction",
+    value: function updateTransaction(transactionId, userId, transactionInfo) {
+      var updatedTransaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function updateTransaction$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(this._transaction.findOneAndUpdate({
+                _id: transactionId,
+                _user: userId
+              }, transactionInfo, {
+                new: true,
+                runValidators: true
+              }));
+
+            case 3:
+              updatedTransaction = _context2.sent;
+
+              if (updatedTransaction) {
+                _context2.next = 7;
+                break;
+              }
+
+              _utils_logger__WEBPACK_IMPORTED_MODULE_13__["default"].error('[TransactionManager - updateTransaction] Transaction not found');
+              throw new _errors__WEBPACK_IMPORTED_MODULE_12__["AppError"]('Transaction not found', 404);
+
+            case 7:
+              return _context2.abrupt("return", updatedTransaction.serialize());
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_13__["default"].error("[TransactionManager - updateTransaction] Update Transaction error: ".concat(_context2.t0.message));
+              throw TransactionManager.parseError(_context2.t0, 'Transaction');
+
+            case 14:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, null, this, [[0, 10]]);
+    }
+  }, {
+    key: "getTransaction",
+    value: function getTransaction(transactionId, userId) {
+      var transaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getTransaction$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(this._transaction.findOne({
+                _id: transactionId,
+                _user: userId
+              }));
+
+            case 3:
+              transaction = _context3.sent;
+
+              if (transaction) {
+                _context3.next = 7;
+                break;
+              }
+
+              _utils_logger__WEBPACK_IMPORTED_MODULE_13__["default"].error('[TransactionManager - getTransaction] Transaction not found');
+              throw new _errors__WEBPACK_IMPORTED_MODULE_12__["AppError"]('Transaction not found', 404);
+
+            case 7:
+              return _context3.abrupt("return", transaction.serialize());
+
+            case 10:
+              _context3.prev = 10;
+              _context3.t0 = _context3["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_13__["default"].error("[TransactionManager - getTransaction] Get Transaction error: ".concat(_context3.t0.message));
+              throw TransactionManager.parseError(_context3.t0, 'Transaction');
+
+            case 14:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, null, this, [[0, 10]]);
+    } // TODO: Add comments
+
+  }, {
+    key: "getTransactions",
+    value: function getTransactions(userId, _ref) {
+      var type, _ref$skip, skip, _ref$limit, limit, skipInt, limitInt, typeSearch, transactions, serializedTransactions, documentCount, next;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.async(function getTransactions$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              type = _ref.type, _ref$skip = _ref.skip, skip = _ref$skip === void 0 ? 0 : _ref$skip, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 2 : _ref$limit;
+              _context4.prev = 1;
+
+              if (!(type && type.toLowerCase() !== 'income' && type.toLowerCase() !== 'expense')) {
+                _context4.next = 4;
+                break;
+              }
+
+              throw new _errors__WEBPACK_IMPORTED_MODULE_12__["AppError"]('Invalid argument: type must be either income or expense', 400);
+
+            case 4:
+              if (!(isNaN(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default()(skip)) || isNaN(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default()(limit)))) {
+                _context4.next = 6;
+                break;
+              }
+
+              throw new _errors__WEBPACK_IMPORTED_MODULE_12__["AppError"]('Invalid argument: skip and limit must be numbers', 400);
+
+            case 6:
+              skipInt = lodash_tointeger__WEBPACK_IMPORTED_MODULE_9___default()(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default()(skip));
+              limitInt = lodash_tointeger__WEBPACK_IMPORTED_MODULE_9___default()(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default()(limit));
+              typeSearch = {};
+
+              if (type) {
+                typeSearch.type = type;
+              }
+
+              _context4.next = 12;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(this._transaction.find(_objectSpread({
+                _user: userId
+              }, typeSearch)).sort({
+                date: 'desc'
+              }).skip(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default()(skipInt)).limit(lodash_tonumber__WEBPACK_IMPORTED_MODULE_8___default()(limitInt)));
+
+            case 12:
+              transactions = _context4.sent;
+              serializedTransactions = transactions.map(function (transaction) {
+                return transaction.serialize();
+              });
+              _context4.next = 16;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.awrap(this._transaction.countDocuments(_objectSpread({
+                _user: userId
+              }, typeSearch)));
+
+            case 16:
+              documentCount = _context4.sent;
+
+              if (skipInt + limitInt < documentCount) {
+                next = skipInt + limitInt;
+              }
+
+              return _context4.abrupt("return", {
+                typeCount: documentCount,
+                next: next,
+                transactions: serializedTransactions,
+                resultCount: serializedTransactions.length
+              });
+
+            case 21:
+              _context4.prev = 21;
+              _context4.t0 = _context4["catch"](1);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_13__["default"].error("[TransactionManager - getTransactions] Get Transactions error: ".concat(_context4.t0.message));
+              throw TransactionManager.parseError(_context4.t0, 'Transaction');
+
+            case 25:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, null, this, [[1, 21]]);
+    }
+  }], [{
+    key: "shareInstance",
+    get: function get() {
+      if (this._sharedInstance === undefined) {
+        this._sharedInstance = new TransactionManager();
+      }
+
+      return this._sharedInstance;
+    }
+  }]);
+
+  return TransactionManager;
+}(_BaseManager__WEBPACK_IMPORTED_MODULE_11__["BaseManager"]);
+
+/***/ }),
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1650,7 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28);
+/* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(29);
 /* harmony import */ var _config_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config_keys__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -1690,7 +2087,7 @@ function () {
 }();
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1709,10 +2106,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
-/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(40);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(33);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(37);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(42);
+/* harmony import */ var _BaseController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(43);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(36);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(39);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(45);
 
 
 
@@ -1980,14 +2377,14 @@ function (_BaseController) {
 }(_BaseController__WEBPACK_IMPORTED_MODULE_7__["BaseController"]);
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterObj", function() { return filterObj; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -2035,13 +2432,13 @@ function filterObj(obj) {
 }
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("@babel/runtime/helpers/defineProperty");
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2077,273 +2474,7 @@ function () {
 }();
 
 /***/ }),
-/* 45 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
-/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(46);
-
-
-
-var userRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router(); // require user to be autheticated for these routes
-
-userRouter.use(_middleware__WEBPACK_IMPORTED_MODULE_2__["requireAuth"]);
-userRouter.get('/', Object(_middleware__WEBPACK_IMPORTED_MODULE_2__["requireRole"])('admin'), _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].getUsers);
-userRouter.get('/current_user', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].getCurrentUser);
-userRouter.patch('/current_user/password', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].updatePassword);
-userRouter.patch('/current_user/info', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].updateUserInfo);
-userRouter.delete('/current_user', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].deleteCurrentUser);
-/* harmony default export */ __webpack_exports__["default"] = (userRouter);
-
-/***/ }),
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _requireAuth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requireAuth", function() { return _requireAuth__WEBPACK_IMPORTED_MODULE_0__["requireAuth"]; });
-
-/* harmony import */ var _requireRole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(48);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requireRole", function() { return _requireRole__WEBPACK_IMPORTED_MODULE_1__["requireRole"]; });
-
-
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requireAuth", function() { return requireAuth; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(37);
-/* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
-
-
-
-
-function requireAuth(req, res, next) {
-  var token, decoded, currentUser;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function requireAuth$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          _context.prev = 0;
-
-          // Getting token and check if it is there
-          if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-            // Get token - format 'Bearer Token'
-            token = req.headers.authorization.split(' ')[1];
-            _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('[Middleware - requireAuth] - Get Token from req Header');
-          }
-
-          if (token) {
-            _context.next = 5;
-            break;
-          }
-
-          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - No Token in the request header'); // FIXME: Global error handling
-
-          throw new Error('No Token in the request header');
-
-        case 5:
-          _context.next = 7;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_TokenManager__WEBPACK_IMPORTED_MODULE_1__["default"].verifyJWTToken(token));
-
-        case 7:
-          decoded = _context.sent;
-          _context.next = 10;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_3__["UserManager"].shareInstance.getUser(decoded.id));
-
-        case 10:
-          currentUser = _context.sent;
-
-          if (currentUser) {
-            _context.next = 14;
-            break;
-          }
-
-          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - User no longer exists'); // FIXME: Global error handling
-
-          throw new Error('User no longer exists');
-
-        case 14:
-          if (!currentUser.changePasswordAfter(decoded.iat)) {
-            _context.next = 17;
-            break;
-          }
-
-          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - User recently changed password'); // FIXME: Global error handling
-
-          throw new Error('User recently changed password. Please log in again');
-
-        case 17:
-          // grant access to protected route and put user on req object
-          req.user = currentUser.serialize();
-          next();
-          _context.next = 25;
-          break;
-
-        case 21:
-          _context.prev = 21;
-          _context.t0 = _context["catch"](0);
-          // FIXME: GLOBAL Errors
-          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - Token Error - Incorrect or Expires');
-          return _context.abrupt("return", res.status(401).json({
-            statusCd: 401,
-            status: 'failure',
-            message: "Unauthorized Access: ".concat(_context.t0.message)
-          }));
-
-        case 25:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, null, null, [[0, 21]]);
-}
-
-/***/ }),
 /* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requireRole", function() { return requireRole; });
-function requireRole() {
-  for (var _len = arguments.length, roles = new Array(_len), _key = 0; _key < _len; _key++) {
-    roles[_key] = arguments[_key];
-  }
-
-  return function (req, res, next) {
-    // check whether the current user role is within roles
-    if (!roles.includes(req.user.role)) {
-      // FIXME: Error handling
-      res.status(403).json({
-        statusCd: 403,
-        status: 'failure',
-        message: 'Unauthorized to use this route'
-      });
-      return;
-    }
-
-    next();
-  };
-}
-
-/***/ }),
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33);
-
-
-var defaultRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router();
-defaultRouter.all('*', function (req, res, next) {
-  next(new _errors__WEBPACK_IMPORTED_MODULE_1__["AppError"]("Route ".concat(req.originalUrl, " does not exist on this server!"), 404));
-});
-/* harmony default export */ __webpack_exports__["default"] = (defaultRouter);
-
-/***/ }),
-/* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transaction", function() { return Transaction; });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-
-var transactionSchema = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
-  date: {
-    type: Date,
-    required: [true, 'Please enter a transaction date']
-  },
-  type: {
-    type: String,
-    required: [true, 'Please enter a transaction type'],
-    enum: ['expense', 'income'],
-    lowercase: true
-  },
-  amount: {
-    type: Number,
-    required: [true, 'Please enter a transacton amount']
-  },
-  description: {
-    type: String,
-    default: ''
-  },
-  _user: {
-    type: mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema.Types.ObjectId,
-    ref: 'users'
-  }
-}); // pre save hooks
-
-transactionSchema.pre('save', function (next) {
-  this.amount = parseFloat(this.amount);
-  next();
-});
-transactionSchema.pre('findByIdAndUpdate', function (next) {
-  if (this.isModified('amount')) {
-    this.amount = parseFloat(this.amount);
-  }
-
-  next();
-}); // instance methods
-
-transactionSchema.methods.serialize = function () {
-  var self = this;
-  var id = self._id,
-      date = self.date,
-      type = self.type,
-      amount = self.amount,
-      description = self.description;
-  return {
-    id: id,
-    date: date,
-    type: type,
-    amount: amount,
-    description: description
-  };
-};
-
-var Transaction = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model('transactions', transactionSchema);
-
-/***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46);
-/* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
-
- // controllers
-
-
-var transactionRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router(); // require user to be authenticated for these routes
-
-transactionRouter.use(_middleware__WEBPACK_IMPORTED_MODULE_1__["requireAuth"]);
-transactionRouter.post('/', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].addTransaction);
-transactionRouter.patch('/:transactionId', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].updateTransaction);
-/* harmony default export */ __webpack_exports__["default"] = (transactionRouter);
-
-/***/ }),
-/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2356,9 +2487,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(33);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(42);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(36);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(39);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(45);
 
 
 
@@ -2502,10 +2633,285 @@ function () {
         }
       }, null, null, [[0, 13]]);
     }
+  }, {
+    key: "getTransaction",
+    value: function getTransaction(req, res, next) {
+      var user, userId, transactionId, transaction;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getTransaction$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              user = req.user;
+
+              if (user) {
+                _context3.next = 4;
+                break;
+              }
+
+              return _context3.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_4__["AppError"]('User not found', 404)));
+
+            case 4:
+              // get userId
+              userId = user.id; // Get transaction id
+
+              transactionId = req.params.transactionId;
+              _context3.next = 8;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_3__["TransactionManager"].shareInstance.getTransaction(transactionId, userId));
+
+            case 8:
+              transaction = _context3.sent;
+              res.status(200).json({
+                statusCd: 200,
+                status: 'success',
+                data: {
+                  transaction: transaction
+                }
+              });
+              _context3.next = 16;
+              break;
+
+            case 12:
+              _context3.prev = 12;
+              _context3.t0 = _context3["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].error("[TransactionController - getTransaction] Get Transaction failure: ".concat(_context3.t0.message));
+              next(_context3.t0);
+
+            case 16:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, null, null, [[0, 12]]);
+    }
+  }, {
+    key: "getTransactions",
+    value: function getTransactions(req, res, next) {
+      var user, id, filteredQuery, _ref, typeCount, nxt, transactions, resultCount;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getTransactions$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              user = req.user;
+
+              if (user) {
+                _context4.next = 4;
+                break;
+              }
+
+              return _context4.abrupt("return", next(new _errors__WEBPACK_IMPORTED_MODULE_4__["AppError"]('User not found', 404)));
+
+            case 4:
+              // get userId
+              id = user.id; // Get Type , Skip and limit query params
+
+              filteredQuery = Object(_utils__WEBPACK_IMPORTED_MODULE_6__["filterObj"])(req.query, 'type', 'skip', 'limit');
+              _context4.next = 8;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_3__["TransactionManager"].shareInstance.getTransactions(id, filteredQuery));
+
+            case 8:
+              _ref = _context4.sent;
+              typeCount = _ref.typeCount;
+              nxt = _ref.next;
+              transactions = _ref.transactions;
+              resultCount = _ref.resultCount;
+              res.status(200).json({
+                statusCd: 200,
+                status: 'success',
+                meta: {
+                  typeCount: typeCount,
+                  next: nxt,
+                  resultCount: resultCount
+                },
+                data: {
+                  transactions: transactions
+                }
+              });
+              _context4.next = 20;
+              break;
+
+            case 16:
+              _context4.prev = 16;
+              _context4.t0 = _context4["catch"](0);
+              _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].error("[TransactionController - getTransactions] Get Transactions failure: ".concat(_context4.t0.message));
+              next(_context4.t0);
+
+            case 20:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, null, null, [[0, 16]]);
+    }
   }]);
 
   return TransactionController;
 }();
+
+/***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(50);
+
+
+
+var userRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router(); // require user to be autheticated for these routes
+
+userRouter.use(_middleware__WEBPACK_IMPORTED_MODULE_2__["requireAuth"]);
+userRouter.get('/', Object(_middleware__WEBPACK_IMPORTED_MODULE_2__["requireRole"])('admin'), _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].getUsers);
+userRouter.get('/current_user', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].getCurrentUser);
+userRouter.patch('/current_user/password', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].updatePassword);
+userRouter.patch('/current_user/info', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].updateUserInfo);
+userRouter.delete('/current_user', _controllers__WEBPACK_IMPORTED_MODULE_1__["UserController"].deleteCurrentUser);
+/* harmony default export */ __webpack_exports__["default"] = (userRouter);
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _requireAuth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requireAuth", function() { return _requireAuth__WEBPACK_IMPORTED_MODULE_0__["requireAuth"]; });
+
+/* harmony import */ var _requireRole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(52);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requireRole", function() { return _requireRole__WEBPACK_IMPORTED_MODULE_1__["requireRole"]; });
+
+
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requireAuth", function() { return requireAuth; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_TokenManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39);
+/* harmony import */ var _managers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
+
+
+
+
+function requireAuth(req, res, next) {
+  var token, decoded, currentUser;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function requireAuth$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+
+          // Getting token and check if it is there
+          if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            // Get token - format 'Bearer Token'
+            token = req.headers.authorization.split(' ')[1];
+            _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('[Middleware - requireAuth] - Get Token from req Header');
+          }
+
+          if (token) {
+            _context.next = 5;
+            break;
+          }
+
+          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - No Token in the request header'); // FIXME: Global error handling
+
+          throw new Error('No Token in the request header');
+
+        case 5:
+          _context.next = 7;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_TokenManager__WEBPACK_IMPORTED_MODULE_1__["default"].verifyJWTToken(token));
+
+        case 7:
+          decoded = _context.sent;
+          _context.next = 10;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_managers__WEBPACK_IMPORTED_MODULE_3__["UserManager"].shareInstance.getUser(decoded.id));
+
+        case 10:
+          currentUser = _context.sent;
+
+          if (currentUser) {
+            _context.next = 14;
+            break;
+          }
+
+          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - User no longer exists'); // FIXME: Global error handling
+
+          throw new Error('User no longer exists');
+
+        case 14:
+          if (!currentUser.changePasswordAfter(decoded.iat)) {
+            _context.next = 17;
+            break;
+          }
+
+          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - User recently changed password'); // FIXME: Global error handling
+
+          throw new Error('User recently changed password. Please log in again');
+
+        case 17:
+          // grant access to protected route and put user on req object
+          req.user = currentUser.serialize();
+          next();
+          _context.next = 25;
+          break;
+
+        case 21:
+          _context.prev = 21;
+          _context.t0 = _context["catch"](0);
+          // FIXME: GLOBAL Errors
+          _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].error('[Middleware - requireAuth] - Token Error - Incorrect or Expires');
+          return _context.abrupt("return", res.status(401).json({
+            statusCd: 401,
+            status: 'failure',
+            message: "Unauthorized Access: ".concat(_context.t0.message)
+          }));
+
+        case 25:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 21]]);
+}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requireRole", function() { return requireRole; });
+function requireRole() {
+  for (var _len = arguments.length, roles = new Array(_len), _key = 0; _key < _len; _key++) {
+    roles[_key] = arguments[_key];
+  }
+
+  return function (req, res, next) {
+    // check whether the current user role is within roles
+    if (!roles.includes(req.user.role)) {
+      // FIXME: Error handling
+      res.status(403).json({
+        statusCd: 403,
+        status: 'failure',
+        message: 'Unauthorized to use this route'
+      });
+      return;
+    }
+
+    next();
+  };
+}
 
 /***/ }),
 /* 53 */
@@ -2513,151 +2919,22 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionManager", function() { return TransactionManager; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
-/* harmony import */ var _BaseManager__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(54);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(33);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(37);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(50);
+/* harmony import */ var _controllers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
+
+ // controllers
 
 
+var transactionRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router(); // require user to be authenticated for these routes
 
-
-
-
-
-// Model
- // Managers
-
- // Errors
-
- // Utils
-
-
-var TransactionManager =
-/*#__PURE__*/
-function (_BaseManager) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default()(TransactionManager, _BaseManager);
-
-  function TransactionManager() {
-    var _this;
-
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, TransactionManager);
-
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(TransactionManager).call(this));
-    var instance = _this.constructor.instance;
-
-    if (instance) {
-      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(_this, instance);
-    }
-
-    _this.constructor.instance = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this); // Assign User model
-
-    _this._transaction = _models__WEBPACK_IMPORTED_MODULE_7__["Transaction"];
-    return _this;
-  } // shared instance of UserManager
-
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(TransactionManager, [{
-    key: "addTransaction",
-    value: function addTransaction(transaction) {
-      var newTransaction;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function addTransaction$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(new this._transaction(transaction).save());
-
-            case 3:
-              newTransaction = _context.sent;
-              return _context.abrupt("return", newTransaction.serialize());
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_10__["default"].error("[TransactionManager - addTransaction] Error message: ".concat(_context.t0.message));
-              throw TransactionManager.parseError(_context.t0, 'Transaction');
-
-            case 11:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, null, this, [[0, 7]]);
-    }
-  }, {
-    key: "updateTransaction",
-    value: function updateTransaction(transactionId, userId, transactionInfo) {
-      var updatedTransaction;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function updateTransaction$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this._transaction.findOneAndUpdate({
-                _id: transactionId,
-                _user: userId
-              }, transactionInfo, {
-                new: true,
-                runValidators: true
-              }));
-
-            case 3:
-              updatedTransaction = _context2.sent;
-
-              if (updatedTransaction) {
-                _context2.next = 7;
-                break;
-              }
-
-              _utils_logger__WEBPACK_IMPORTED_MODULE_10__["default"].error('[TransactionManager - updateTransaction] Transaction not found');
-              throw new _errors__WEBPACK_IMPORTED_MODULE_9__["AppError"]('Transaction not found', 404);
-
-            case 7:
-              return _context2.abrupt("return", updatedTransaction.serialize());
-
-            case 10:
-              _context2.prev = 10;
-              _context2.t0 = _context2["catch"](0);
-              _utils_logger__WEBPACK_IMPORTED_MODULE_10__["default"].error("[TransactionManager - updateTransaction] Update Transaction error: ".concat(_context2.t0.message));
-              throw TransactionManager.parseError(_context2.t0, 'Transaction');
-
-            case 14:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, null, this, [[0, 10]]);
-    }
-  }], [{
-    key: "shareInstance",
-    get: function get() {
-      if (this._sharedInstance === undefined) {
-        this._sharedInstance = new TransactionManager();
-      }
-
-      return this._sharedInstance;
-    }
-  }]);
-
-  return TransactionManager;
-}(_BaseManager__WEBPACK_IMPORTED_MODULE_8__["BaseManager"]);
+transactionRouter.use(_middleware__WEBPACK_IMPORTED_MODULE_1__["requireAuth"]);
+transactionRouter.post('/', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].addTransaction);
+transactionRouter.get('/', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].getTransactions);
+transactionRouter.patch('/:transactionId', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].updateTransaction);
+transactionRouter.get('/:transactionId', _controllers__WEBPACK_IMPORTED_MODULE_2__["TransactionController"].getTransaction);
+/* harmony default export */ __webpack_exports__["default"] = (transactionRouter);
 
 /***/ }),
 /* 54 */
@@ -2665,42 +2942,428 @@ function (_BaseManager) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseManager", function() { return BaseManager; });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(36);
 
 
-//Errors
+var defaultRouter = express__WEBPACK_IMPORTED_MODULE_0___default.a.Router();
+defaultRouter.all('*', function (req, res, next) {
+  next(new _errors__WEBPACK_IMPORTED_MODULE_1__["AppError"]("The ".concat(req.method, " method on the ").concat(req.originalUrl, " route does not exist on this server!"), 404));
+});
+/* harmony default export */ __webpack_exports__["default"] = (defaultRouter);
 
-var BaseManager =
-/*#__PURE__*/
-function () {
-  function BaseManager() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, BaseManager);
+/***/ }),
+/* 55 */
+/***/ (function(module, exports) {
+
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
   }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(BaseManager, null, [{
-    key: "parseError",
-    value: function parseError(err, entity) {
-      var error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]('Internal Server Error', 500);
+module.exports = toNumber;
 
-      if (err.name === 'MongoError' && err.code === 11000) {
-        error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " already exists"), 409);
-      } else if (err.name === 'CastError') {
-        error = new _errors__WEBPACK_IMPORTED_MODULE_2__["AppError"]("".concat(entity, " not found"), 404);
-      } else if (err.name === 'AppError') {
-        error = err;
-      }
 
-      return error;
-    }
-  }]);
+/***/ }),
+/* 56 */
+/***/ (function(module, exports) {
 
-  return BaseManager;
-}();
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0,
+    MAX_INTEGER = 1.7976931348623157e+308,
+    NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a finite number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.12.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {number} Returns the converted number.
+ * @example
+ *
+ * _.toFinite(3.2);
+ * // => 3.2
+ *
+ * _.toFinite(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toFinite(Infinity);
+ * // => 1.7976931348623157e+308
+ *
+ * _.toFinite('3.2');
+ * // => 3.2
+ */
+function toFinite(value) {
+  if (!value) {
+    return value === 0 ? value : 0;
+  }
+  value = toNumber(value);
+  if (value === INFINITY || value === -INFINITY) {
+    var sign = (value < 0 ? -1 : 1);
+    return sign * MAX_INTEGER;
+  }
+  return value === value ? value : 0;
+}
+
+/**
+ * Converts `value` to an integer.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {number} Returns the converted integer.
+ * @example
+ *
+ * _.toInteger(3.2);
+ * // => 3
+ *
+ * _.toInteger(Number.MIN_VALUE);
+ * // => 0
+ *
+ * _.toInteger(Infinity);
+ * // => 1.7976931348623157e+308
+ *
+ * _.toInteger('3.2');
+ * // => 3
+ */
+function toInteger(value) {
+  var result = toFinite(value),
+      remainder = result % 1;
+
+  return result === result ? (remainder ? result - remainder : result) : 0;
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = toInteger;
+
 
 /***/ })
 /******/ ]);
