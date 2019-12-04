@@ -9,6 +9,16 @@ import { AppError } from '../errors'
 // Utils
 import logger from '../utils/logger'
 
+// FIXME: move to validation file
+const sortParams = [
+  'date-desc',
+  'date-asc',
+  'type-desc',
+  'type-asc',
+  'amount-desc',
+  'amount-asc'
+]
+
 export class TransactionManager extends BaseManager {
   constructor() {
     super()
@@ -71,6 +81,27 @@ export class TransactionManager extends BaseManager {
     }
   }
 
+  async deleteTransaction(transactionId, userId) {
+    try {
+      const deletedTransaction = await this._transaction.findOneAndDelete({
+        _id: transactionId,
+        _user: userId
+      })
+
+      if (!deletedTransaction) {
+        logger.error(
+          '[TransactionManager - DeleteTransaction] Transaction not found'
+        )
+        throw new AppError('Transaction not found', 404)
+      }
+    } catch (e) {
+      logger.error(
+        `[TransactionManager - deleteTransaction] Delete Transaction error: ${e.message}`
+      )
+      throw TransactionManager.parseError(e, 'Transaction')
+    }
+  }
+
   async getTransaction(transactionId, userId) {
     try {
       const transaction = await this._transaction.findOne({
@@ -93,7 +124,10 @@ export class TransactionManager extends BaseManager {
   }
 
   // TODO: Add comments
-  async getTransactions(userId, { type, skip = 0, limit = 2 }) {
+  async getTransactions(
+    userId,
+    { type, skip = 0, limit = 2, sort = 'date-desc' }
+  ) {
     try {
       // if there is a type, it must be either income or expense
       if (
@@ -115,6 +149,17 @@ export class TransactionManager extends BaseManager {
         )
       }
 
+      // Check the sort value
+      if (!sortParams.includes(sort)) {
+        throw new AppError(
+          'Invalid argument: sort must be one of date-desc, date-asc, type-desc, type-asc, amount-desc and amount-asc',
+          400
+        )
+      }
+
+      // get sort info
+      const [field, sortType] = sort.split('-')
+
       const skipInt = toInteger(toNumber(skip))
       const limitInt = toInteger(toNumber(limit))
 
@@ -128,7 +173,7 @@ export class TransactionManager extends BaseManager {
           _user: userId,
           ...typeSearch
         })
-        .sort({ date: 'desc' })
+        .sort({ [field]: sortType })
         .skip(toNumber(skipInt))
         .limit(toNumber(limitInt))
 
@@ -159,5 +204,39 @@ export class TransactionManager extends BaseManager {
       )
       throw TransactionManager.parseError(e, 'Transaction')
     }
+  }
+
+  async getSummary() {
+    try {
+      const summary = await this._transaction.aggregate().group({
+        _id: '$type',
+        total: {
+          $sum: '$amount'
+        }
+      })
+
+      return this._formatSummary(summary)
+    } catch (e) {
+      logger.error(
+        `[TransactionManager - getSummary] Get Summary error: ${e.message}`
+      )
+      throw TransactionManager.parseError(e, 'Transaction')
+    }
+  }
+
+  _formatSummary(summary) {
+    const formattedSummary = {
+      expense: 0,
+      income: 0
+    }
+    summary.forEach(item => {
+      const { _id } = item
+      if (formattedSummary[_id] !== undefined) {
+        formattedSummary[_id] = item.total
+      }
+    })
+
+    formattedSummary.net = formattedSummary.income - formattedSummary.expense
+    return formattedSummary
   }
 }

@@ -136,6 +136,36 @@ export class TransactionController {
     }
   }
 
+  static async deleteTransaction(req, res, next) {
+    try {
+      const { user } = req
+      if (!user) {
+        // TODO: logger
+        return next(new AppError('User not found', 404))
+      }
+
+      // get userId
+      const { id: userId } = user
+      // Get transaction id
+      const { transactionId } = req.params
+
+      await TransactionManager.shareInstance.deleteTransaction(
+        transactionId,
+        userId
+      )
+
+      res.status(200).json({
+        statusCd: 200,
+        status: 'success'
+      })
+    } catch (e) {
+      logger.error(
+        `[TransactionController - deleteTransaction] Delete Transaction failure: ${e.message}`
+      )
+      next(e)
+    }
+  }
+
   static async getTransactions(req, res, next) {
     try {
       const { user } = req
@@ -148,7 +178,13 @@ export class TransactionController {
       const { id } = user
 
       // Get Type , Skip and limit query params
-      const filteredQuery = filterObj(req.query, 'type', 'skip', 'limit')
+      const filteredQuery = filterObj(
+        req.query,
+        'type',
+        'skip',
+        'limit',
+        'sort'
+      )
 
       const {
         typeCount,
@@ -175,6 +211,23 @@ export class TransactionController {
     } catch (e) {
       logger.error(
         `[TransactionController - getTransactions] Get Transactions failure: ${e.message}`
+      )
+      next(e)
+    }
+  }
+
+  static async getSummary(req, res, next) {
+    try {
+      const summary = await TransactionManager.shareInstance.getSummary()
+
+      res.status(200).json({
+        statusCd: 200,
+        status: 'success',
+        summary
+      })
+    } catch (e) {
+      logger.error(
+        `[TransactionController - getSummary] Get Summary failure: ${e.message}`
       )
       next(e)
     }
