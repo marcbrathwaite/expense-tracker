@@ -5,13 +5,13 @@ import { AppError } from '../errors'
 
 // Utils
 import logger from '../utils/logger'
-import { filterObj } from '../utils'
+import { filterObj, isUndefined } from '../utils'
 
 export class TransactionController {
   static async addTransaction(req, res, next) {
     try {
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         // TODO: logger
         return next(new AppError('User not found', 404))
       }
@@ -22,7 +22,7 @@ export class TransactionController {
       // get params out of req body
       const { date, type, amount, description } = req.body
 
-      if (!date || !type || !amount) {
+      if (isUndefined(date) || isUndefined(type) || isUndefined(amount)) {
         // TODO: logger
         return next(
           new AppError(
@@ -63,7 +63,7 @@ export class TransactionController {
   static async updateTransaction(req, res, next) {
     try {
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         // TODO: logger
         return next(new AppError('User not found', 404))
       }
@@ -106,7 +106,7 @@ export class TransactionController {
   static async getTransaction(req, res, next) {
     try {
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         // TODO: logger
         return next(new AppError('User not found', 404))
       }
@@ -139,7 +139,7 @@ export class TransactionController {
   static async deleteTransaction(req, res, next) {
     try {
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         // TODO: logger
         return next(new AppError('User not found', 404))
       }
@@ -169,7 +169,7 @@ export class TransactionController {
   static async getTransactions(req, res, next) {
     try {
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         // TODO: logger
         return next(new AppError('User not found', 404))
       }

@@ -8,12 +8,12 @@ import { BaseController } from './BaseController'
 import { AppError } from '../errors'
 
 import logger from '../utils/logger'
-import { filterObj } from '../utils'
+import { filterObj, isUndefined } from '../utils'
 
 export class UserController extends BaseController {
   static async getCurrentUser(req, res, next) {
     const { user } = req
-    if (!user) {
+    if (isUndefined(user)) {
       logger.error('[UserController - getCurrentUser] User not found')
 
       return next(new AppError('User not found', 404))
@@ -48,7 +48,7 @@ export class UserController extends BaseController {
       // Get password from body
       const { password, newPassword, newPasswordConfirm } = req.body
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         logger.error('[UserController - updatePassword] User not found')
 
         return next(new AppError('User not found', 404))
@@ -57,7 +57,11 @@ export class UserController extends BaseController {
       // get userId
       const { id } = user
 
-      if (!password || !newPassword || !newPasswordConfirm) {
+      if (
+        isUndefined(password) ||
+        isUndefined(newPassword) ||
+        isUndefined(newPasswordConfirm)
+      ) {
         logger.error(
           `[UserController - updatePassword] Missing either name, email, password or passwordConfirm in request body`
         )
@@ -99,7 +103,7 @@ export class UserController extends BaseController {
       }
 
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         return next(new AppError('User not found', 404))
       }
 
@@ -130,7 +134,7 @@ export class UserController extends BaseController {
   static async deleteCurrentUser(req, res, next) {
     try {
       const { user } = req
-      if (!user) {
+      if (isUndefined(user)) {
         // TODO: logger
         return next(new AppError('User not found', 404))
       }

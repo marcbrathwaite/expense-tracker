@@ -9,13 +9,19 @@ import { AppError } from '../errors'
 
 // Utils
 import logger from '../utils/logger'
+import { isUndefined } from '../utils'
 
 export class AuthController extends BaseController {
   static async signUp(req, res, next) {
     try {
       const { name, email, password, passwordConfirm } = req.body
 
-      if (!name || !email || !password || !passwordConfirm) {
+      if (
+        isUndefined(name) ||
+        isUndefined(email) ||
+        isUndefined(password) ||
+        isUndefined(passwordConfirm)
+      ) {
         logger.error(
           '[AuthController - signUp] Missing either name, email, password or passwordConfirm in request body'
         )
@@ -49,7 +55,7 @@ export class AuthController extends BaseController {
       const { email, password } = req.body
 
       // Check if email and password exist
-      if (!email || !password) {
+      if (isUndefined(email) || isUndefined(password)) {
         logger.error(
           '[AuthController - login] Missing email or password in request body'
         )
@@ -79,7 +85,7 @@ export class AuthController extends BaseController {
       const { protocol } = req
       const host = req.get('host')
       // Check if email and password exist
-      if (!email) {
+      if (isUndefined(email)) {
         logger.error(
           '[AuthController - forgotPassword] Missing email in request body'
         )
@@ -108,7 +114,7 @@ export class AuthController extends BaseController {
       const { token } = req.params
       const { password, passwordConfirm } = req.body
 
-      if (!password || !passwordConfirm) {
+      if (isUndefined(password) || isUndefined(passwordConfirm)) {
         logger.error(
           '[AuthController - resetPassword] Missing password or passwordConfirm in request body'
         )

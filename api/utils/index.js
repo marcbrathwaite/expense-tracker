@@ -12,3 +12,7 @@ export function filterObj(obj, ...allowedFields) {
     return newObj
   }, {})
 }
+
+export function isUndefined(input) {
+  return input === undefined || input === null || input === ''
+}
