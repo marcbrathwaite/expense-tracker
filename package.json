@@ -4,15 +4,13 @@
   "description": "HackerYou Fullstack Masterclass Project",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test",
     "clean:server": "rimraf server-dist && mkdir -p server-dist",
     "dev": "npm-run-all dev:server dev:client",
-    "dev:server": "npm-run-all --parallel clean:server webpack:server start:server",
+    "dev:server": "npm-run-all --parallel clean:server webpack:server server",
     "webpack:server": "webpack --config webpack.server.config.js --watch",
-    "start:server": "nodemon --watch server-dist --exec \"node server-dist/server.js\" --ignore src/ --ignore build/ --ignore public/",
-    "dev:client": "react-scripts start",
-    "build:client": "react-scripts build",
-    "git": "node scripts/git.js marcbrathwaite expense-tracker"
+    "start": "node server-dist/server.js",
+    "server": "nodemon --watch server-dist --exec \"node server-dist/server.js\" --ignore src/ --ignore build/ --ignore public/",
+    "dev:client": "npm run start --prefix client"
   },
   "repository": {
     "type": "git",
@@ -26,7 +24,9 @@
   },
   "homepage": "https://github.com/HackerYou/con-ed-full-stack#readme",
   "dependencies": {
+    "@babel/runtime": "^7.7.4",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
     "eslint": "^6.6.0",
     "express": "^4.17.1",
     "express-mongo-sanitize": "^1.3.2",
@@ -40,13 +40,6 @@
     "mongoose": "^5.7.10",
     "nodemailer": "^6.3.1",
     "nodemon": "^1.19.4",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-redux": "^7.1.3",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.2.0",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
     "validator": "^12.1.0",
     "winston": "^3.2.1",
     "xss-clean": "^0.1.1"
@@ -57,7 +50,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:4000",
   "standard": {
     "ignore": [
       "build/**"

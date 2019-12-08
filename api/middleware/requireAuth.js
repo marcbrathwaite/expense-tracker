@@ -14,6 +14,9 @@ export async function requireAuth(req, res, next) {
       // Get token - format 'Bearer Token'
       token = req.headers.authorization.split(' ')[1]
       logger.info('[Middleware - requireAuth] - Get Token from req Header')
+    } else if (req.cookies.jwt) {
+      // if there is no authorization header, look for token in cookies
+      token = req.cookies.jwt
     }
     if (!token) {
       logger.error(

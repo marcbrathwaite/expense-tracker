@@ -1,0 +1,6 @@
+export const ASYNC_STATUS = {
+  UNINIT: 'UNINIT',
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR'
+}

@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import mongoSanitize from 'express-mongo-sanitize'
 import xss from 'xss-clean'
 import hpp from 'hpp'
+import cookieParser from 'cookie-parser'
 
 import backendRouter from './routes'
 import defaultRouter from './routers/defaultRouter'
@@ -28,6 +29,7 @@ const limiter = rateLimit({
 
 // 4. Ensure that the router is parsing the request body to appropriately format incoming requests. Limit body to 10kb
 app.use(express.json({ limit: '10kb' }))
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 
 // Data sanitization against NoSQL query injection
