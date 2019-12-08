@@ -26,6 +26,14 @@ export class ExpenseAPIService {
     }
   }
 
+  async signOut() {
+    try {
+      await axios.post('/api/v1/auth/logout')
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
   _parseHttpResponse(response) {
     const error = new ServiceError('Service unavailable')
     // Unauthorized Access

@@ -34,6 +34,15 @@ export class UserManager {
     }
   }
 
+  // method for logout flow
+  async signOut() {
+    try {
+      await this._apiService.signOut()
+    } catch (e) {
+      throw this._parseError(e)
+    }
+  }
+
   // method for signup flow
   async signUp() {}
 

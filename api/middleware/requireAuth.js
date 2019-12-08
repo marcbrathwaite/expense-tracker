@@ -1,7 +1,10 @@
 import TokenManager from '../utils/TokenManager'
 import logger from '../utils/logger'
 
+// Managers
 import { UserManager } from '../managers'
+// Errors
+import { AppError } from '../errors'
 
 export async function requireAuth(req, res, next) {
   try {
@@ -22,8 +25,7 @@ export async function requireAuth(req, res, next) {
       logger.error(
         '[Middleware - requireAuth] - No Token in the request header'
       )
-      // FIXME: Global error handling
-      throw new Error('No Token in the request header')
+      throw new AppError('No Token in the request header', 401)
     }
     // verify token
     const decoded = await TokenManager.verifyJWTToken(token)
@@ -31,8 +33,8 @@ export async function requireAuth(req, res, next) {
     const currentUser = await UserManager.shareInstance.getUser(decoded.id)
     if (!currentUser) {
       logger.error('[Middleware - requireAuth] - User no longer exists')
-      // FIXME: Global error handling
-      throw new Error('User no longer exists')
+
+      throw new AppError('User no longer exists', 401)
     }
 
     // Check if user changed password the token was issued
@@ -40,8 +42,10 @@ export async function requireAuth(req, res, next) {
       logger.error(
         '[Middleware - requireAuth] - User recently changed password'
       )
-      // FIXME: Global error handling
-      throw new Error('User recently changed password. Please log in again')
+      throw new AppError(
+        'User recently changed password. Please log in again',
+        401
+      )
     }
 
     // grant access to protected route and put user on req object
@@ -52,10 +56,6 @@ export async function requireAuth(req, res, next) {
     logger.error(
       '[Middleware - requireAuth] - Token Error - Incorrect or Expires'
     )
-    return res.status(401).json({
-      statusCd: 401,
-      status: 'failure',
-      message: `Unauthorized Access: ${e.message}`
-    })
+    next(e)
   }
 }

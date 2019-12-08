@@ -79,6 +79,16 @@ export class AuthController extends BaseController {
     }
   }
 
+  static logout(req, res) {
+    // send back a cookie with the same name and invalid jwt
+    // set expiry time to short time
+    res.cookie('jwt', 'loggedOut', {
+      expires: new Date(Date.now() + 5 * 1000), // 5 seconds
+      httpOnly: true
+    })
+    res.status(200).json({ status: 'success' })
+  }
+
   static async forgotPassword(req, res, next) {
     try {
       const { email } = req.body
