@@ -60,6 +60,7 @@ const SignIn = ({
   const classes = useStyles()
 
   const isIncorrectCredentials = userSignInStatus === ERROR
+  const isServiceError = userAsyncStatus === ERROR
 
   const [formInputs, setFormInputs] = useState({
     email: {
@@ -143,6 +144,11 @@ const SignIn = ({
           {isIncorrectCredentials && (
             <Typography variant="body2" className={classes.errorText}>
               Incorrect Email/Password Combination
+            </Typography>
+          )}
+          {isServiceError && (
+            <Typography variant="body2" className={classes.errorText}>
+              We apologize! Something went wrong! Please try again!
             </Typography>
           )}
           <form className={classes.form}>

@@ -24,3 +24,7 @@ export function isValidPassword(input) {
 
   return schema.validate(input)
 }
+
+export function isNotEmpty(input) {
+  return !validator.isEmpty(input)
+}

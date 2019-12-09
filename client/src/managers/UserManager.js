@@ -1,5 +1,7 @@
+// Services
 import { ExpenseAPIService } from '../services'
-import { SignInError, ManagerError } from './errors'
+// errors
+import { SignInError, ManagerError, SignUpError } from './errors'
 
 export class UserManager {
   constructor() {
@@ -44,15 +46,32 @@ export class UserManager {
   }
 
   // method for signup flow
-  async signUp() {}
+  async signUp({ name, email, password, passwordConfirm }) {
+    try {
+      const userInfo = {
+        name,
+        email,
+        password,
+        passwordConfirm
+      }
+      const user = await this._apiService.signUp(userInfo)
+      return user
+    } catch (e) {
+      throw this._parseError(e)
+    }
+  }
 
   _parseError(error) {
     const err = new ManagerError(`User Manager Error: ${error.message}`)
 
     if (error.name === 'UnauthorizedError') {
-      // TODO: Rename Error?
       return new SignInError(`No user info returned: ${error.message}`)
     }
+
+    if (error.name === 'ConflictError') {
+      return new SignUpError(`User already exists: ${error.message}`)
+    }
+
     return err
   }
 }

@@ -2,7 +2,7 @@ import axios from 'axios'
 // import cookie from 'react-cookies'
 
 // Errors
-import { UnauthorizedError, ServiceError } from './errors'
+import { UnauthorizedError, ServiceError, ConflictError } from './errors'
 
 export class ExpenseAPIService {
   async getUser() {
@@ -26,6 +26,20 @@ export class ExpenseAPIService {
     }
   }
 
+  async signUp({ name, email, password, passwordConfirm }) {
+    try {
+      const res = await axios.post('/api/v1/auth/signup', {
+        name,
+        email,
+        password,
+        passwordConfirm
+      })
+      return res.data
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
   async signOut() {
     try {
       await axios.post('/api/v1/auth/logout')
@@ -39,6 +53,10 @@ export class ExpenseAPIService {
     // Unauthorized Access
     if (response.status === 401) {
       return new UnauthorizedError(response.data.message)
+    }
+    // Conflict status
+    if (response.status === 409) {
+      return new ConflictError(response.data.message)
     }
     return error
   }
