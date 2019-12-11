@@ -3,26 +3,24 @@
   "version": "1.0.0",
   "description": "HackerYou Fullstack Masterclass Project",
   "main": "index.js",
+  "engines": {
+    "node": "13.0.1",
+    "npm": "6.12.0"
+  },
   "scripts": {
+    "build": "webpack --mode production --config webpack.server.config.js",
     "clean:server": "rimraf server-dist && mkdir -p server-dist",
     "dev": "npm-run-all dev:server dev:client",
-    "dev:server": "npm-run-all --parallel clean:server webpack:server server",
+    "dev:server": "npm-run-all --parallel webpack:server server",
     "webpack:server": "webpack --config webpack.server.config.js --watch",
-    "start": "node server-dist/server.js",
-    "server": "nodemon --watch server-dist --exec \"node server-dist/server.js\" --ignore src/ --ignore build/ --ignore public/",
-    "dev:client": "npm run start --prefix client"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/marcbrathwaite/expense-tracker.git"
+    "start": "node server.js",
+    "server": "nodemon --exec \"node server.js\" --ignore src/ --ignore build/ --ignore public/",
+    "dev:client": "npm run start --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "Marc Brathwaite",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HackerYou/con-ed-full-stack/issues"
-  },
-  "homepage": "https://github.com/HackerYou/con-ed-full-stack#readme",
   "dependencies": {
     "@babel/runtime": "^7.7.4",
     "bcryptjs": "^2.4.3",
@@ -43,17 +41,6 @@
     "validator": "^12.1.0",
     "winston": "^3.2.1",
     "xss-clean": "^0.1.1"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "standard": {
-    "ignore": [
-      "build/**"
-    ]
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

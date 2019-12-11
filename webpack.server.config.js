@@ -7,7 +7,7 @@ module.exports = {
   mode: 'none',
   output: {
     filename: 'server.js',
-    path: path.resolve(__dirname, 'server-dist')
+    path: path.resolve(__dirname)
   },
   externals: [webpackNodeExternals()],
   module: {

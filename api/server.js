@@ -45,8 +45,17 @@ app.use(hpp())
 app.use(BACKEND_BASEURL, limiter, backendRouter)
 
 // Handled routes that are not defined
-app.all('*', defaultRouter)
+app.all('/api/*', defaultRouter)
 
+if (process.env.NODE_ENV === 'production') {
+  // Express will serve up production assets
+  app.use(express.static('./client/build'))
+
+  // if it doesnt recognize the route, Express will serve up the index.html
+  app.get('*', (req, res) => {
+    res.sendFile('./client/build/index.html')
+  })
+}
 app.use(ErrorController.handleError)
 
 // 6. Define configuration for mongodb

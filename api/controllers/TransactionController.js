@@ -199,12 +199,12 @@ export class TransactionController {
       res.status(200).json({
         statusCd: 200,
         status: 'success',
-        meta: {
-          typeCount,
-          next: nxt,
-          resultCount
-        },
         data: {
+          meta: {
+            typeCount,
+            next: nxt,
+            resultCount
+          },
           transactions
         }
       })

@@ -126,7 +126,7 @@ export class TransactionManager extends BaseManager {
   // TODO: Add comments
   async getTransactions(
     userId,
-    { type, skip = 0, limit = 2, sort = 'date-desc' }
+    { type, skip = 0, limit = 0, sort = 'date-desc' }
   ) {
     try {
       // if there is a type, it must be either income or expense
@@ -188,8 +188,11 @@ export class TransactionManager extends BaseManager {
 
       let next
 
-      if (skipInt + limitInt < documentCount) {
-        next = skipInt + limitInt
+      // This represents where the next get request should start
+      const slidingWindowEnd = skipInt + limitInt
+
+      if (slidingWindowEnd < documentCount && slidingWindowEnd !== 0) {
+        next = slidingWindowEnd
       }
 
       return {

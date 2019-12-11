@@ -48,6 +48,15 @@ export class ExpenseAPIService {
     }
   }
 
+  async getTransactions({ limit, sort }) {
+    try {
+      const res = await axios.get('api/vi/transactions')
+      return res.data
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
   _parseHttpResponse(response) {
     const error = new ServiceError('Service unavailable')
     // Unauthorized Access

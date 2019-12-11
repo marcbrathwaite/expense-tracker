@@ -1,10 +1,14 @@
 // Services
 import { ExpenseAPIService } from '../services'
-// errors
-import { SignInError, ManagerError, SignUpError } from './errors'
 
-export class UserManager {
+// Manager
+import { BaseManager } from './BaseManager'
+// errors
+// import { SignInError, ManagerError, SignUpError } from './errors'
+
+export class UserManager extends BaseManager {
   constructor() {
+    super()
     this._apiService = new ExpenseAPIService()
   }
 
@@ -22,7 +26,7 @@ export class UserManager {
       const user = await this._apiService.getUser()
       return user
     } catch (e) {
-      throw this._parseError(e)
+      throw UserManager._parseError(e)
     }
   }
 
@@ -32,7 +36,7 @@ export class UserManager {
       const user = await this._apiService.signIn(email, password)
       return user
     } catch (e) {
-      throw this._parseError(e)
+      throw UserManager._parseError(e)
     }
   }
 
@@ -41,7 +45,7 @@ export class UserManager {
     try {
       await this._apiService.signOut()
     } catch (e) {
-      throw this._parseError(e)
+      throw UserManager._parseError(e)
     }
   }
 
@@ -57,21 +61,22 @@ export class UserManager {
       const user = await this._apiService.signUp(userInfo)
       return user
     } catch (e) {
-      throw this._parseError(e)
+      throw UserManager._parseError(e)
     }
   }
 
-  _parseError(error) {
-    const err = new ManagerError(`User Manager Error: ${error.message}`)
+  // FIXME: Add this to a base manager
+  // _parseError(error) {
+  //   const err = new ManagerError(`User Manager Error: ${error.message}`)
 
-    if (error.name === 'UnauthorizedError') {
-      return new SignInError(`No user info returned: ${error.message}`)
-    }
+  //   if (error.name === 'UnauthorizedError') {
+  //     return new SignInError(`No user info returned: ${error.message}`)
+  //   }
 
-    if (error.name === 'ConflictError') {
-      return new SignUpError(`User already exists: ${error.message}`)
-    }
+  //   if (error.name === 'ConflictError') {
+  //     return new SignUpError(`User already exists: ${error.message}`)
+  //   }
 
-    return err
-  }
+  //   return err
+  // }
 }
