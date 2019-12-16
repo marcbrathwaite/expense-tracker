@@ -7,6 +7,7 @@ import AddIcon from '@material-ui/icons/Add'
 
 // Components
 import TransactionsTable from './TransactionsTable'
+import AddTransaction from './AddTransaction'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -28,17 +29,28 @@ const Transactions = () => {
           justifyContent: 'flex-end'
         }}
       >
-        <p
+        <Typography
+          variant="subtitle2"
+          component="span"
           style={{
-            marginRight: '10px'
+            marginRight: '10px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
           }}
         >
           Add a Transaction
-        </p>
-        <IconButton color="secondary">
+        </Typography>
+        <IconButton
+          color="primary"
+          style={{
+            background: '#f1f1f1'
+          }}
+        >
           <AddIcon />
         </IconButton>
       </div>
+      <AddTransaction />
       <TransactionsTable />
     </Container>
   )

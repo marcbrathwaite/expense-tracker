@@ -98,6 +98,7 @@ const SignUpContainer = ({
     }
   }
 
+  // FIXME: can be reused
   function handleInputChange(e) {
     const { name, value } = e.target
     // get current state of input field

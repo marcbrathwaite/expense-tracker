@@ -1,5 +1,6 @@
 import PasswordValidator from 'password-validator'
 import validator from 'validator'
+import isNumber from 'is-number'
 
 export function isValidEmail(input) {
   return validator.isEmail(input)
@@ -27,4 +28,8 @@ export function isValidPassword(input) {
 
 export function isNotEmpty(input) {
   return !validator.isEmpty(input)
+}
+
+export function isPositiveNumber(input) {
+  return isNumber(input) && !input.includes('-')
 }
