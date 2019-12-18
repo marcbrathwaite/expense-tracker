@@ -3,6 +3,9 @@ import { EMAIL_SERVICE } from '../config/keys'
 
 export class EmailService {
   constructor() {
+    // It looks like this is mean to make the class a singleton?
+    // One possible alternative, is to export the instance of the class from this module
+    // Since in JS, all modules are singletons. 
     const instance = this.constructor.instance
     if (instance) {
       return instance
