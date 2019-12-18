@@ -21,6 +21,7 @@ const app = express()
 app.use(helmet())
 
 // create a limiter, and how many request per ip in specific time period
+// Rad! This is the first rate limiter I've seen in a FS-master class project. Really neat!
 const limiter = rateLimit({
   max: 100, // 100 requests
   windowMs: 60 * 60 * 1000, // in 1 hour,
@@ -36,9 +37,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(mongoSanitize())
 
 // Data sanitization against XSS
+// Also a first for a FS project, nice!
 app.use(xss())
 
 // Prevent parameter pollution - we can pass a whitelist for query parameter we would like to be duplicated e.g. { whitelist: ['duration']}
+// 🔥
 app.use(hpp())
 
 // 5. Utilise routes - apply limiter on api routes

@@ -6,6 +6,7 @@ export function isValidEmail(input) {
 }
 
 export function isValidPassword(input) {
+  // I hadn't seen this lib before... cool!
   const schema = new PasswordValidator()
   schema
     .is()

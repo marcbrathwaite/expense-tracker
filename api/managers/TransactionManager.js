@@ -22,6 +22,7 @@ const sortParams = [
 export class TransactionManager extends BaseManager {
   constructor() {
     super()
+    // Similar to the email serivce, you could probably avoid this extra code by relying on the JS module system
     const instance = this.constructor.instance
     if (instance) {
       return instance
