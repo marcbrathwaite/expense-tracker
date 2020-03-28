@@ -37,7 +37,7 @@ export async function requireAuth(req, res, next) {
       throw new AppError('User no longer exists', 401)
     }
 
-    // Check if user changed password the token was issued
+    // Check if user changed password after the token was issued
     if (currentUser.changePasswordAfter(decoded.iat)) {
       logger.error(
         '[Middleware - requireAuth] - User recently changed password'
@@ -52,7 +52,6 @@ export async function requireAuth(req, res, next) {
     req.user = currentUser.serialize()
     next()
   } catch (e) {
-    // FIXME: GLOBAL Errors
     logger.error(
       '[Middleware - requireAuth] - Token Error - Incorrect or Expires'
     )

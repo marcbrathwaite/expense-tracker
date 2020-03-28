@@ -27,4 +27,13 @@ export class TransactionManager extends BaseManager {
       throw TransactionManager._parseError(e)
     }
   }
+
+  async addTransaction(transaction) {
+    try {
+      const res = await this._apiService.addTransaction(transaction)
+      return res
+    } catch (e) {
+      throw TransactionManager._parseError(e)
+    }
+  }
 }

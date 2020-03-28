@@ -7,6 +7,8 @@ import Transactions from './Transactions'
 // Selectors
 import { getUserData } from '../../reducers/userReducer'
 
+// Actions
+
 const TransactionsContainer = ({ user, history }) => {
   // FIXME: make custom hook?
   useEffect(() => {

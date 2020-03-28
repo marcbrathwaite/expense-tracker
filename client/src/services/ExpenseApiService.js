@@ -50,7 +50,21 @@ export class ExpenseAPIService {
 
   async getTransactions({ limit, sort }) {
     try {
-      const res = await axios.get('api/vi/transactions')
+      const res = await axios.get('api/v1/transactions')
+      return res.data
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
+  async addTransaction({ date, type, amount, description }) {
+    try {
+      const res = await axios.post('/api/v1/transactions', {
+        date,
+        type,
+        amount,
+        description
+      })
       return res.data
     } catch (e) {
       throw this._parseHttpResponse(e.response)

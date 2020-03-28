@@ -7,6 +7,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers'
 import Card from '@material-ui/core/Card'
+import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { makeStyles } from '@material-ui/core/styles'
@@ -23,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 const AddTransaction = ({
   handleDateChange,
   handleInputChange,
+  handleSubmit,
   formInputs,
   dateInput
 }) => {
@@ -69,12 +71,31 @@ const AddTransaction = ({
               variant="outlined"
               id={formInputs.amount.name}
               name={formInputs.amount.name}
-              label="Type"
+              label="Amount"
               value={formInputs.amount.value}
               onChange={handleInputChange}
               helperText="Please enter amount"
             />
           </Grid>
+          <Grid container justify="center">
+            <TextField
+              variant="outlined"
+              id={formInputs.description.name}
+              name={formInputs.description.name}
+              label="Description"
+              value={formInputs.description.value}
+              onChange={handleInputChange}
+              helperText="Transaction Description"
+            />
+          </Grid>
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            onClick={handleSubmit}
+          >
+            Add Transaction
+          </Button>
         </form>
       </MuiPickersUtilsProvider>
     </Card>

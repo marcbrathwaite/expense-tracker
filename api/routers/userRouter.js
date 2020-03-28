@@ -10,9 +10,13 @@ const userRouter = express.Router()
 userRouter.use(requireAuth)
 
 userRouter.get('/', requireRole('admin'), UserController.getUsers)
+// Get current user
 userRouter.get('/current_user', UserController.getCurrentUser)
+// update password
 userRouter.patch('/current_user/password', UserController.updatePassword)
+// update user info
 userRouter.patch('/current_user/info', UserController.updateUserInfo)
+// delete current user
 userRouter.delete('/current_user', UserController.deleteCurrentUser)
 
 export default userRouter

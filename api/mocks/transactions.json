@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2020-01-30",
+    "type": "expense",
+    "amount": 45.56,
+    "description": "Dumbbells",
+    "_user": "5e7b7b43ff53d8187af0342c"
+  },
+  {
+    "date": "2019-12-15",
+    "type": "income",
+    "amount": 3456.34,
+    "description": "Salary",
+    "_user": "5e7b7b43ff53d8187af0342c"
+  },
+  {
+    "date": "2020-02-02",
+    "type": "expense",
+    "amount": 92.67,
+    "description": "Going out clothes",
+    "_user": "5e7b7b43ff53d8187af0342c"
+  }
+]

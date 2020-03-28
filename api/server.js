@@ -12,7 +12,7 @@ import defaultRouter from './routers/defaultRouter'
 
 import { ErrorController } from './controllers'
 
-import { MONGODB_URI, MONGODB_PORT, BACKEND_BASEURL } from './config'
+import { MONGODB_URI, EXPRESS_PORT, BACKEND_BASEURL } from './config'
 
 // 1. Create main express intance
 const app = express()
@@ -68,10 +68,10 @@ const MONGO_CONFIG = {
 // 7. Start server
 mongoose
   .connect(MONGODB_URI, MONGO_CONFIG)
-  .then(async () => {
+  .then(() => {
     console.log(`Connected to database at ${MONGODB_URI}`)
-    app.listen(MONGODB_PORT, () => {
-      console.log(`Server is running on PORT: ${MONGODB_PORT}`)
+    app.listen(EXPRESS_PORT, () => {
+      console.log(`Server is running on PORT: ${EXPRESS_PORT}`)
     })
   })
   .catch(err => {

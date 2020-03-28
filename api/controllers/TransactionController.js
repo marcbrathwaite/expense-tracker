@@ -181,16 +181,16 @@ export class TransactionController {
       const filteredQuery = filterObj(
         req.query,
         'type',
-        'skip',
+        'page',
         'limit',
         'sort'
       )
 
       const {
-        typeCount,
+        searchCount,
         next: nxt,
         transactions,
-        resultCount
+        pageCount
       } = await TransactionManager.shareInstance.getTransactions(
         id,
         filteredQuery
@@ -201,9 +201,9 @@ export class TransactionController {
         status: 'success',
         data: {
           meta: {
-            typeCount,
+            searchCount,
             next: nxt,
-            resultCount
+            pageCount
           },
           transactions
         }

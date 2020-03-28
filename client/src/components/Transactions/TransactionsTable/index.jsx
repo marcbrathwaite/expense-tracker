@@ -66,7 +66,7 @@ const TransactionsTable = () => {
     amount: 3456.45,
     description: 'Went to the supermarket and bout 4 pigs and 3 cows'
   })
-
+  // Map actions to each transaction
   const mappedRows = rows.map(row => {
     return {
       ...row,

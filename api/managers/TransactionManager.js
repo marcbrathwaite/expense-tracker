@@ -10,14 +10,7 @@ import { AppError } from '../errors'
 import logger from '../utils/logger'
 
 // FIXME: move to validation file
-const sortParams = [
-  'date-desc',
-  'date-asc',
-  'type-desc',
-  'type-asc',
-  'amount-desc',
-  'amount-asc'
-]
+const sortParams = ['date', 'type', 'amount', '-date', '-type', '-amount']
 
 export class TransactionManager extends BaseManager {
   constructor() {
@@ -62,7 +55,7 @@ export class TransactionManager extends BaseManager {
         },
         transactionInfo,
         {
-          new: true,
+          new: true, // new updated document will be returned
           runValidators: true
         }
       )
@@ -126,7 +119,7 @@ export class TransactionManager extends BaseManager {
   // TODO: Add comments
   async getTransactions(
     userId,
-    { type, skip = 0, limit = 0, sort = 'date-desc' }
+    { type, page = 1, limit = 10, sort = '-date' }
   ) {
     try {
       // if there is a type, it must be either income or expense
@@ -141,10 +134,10 @@ export class TransactionManager extends BaseManager {
         )
       }
 
-      // Skip and limit must be numbers
-      if (isNaN(toNumber(skip)) || isNaN(toNumber(limit))) {
+      // Page and limit must be numbers
+      if (isNaN(toNumber(page)) || isNaN(toNumber(limit))) {
         throw new AppError(
-          'Invalid argument: skip and limit must be numbers',
+          'Invalid argument: page and limit must be numbers',
           400
         )
       }
@@ -152,16 +145,16 @@ export class TransactionManager extends BaseManager {
       // Check the sort value
       if (!sortParams.includes(sort)) {
         throw new AppError(
-          'Invalid argument: sort must be one of date-desc, date-asc, type-desc, type-asc, amount-desc and amount-asc',
+          'Invalid argument: sort must be one of date [or -date], type [or -type] and amount [or -amount]',
           400
         )
       }
-
-      // get sort info
-      const [field, sortType] = sort.split('-')
-
-      const skipInt = toInteger(toNumber(skip))
-      const limitInt = toInteger(toNumber(limit))
+      const pageInt = toInteger(page)
+      if (pageInt < 1) {
+        throw new AppError('Invalid argument: page must be 1 or more', 400)
+      }
+      const limitInt = toInteger(limit)
+      const skip = (pageInt - 1) * limit
 
       const typeSearch = {}
       if (type) {
@@ -173,9 +166,9 @@ export class TransactionManager extends BaseManager {
           _user: userId,
           ...typeSearch
         })
-        .sort({ [field]: sortType })
-        .skip(toNumber(skipInt))
-        .limit(toNumber(limitInt))
+        .sort(sort)
+        .skip(skip)
+        .limit(limitInt)
 
       const serializedTransactions = transactions.map(transaction =>
         transaction.serialize()
@@ -188,18 +181,15 @@ export class TransactionManager extends BaseManager {
 
       let next
 
-      // This represents where the next get request should start
-      const slidingWindowEnd = skipInt + limitInt
-
-      if (slidingWindowEnd < documentCount && slidingWindowEnd !== 0) {
-        next = slidingWindowEnd
+      if (skip < documentCount) {
+        next = skip + limit < documentCount ? pageInt + 1 : undefined
       }
 
       return {
-        typeCount: documentCount,
+        searchCount: documentCount,
         next,
         transactions: serializedTransactions,
-        resultCount: serializedTransactions.length
+        pageCount: serializedTransactions.length
       }
     } catch (e) {
       logger.error(

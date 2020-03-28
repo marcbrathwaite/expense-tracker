@@ -62,8 +62,10 @@ userSchema.pre('save', async function(next) {
   next()
 })
 
+// Document middleware
 // presave hook for adding passwordChangedAt field
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
+  // this keyword points to current document
   // if the password has not changed or the document is new
   if (!this.isModified('password') || this.isNew) return next()
 
@@ -72,6 +74,7 @@ userSchema.pre('save', function(next) {
   next()
 })
 
+// Query middleware
 // prefind hook to only look for documents with active set to true
 userSchema.pre(/^find/, function(next) {
   // this points to the current query
@@ -120,5 +123,5 @@ userSchema.methods.createPasswordResetToken = function() {
   // We will send the unencrypted token via email
   return resetToken
 }
-
+// Takes name of model and schema
 export const User = mongoose.model('users', userSchema)
