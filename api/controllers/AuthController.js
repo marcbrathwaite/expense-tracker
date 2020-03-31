@@ -94,7 +94,7 @@ export class AuthController extends BaseController {
       const { email } = req.body
       const { protocol } = req
       const host = req.get('host')
-      // Check if email and password exist
+      // Check if email is in req.body
       if (isUndefined(email)) {
         logger.error(
           '[AuthController - forgotPassword] Missing email in request body'

@@ -19,9 +19,14 @@ export class TransactionManager extends BaseManager {
   }
 
   // method to get transactions for a particular user
-  async getTransactions() {
+  /**
+   * 
+   * @param {*} params 
+   */
+  async getTransactions(params) {
     try {
-      const transactions = await this._apiService.getTransactions()
+      const { page, limit } = params
+      const transactions = await this._apiService.getTransactions({ page, limit })
       return transactions
     } catch (e) {
       throw TransactionManager._parseError(e)

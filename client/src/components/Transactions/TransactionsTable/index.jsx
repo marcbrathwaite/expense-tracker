@@ -1,4 +1,5 @@
 import React from 'react'
+import format from 'date-fns/format'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import TableContainer from '@material-ui/core/TableContainer'
@@ -22,19 +23,18 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function generateRows(numOfRows, row) {
-  const rows = []
-  for (let i = 1; i <= numOfRows; i += 1) {
-    rows.push({ ...row, id: `${row.id}-${i}` })
-  }
-
-  return rows
-}
-
-const TransactionsTable = () => {
+const TransactionsTable = ({
+  transactions,
+  count,
+  rowsPerPage,
+  rowsPerPageOptions,
+  page,
+  handlePageChange,
+  handleRowsPerPageChange
+}) => {
   const classes = useStyles()
   const columns = [
-    { id: 'date', label: 'Date', minWidth: 50, maxWidth: 60 },
+    { id: 'date', label: 'Date', minWidth: 50, maxWidth: 60, format: value => format(new Date(value), 'yyyy-MM-dd') },
     { id: 'type', label: 'Type', align: 'center', minWidth: 50, maxWidth: 60 },
     {
       id: 'amount',
@@ -59,18 +59,11 @@ const TransactionsTable = () => {
     }
   ]
 
-  const rows = generateRows(15, {
-    id: '374y3t843y4783y4',
-    date: '2019-12-31',
-    type: 'expense',
-    amount: 3456.45,
-    description: 'Went to the supermarket and bout 4 pigs and 3 cows'
-  })
   // Map actions to each transaction
-  const mappedRows = rows.map(row => {
+  const mappedRows = transactions.map(transaction => {
     return {
-      ...row,
-      actions: [<Actions key={row.id} transactionId={row.id} />]
+      ...transaction,
+      actions: [<Actions key={transaction.id} transactionId={transaction.id} />]
     }
   })
 
@@ -110,13 +103,13 @@ const TransactionsTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={rowsPerPageOptions}
         component="div"
-        count={25}
-        rowsPerPage={10}
-        page={2}
-        onChangePage={() => console.log('test')}
-        onChangeRowsPerPage={() => console.log('test')}
+        count={count}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handlePageChange}
+        onChangeRowsPerPage={handleRowsPerPageChange}
       />
     </Paper>
   )

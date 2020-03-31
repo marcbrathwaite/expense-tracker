@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
 
 // pre save hook for encrypting password
 userSchema.pre('save', async function(next) {
-  // if password is not modified go to next middleware
+  // if password is not modified go to next middleware e.g. only changing email
   if (!this.isModified('password')) return next()
   // hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12)

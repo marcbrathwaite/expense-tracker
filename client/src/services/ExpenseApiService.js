@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import cookie from 'react-cookies'
+import qs from 'qs'
 
 // Errors
 import { UnauthorizedError, ServiceError, ConflictError } from './errors'
@@ -48,9 +48,16 @@ export class ExpenseAPIService {
     }
   }
 
-  async getTransactions({ limit, sort }) {
+  async getTransactions({ page, limit }) {
+
+    const queryString = qs.stringify({
+      page,
+      limit
+    })
+    const endPoint = `/api/v1/transactions?${queryString}`
+
     try {
-      const res = await axios.get('api/v1/transactions')
+      const res = await axios.get(endPoint)
       return res.data
     } catch (e) {
       throw this._parseHttpResponse(e.response)

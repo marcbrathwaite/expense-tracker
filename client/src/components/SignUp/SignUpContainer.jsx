@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 // Components
@@ -6,9 +6,7 @@ import SignUp from './SignUp'
 
 // Selectors
 import {
-  getUserData,
-  getUserAsyncStatus,
-  getUserSignUpStatus
+  getUser
 } from '../../reducers/userReducer'
 
 // action creators
@@ -24,13 +22,10 @@ const { ERROR } = ASYNC_STATUS
 
 const SignUpContainer = ({
   signUpUser,
-  user,
-  userAsyncStatus,
-  userSignUpStatus,
-  history
+  user
 }) => {
-  const isAccountConflict = userSignUpStatus === ERROR
-  const isServiceError = userAsyncStatus === ERROR
+  const isAccountConflict = user.signUpStatus === ERROR
+  const isServiceError = user.status === ERROR
 
   const [formInputs, setFormInputs] = useState({
     name: {
@@ -58,12 +53,6 @@ const SignUpContainer = ({
       error: false
     }
   })
-
-  useEffect(() => {
-    if (user) {
-      history.push('/transactions')
-    }
-  }, [user, history])
 
   function handleSignUp(e) {
     e.preventDefault()
@@ -138,9 +127,7 @@ const SignUpContainer = ({
 
 function mapStateToProps(state) {
   return {
-    user: getUserData(state),
-    userAsyncStatus: getUserAsyncStatus(state),
-    userSignUpStatus: getUserSignUpStatus(state)
+    user: getUser(state)
   }
 }
 

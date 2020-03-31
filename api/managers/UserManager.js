@@ -97,12 +97,12 @@ export class UserManager extends BaseManager {
 
       // Generate random reset token
       const resetToken = user.createPasswordResetToken()
-      // would Need to set the validateBeforeSave option to false if we were goinmg to save the user without a required field or a field which doesnt match validation
+      // would Need to set the validateBeforeSave option to false if we were goinmg to save the user without a required field e.g. email and password or a field which doesnt match validation
       await user.save({ validateBeforeSave: false })
 
       // Send to users email
       const { host, protocol } = urlConfig
-      const resetURL = `${protocol}://${host}${BACKEND_BASEURL}/reset-password/${resetToken}`
+      const resetURL = `${protocol}://${host}/reset-password/${resetToken}`
 
       const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to ${resetURL}\nIf you didn't forget your password, please ignore this email`
 

@@ -15,7 +15,7 @@ userRouter.get('/current_user', UserController.getCurrentUser)
 // update password
 userRouter.patch('/current_user/password', UserController.updatePassword)
 // update user info
-userRouter.patch('/current_user/info', UserController.updateUserInfo)
+userRouter.patch('/current_user', UserController.updateUserInfo)
 // delete current user
 userRouter.delete('/current_user', UserController.deleteCurrentUser)
 

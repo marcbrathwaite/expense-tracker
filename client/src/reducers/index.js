@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import userReducer from './userReducer'
-import transactionReducer from './transactionReducer'
+import transactionsReducer from './transactionsReducer'
 
 const reducers = combineReducers({
   user: userReducer,
-  transaction: transactionReducer
+  transactions: transactionsReducer
 })
 
 export default reducers

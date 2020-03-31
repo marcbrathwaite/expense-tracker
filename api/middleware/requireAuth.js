@@ -25,7 +25,7 @@ export async function requireAuth(req, res, next) {
       logger.error(
         '[Middleware - requireAuth] - No Token in the request header'
       )
-      throw new AppError('No Token in the request header', 401)
+      throw new AppError('No Token in the request header or cookie', 401)
     }
     // verify token
     const decoded = await TokenManager.verifyJWTToken(token)

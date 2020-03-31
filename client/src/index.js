@@ -10,9 +10,6 @@ import App from './components/App'
 // Reducers
 import reducers from './reducers'
 
-// routes
-import getUIRoutes from './routes'
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
@@ -24,7 +21,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <App>{getUIRoutes()}</App>
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root')

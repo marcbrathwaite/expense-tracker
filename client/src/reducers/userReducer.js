@@ -65,6 +65,8 @@ export default function(state = defaultState, action) {
 }
 
 // selectors
+export const getUser = ({ user }) => user
+
 export function getUserData({ user }) {
   return user.data
 }

@@ -182,7 +182,7 @@ export class TransactionManager extends BaseManager {
       let next
 
       if (skip < documentCount) {
-        next = skip + limit < documentCount ? pageInt + 1 : undefined
+        next = skip + limitInt < documentCount ? pageInt + 1 : undefined
       }
 
       return {

@@ -6,32 +6,29 @@ const { PENDING, SUCCESS, ERROR } = ASYNC_STATUS
 
 export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
 
-export function fetchTransactions() {
+export function fetchTransactions(params) {
   return async function(dispatch) {
     try {
       dispatch({
         type: `${FETCH_TRANSACTIONS}_${PENDING}`
       })
 
-      const res = await TransactionManager.sharedInstance.getTransactions()
+      const { page, limit } = params
+      const res = await TransactionManager.sharedInstance.getTransactions({
+        page,
+        limit
+      })
       dispatch({
         type: `${FETCH_TRANSACTIONS}_${SUCCESS}`,
         signInStatus: SUCCESS,
         meta: res.data.meta,
         payload: res.data.transactions
       })
-    } catch (e) {
-      // if user is not signed in
-      if (e.name === 'SignInError') {
-        dispatch({
-          type: `${FETCH_TRANSACTIONS}_${ERROR}`,
-          signInStatus: ERROR
-        })
-      } else {
-        dispatch({
-          type: `${FETCH_TRANSACTIONS}_${ERROR}`
-        })
-      }
+    } catch (error) {
+      dispatch({
+        type: `${FETCH_TRANSACTIONS}_${ERROR}`,
+        error
+      })
     }
   }
 }
