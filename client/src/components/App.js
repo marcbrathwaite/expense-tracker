@@ -8,6 +8,8 @@ import Landing from './Landing'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Transactions from './Transactions'
+import Spinner from './Common/Spinner'
+import PageDoesNotExist from './PageDoesNotExist'
 
 // Selectors
 import { getUser } from '../reducers/userReducer'
@@ -18,19 +20,16 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 // Actions Creators
 import { fetchUser } from '../actions'
 
-
-const PageDoesExist = () => "Page does not exist"
+// utils
+import { ASYNC_STATUS } from '../utils/constants'
+const { PENDING, ERROR, UNINIT } = ASYNC_STATUS
 
 const App = ({ fetchUser, user }) => {
   useEffect(() => {
     fetchUser()
   }, [fetchUser])
 
-  if (['PENDING', 'UNINIT'].includes(user.status)) {
-    return 'LOADING...'
-  }
-
-  if (user.status === 'ERROR') {
+  if (user.status === ERROR) {
     return 'ERROR obtaining user'
   }
 
@@ -38,27 +37,31 @@ const App = ({ fetchUser, user }) => {
     <>
       <CssBaseline />
       <Header />
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route
-          path="/users/sign-up"
-          exact
-          render={() => (user.data ? <Redirect to="/" /> : <SignUp />)}
-        />
-        <Route
-          path="/users/sign-in"
-          exact
-          render={() => (user.data ? <Redirect to="/" /> : <SignIn />)}
-        />
-        <Route
-          path="/transactions"
-          exact
-          component={() =>
-            user.data ? <Transactions /> : <Redirect to="/users/sign-in" />
-          }
-        />
-        <Route path="*" component={PageDoesExist} />
-      </Switch>
+      {[PENDING, UNINIT].includes(user.status) ? (
+        <Spinner verticalPadding={20} />
+      ) : (
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route
+            path="/users/sign-up"
+            exact
+            render={() => (user.data ? <Redirect to="/" /> : <SignUp />)}
+          />
+          <Route
+            path="/users/sign-in"
+            exact
+            render={() => (user.data ? <Redirect to="/" /> : <SignIn />)}
+          />
+          <Route
+            path="/transactions"
+            exact
+            component={() =>
+              user.data ? <Transactions /> : <Redirect to="/users/sign-in" />
+            }
+          />
+          <Route path="*" component={PageDoesNotExist} />
+        </Switch>
+      )}
     </>
   )
 }

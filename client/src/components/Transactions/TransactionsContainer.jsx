@@ -8,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add'
 
 //Components
 import TransactionsTable from './TransactionsTable'
+import Spinner from '../Common/Spinner'
 
 // Selectors
 import { getUser } from '../../reducers/userReducer'
@@ -57,7 +58,7 @@ const TransactionsContainer = ({ user, fetchTransactions, transactions }) => {
     })
   }
 
-  const handleRowsPerPageChange = (event) => {
+  const handleRowsPerPageChange = event => {
     setPage({
       current: 0,
       rows: event.target.value
@@ -98,18 +99,17 @@ const TransactionsContainer = ({ user, fetchTransactions, transactions }) => {
         </IconButton>
       </div>
       {[UNINIT, PENDING].includes(transactions.status) ? (
-        'Loading...'
+        <Spinner />
       ) : (
-          <TransactionsTable
-            transactions={transactions.data}
-            count={transactions.total}
-            rowsPerPage={page.rows}
-            rowsPerPageOptions={rowsPerPageOptions}
-            page={page.current}
-            handlePageChange={handlePageChange}
-            handleRowsPerPageChange={handleRowsPerPageChange}
-
-          />
+        <TransactionsTable
+          transactions={transactions.data}
+          count={transactions.total}
+          rowsPerPage={page.rows}
+          rowsPerPageOptions={rowsPerPageOptions}
+          page={page.current}
+          handlePageChange={handlePageChange}
+          handleRowsPerPageChange={handleRowsPerPageChange}
+        />
       )}
     </Container>
   )

@@ -23,6 +23,38 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const columns = [
+  {
+    id: 'date',
+    label: 'Date',
+    minWidth: 50,
+    maxWidth: 60,
+    format: value => format(new Date(value), 'yyyy-MM-dd')
+  },
+  { id: 'type', label: 'Type', align: 'center', minWidth: 50, maxWidth: 60 },
+  {
+    id: 'amount',
+    label: 'Amount',
+    minWidth: 30,
+    maxWidth: 150,
+    align: 'center',
+    format: value => value.toFixed(2)
+  },
+  {
+    id: 'description',
+    label: 'Description',
+    minWidth: 100,
+    maxWidth: 200
+  },
+  {
+    id: 'actions',
+    label: 'Actions',
+    align: 'center',
+    minWidth: 50,
+    maxWidth: 70
+  }
+]
+
 const TransactionsTable = ({
   transactions,
   count,
@@ -33,31 +65,6 @@ const TransactionsTable = ({
   handleRowsPerPageChange
 }) => {
   const classes = useStyles()
-  const columns = [
-    { id: 'date', label: 'Date', minWidth: 50, maxWidth: 60, format: value => format(new Date(value), 'yyyy-MM-dd') },
-    { id: 'type', label: 'Type', align: 'center', minWidth: 50, maxWidth: 60 },
-    {
-      id: 'amount',
-      label: 'Amount',
-      minWidth: 30,
-      maxWidth: 150,
-      align: 'center',
-      format: value => value.toFixed(2)
-    },
-    {
-      id: 'description',
-      label: 'Description',
-      minWidth: 100,
-      maxWidth: 200
-    },
-    {
-      id: 'actions',
-      label: 'Actions',
-      align: 'center',
-      minWidth: 50,
-      maxWidth: 70
-    }
-  ]
 
   // Map actions to each transaction
   const mappedRows = transactions.map(transaction => {
