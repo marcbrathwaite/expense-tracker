@@ -1,4 +1,4 @@
-import { FETCH_TRANSACTIONS } from '../actions/fetchTransactions'
+import { FETCH_TRANSACTIONS, SET_TRANSACTIONS_PAGE } from '../actions'
 
 import { ASYNC_STATUS } from '../utils/constants'
 
@@ -8,12 +8,16 @@ const defaultState = {
   status: UNINIT,
   data: null,
   total: null,
-  error: null
+  error: null,
+  page: {
+    current: 0,
+    rows: 10
+  }
 }
 
-export default (state = defaultState, action)  => {
+export default (state = defaultState, action) => {
   switch (action.type) {
-    case `${FETCH_TRANSACTIONS}_${PENDING}`: 
+    case `${FETCH_TRANSACTIONS}_${PENDING}`:
       return {
         ...state,
         status: PENDING
@@ -30,6 +34,13 @@ export default (state = defaultState, action)  => {
         ...state,
         status: ERROR,
         error: action.error
+      }
+    case SET_TRANSACTIONS_PAGE:
+      return {
+        ...state,
+        page: {
+          ...action.payload
+        }
       }
     default:
       return state

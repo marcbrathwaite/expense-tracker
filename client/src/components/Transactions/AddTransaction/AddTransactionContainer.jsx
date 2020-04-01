@@ -5,17 +5,14 @@ import { format } from 'date-fns'
 // Components
 import AddTransaction from './AddTransaction'
 
-// Selectors
-import { getTransaction } from '../../../reducers/transactionReducer'
-
 // Actions
 import { addTransaction } from '../../../actions'
 
 // utils
 import { isNotEmpty, isPositiveNumber } from '../../../utils'
 
-const AddTransactionContainer = ({ addTransaction }) => {
-  const [dateInput, setDateInput] = useState(new Date('2019-12-16'))
+const AddTransactionContainer = ({ addTransaction, handleCancel }) => {
+  const [dateInput, setDateInput] = useState(Date.now())
   const [formInputs, setFormInputs] = useState({
     type: {
       name: 'type',
@@ -34,14 +31,18 @@ const AddTransactionContainer = ({ addTransaction }) => {
     }
   })
 
-  function handleDateChange(date) {
+  const handleDateChange = date => {
     setDateInput(date)
   }
 
-  function handleInputChange(e) {
+  const handleInputChange = e => {
     const { name, value } = e.target
     // get current state of input field
     const currentInputState = formInputs[name]
+    // Check whether validation is required
+    if (currentInputState.validation) {
+      currentInputState.error = !currentInputState.validation(value)
+    }
     setFormInputs({
       ...formInputs,
       [name]: {
@@ -51,35 +52,55 @@ const AddTransactionContainer = ({ addTransaction }) => {
     })
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const formatedDate = format(dateInput, 'yyyy-MM-dd')
-    const transaction = {
-      date: formatedDate,
-      type: formInputs.type.value,
-      amount: formInputs.amount.value,
-      description: formInputs.description.value
+  const handleOnBlur = e => {
+    const { name, value } = e.target
+    // get current state of input field
+    const currentInputState = formInputs[name]
+    if (currentInputState.validation) {
+      currentInputState.error = !currentInputState.validation(value)
     }
-    addTransaction(transaction)
+
+    setFormInputs({
+      ...formInputs,
+      [name]: {
+        ...currentInputState,
+      }
+    })
+
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    let error = false
+    // Check for error in formInputs
+    Object.keys(formInputs).forEach(key => {
+      if (formInputs[key].error && formInputs[key].error === true) {
+        error = true
+      }
+    })
+    if (!error) {
+      const formatedDate = format(dateInput, 'yyyy-MM-dd')
+      const transaction = {
+        date: formatedDate,
+        type: formInputs.type.value,
+        amount: formInputs.amount.value,
+        description: formInputs.description.value
+      }
+      addTransaction(transaction)
+    }
   }
 
   return (
     <AddTransaction
       handleDateChange={handleDateChange}
       handleInputChange={handleInputChange}
+      handleOnBlur={handleOnBlur}
       formInputs={formInputs}
       dateInput={dateInput}
       handleSubmit={handleSubmit}
+      handleCancel={handleCancel}
     />
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    transaction: getTransaction(state)
-  }
-}
-
-export default connect(mapStateToProps, { addTransaction })(
-  AddTransactionContainer
-)
+export default connect(null, { addTransaction })(AddTransactionContainer)

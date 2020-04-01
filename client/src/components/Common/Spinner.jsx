@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const Spinner = ({ verticalPadding, horizontalPadding }) => {
   const classes = useStyles({verticalPadding, horizontalPadding})
   return (
-    <div className={classes.root}>
+    <div className={classes.container}>
       <CircularProgress />
     </div>
   )

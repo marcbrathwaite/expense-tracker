@@ -6,14 +6,13 @@ const { PENDING, SUCCESS, ERROR } = ASYNC_STATUS
 
 export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
 
-export function fetchTransactions(params) {
+export function fetchTransactions({ page, limit }) {
   return async function(dispatch) {
     try {
       dispatch({
         type: `${FETCH_TRANSACTIONS}_${PENDING}`
       })
 
-      const { page, limit } = params
       const res = await TransactionManager.sharedInstance.getTransactions({
         page,
         limit

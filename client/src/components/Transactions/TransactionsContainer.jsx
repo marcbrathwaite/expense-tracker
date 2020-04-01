@@ -3,18 +3,19 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import AddIcon from '@material-ui/icons/Add'
+import Modal from 'react-modal'
 
 //Components
 import TransactionsTable from './TransactionsTable'
 import Spinner from '../Common/Spinner'
+import AddTransactionCTA from './AddTransactionCTA'
+import AddTransaction from './AddTransaction'
 
 // Selectors
 import { getUser } from '../../reducers/userReducer'
 
 // Actions
-import { fetchTransactions } from '../../actions/fetchTransactions'
+import { fetchTransactions, setTransactionsPage } from '../../actions'
 
 // Selectors
 import { getTransactions } from '../../reducers/transactionsReducer'
@@ -22,6 +23,8 @@ import { getTransactions } from '../../reducers/transactionsReducer'
 // utils
 import { ASYNC_STATUS } from '../../utils/constants'
 const { PENDING, SUCCESS, ERROR, UNINIT } = ASYNC_STATUS
+
+Modal.setAppElement('#root')
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -31,12 +34,27 @@ const useStyles = makeStyles(theme => ({
 
 const rowsPerPageOptions = [10, 25, 100]
 
-const TransactionsContainer = ({ user, fetchTransactions, transactions }) => {
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+}
+
+const TransactionsContainer = ({
+  user,
+  fetchTransactions,
+  setTransactionsPage,
+  transactions,
+  page
+}) => {
   const classes = useStyles()
-  const [page, setPage] = useState({
-    current: 0,
-    rows: rowsPerPageOptions[0]
-  })
+
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     if (user.data !== false) {
@@ -52,17 +70,25 @@ const TransactionsContainer = ({ user, fetchTransactions, transactions }) => {
   }, [transactions])
 
   const handlePageChange = (event, newPage) => {
-    setPage({
+    setTransactionsPage({
       ...page,
       current: newPage
     })
   }
 
   const handleRowsPerPageChange = event => {
-    setPage({
+    setTransactionsPage({
       current: 0,
       rows: event.target.value
     })
+  }
+
+  const handleShowModal = () => {
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false)
   }
 
   return (
@@ -70,34 +96,7 @@ const TransactionsContainer = ({ user, fetchTransactions, transactions }) => {
       <Typography variant="h5" component="h2">
         Transactions
       </Typography>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'flex-end'
-        }}
-      >
-        <Typography
-          variant="subtitle2"
-          component="span"
-          style={{
-            marginRight: '10px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center'
-          }}
-        >
-          Add a Transaction
-        </Typography>
-        <IconButton
-          color="primary"
-          style={{
-            background: '#f1f1f1'
-          }}
-        >
-          <AddIcon />
-        </IconButton>
-      </div>
+      <AddTransactionCTA handleCTAClick={handleShowModal} />
       {[UNINIT, PENDING].includes(transactions.status) ? (
         <Spinner />
       ) : (
@@ -111,17 +110,24 @@ const TransactionsContainer = ({ user, fetchTransactions, transactions }) => {
           handleRowsPerPageChange={handleRowsPerPageChange}
         />
       )}
+      <Modal isOpen={showModal} style={modalStyles}>
+        <AddTransaction handleCancel={handleCloseModal} />
+      </Modal>
     </Container>
   )
 }
 
 function mapStateToProps(state) {
+  const transactions = getTransactions(state)
+  const { page } = transactions
   return {
     user: getUser(state),
-    transactions: getTransactions(state)
+    transactions,
+    page
   }
 }
 
 export default connect(mapStateToProps, {
-  fetchTransactions
+  fetchTransactions,
+  setTransactionsPage
 })(TransactionsContainer)

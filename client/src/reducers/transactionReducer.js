@@ -1,13 +1,21 @@
-import { ADD_TRANSACTION } from '../actions'
+import { ADD_TRANSACTION, RESET_TRANSACTION } from '../actions'
 
 import { ASYNC_STATUS } from '../utils/constants'
 
 const { UNINIT, PENDING, SUCCESS, ERROR } = ASYNC_STATUS
 
 const defaultState = {
-  status: UNINIT,
-  action: null,
-  data: null
+  ADD: {
+    status: UNINIT,
+    data: null
+  },
+  UPDATE: {
+    status: UNINIT,
+    data: null
+  },
+  DELETE: {
+    status: UNINIT
+  }
 }
 
 const actions = {
@@ -21,20 +29,30 @@ export default function(state = defaultState, action) {
     case `${ADD_TRANSACTION}_${PENDING}`:
       return {
         ...state,
-        status: PENDING
+        ADD: {
+          ...state.ADD,
+          status: PENDING
+        }
       }
     case `${ADD_TRANSACTION}_${SUCCESS}`:
       return {
         ...state,
-        status: SUCCESS,
-        action: actions.ADD,
-        data: action.payload
+        ADD: {
+          ...state.ADD,
+          status: SUCCESS,
+          data: action.payload
+        }
       }
     case `${ADD_TRANSACTION}_${ERROR}`:
       return {
         ...state,
-        status: ERROR
+        ADD: {
+          ...state.ADD,
+          status: ERROR
+        }
       }
+    case RESET_TRANSACTION:
+      return defaultState
     default:
       return state
   }

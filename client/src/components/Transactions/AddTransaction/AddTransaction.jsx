@@ -6,18 +6,19 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from '@material-ui/pickers'
-import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { makeStyles } from '@material-ui/core/styles'
 
-// FIXME: move somewhere else?
 const TRANSACTION_TYPES = ['expense', 'income']
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    padding: theme.spacing(2)
+  container: {
+    width: '500px'
+  },
+  row: {
+    margin: theme.spacing(0,0,3,0)
   }
 }))
 
@@ -26,14 +27,16 @@ const AddTransaction = ({
   handleInputChange,
   handleSubmit,
   formInputs,
-  dateInput
+  dateInput,
+  handleCancel,
+  handleOnBlur
 }) => {
   const classes = useStyles()
   return (
-    <Card className={classes.card}>
+    <div className={classes.container}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <form>
-          <Grid container justify="space-around">
+          <Grid container justify="space-between" alignItems="center" className={classes.row}>
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
@@ -51,13 +54,13 @@ const AddTransaction = ({
             <TextField
               error={formInputs.type.error}
               variant="outlined"
+              required
               id={formInputs.type.name}
               name={formInputs.type.name}
               select
               label="Type"
               value={formInputs.type.value}
               onChange={handleInputChange}
-              helperText="Please select transaction type"
             >
               {TRANSACTION_TYPES.map(option => (
                 <MenuItem key={option} value={option}>
@@ -65,19 +68,20 @@ const AddTransaction = ({
                 </MenuItem>
               ))}
             </TextField>
-
+          </Grid>
+          <Grid container justify="space-between" alignItems="center" className={classes.row}>
             <TextField
               error={formInputs.amount.error}
               variant="outlined"
               id={formInputs.amount.name}
               name={formInputs.amount.name}
+              required
               label="Amount"
               value={formInputs.amount.value}
               onChange={handleInputChange}
-              helperText="Please enter amount"
+              onBlur={handleOnBlur}
+              helperText="Must be a positive number"
             />
-          </Grid>
-          <Grid container justify="center">
             <TextField
               variant="outlined"
               id={formInputs.description.name}
@@ -85,20 +89,29 @@ const AddTransaction = ({
               label="Description"
               value={formInputs.description.value}
               onChange={handleInputChange}
-              helperText="Transaction Description"
             />
           </Grid>
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            onClick={handleSubmit}
-          >
-            Add Transaction
-          </Button>
+          <Grid container justify="space-around" alignItems="center">
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              onClick={handleSubmit}
+            >
+              Add Transaction
+            </Button>
+            <Button
+              type="submit"
+              color="secondary"
+              variant="contained"
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
+          </Grid>
         </form>
       </MuiPickersUtilsProvider>
-    </Card>
+    </div>
   )
 }
 
