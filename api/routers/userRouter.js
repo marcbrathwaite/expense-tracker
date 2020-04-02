@@ -1,8 +1,8 @@
-import express from 'express'
+const express = require('express')
 
-import { UserController } from '../controllers'
+const { UserController } = require('../controllers')
 
-import { requireAuth, requireRole } from '../middleware'
+const { requireAuth, requireRole } = require('../middleware')
 
 const userRouter = express.Router()
 
@@ -19,4 +19,4 @@ userRouter.patch('/current_user', UserController.updateUserInfo)
 // delete current user
 userRouter.delete('/current_user', UserController.deleteCurrentUser)
 
-export default userRouter
+module.exports = userRouter

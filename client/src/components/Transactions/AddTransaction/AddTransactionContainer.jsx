@@ -8,10 +8,16 @@ import AddTransaction from './AddTransaction'
 // Actions
 import { addTransaction } from '../../../actions'
 
+// Selectors
+import { getAddTransaction } from '../../../reducers/transactionReducer' 
+
 // utils
 import { isNotEmpty, isPositiveNumber } from '../../../utils'
+import { ASYNC_STATUS } from '../../../utils/constants'
 
-const AddTransactionContainer = ({ addTransaction, handleCancel }) => {
+const { PENDING } = ASYNC_STATUS
+
+const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) => {
   const [dateInput, setDateInput] = useState(Date.now())
   const [formInputs, setFormInputs] = useState({
     type: {
@@ -30,6 +36,9 @@ const AddTransactionContainer = ({ addTransaction, handleCancel }) => {
       value: ''
     }
   })
+
+  // pending status of addTransaction action
+  const addTransactionPending = addStatus === PENDING
 
   const handleDateChange = date => {
     setDateInput(date)
@@ -99,8 +108,15 @@ const AddTransactionContainer = ({ addTransaction, handleCancel }) => {
       dateInput={dateInput}
       handleSubmit={handleSubmit}
       handleCancel={handleCancel}
+      addTransactionPending={addTransactionPending}
     />
   )
 }
 
-export default connect(null, { addTransaction })(AddTransactionContainer)
+const mapStateToProps = (state) => {
+  return {
+    addStatus: getAddTransaction(state).status
+  }
+}
+
+export default connect(mapStateToProps, { addTransaction })(AddTransactionContainer)

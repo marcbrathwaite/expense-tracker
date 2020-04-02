@@ -21,13 +21,18 @@ const Header = ({ user, signOutUser }) => {
   function renderButtons() {
     if (user) {
       return (
-        <Button color="inherit" onClick={() => signOutUser()}>
-          Sign Out
-        </Button>
+        <>
+          <Button color="inherit" component={Link} to="/transactions">
+            Transactions
+          </Button>
+          <Button color="inherit" onClick={() => signOutUser()}>
+            Sign Out
+          </Button>
+        </>
       )
     }
     return (
-      <Button color="inherit" component={Link} to="/users/sign_in">
+      <Button color="inherit" component={Link} to="/users/sign-in">
         Sign In
       </Button>
     )

@@ -1,19 +1,19 @@
 // Models
-import { User } from '../models'
+const { User } = require('../models')
 // Services
-import { EmailService } from '../services'
+const { EmailService } = require('../services')
 //Managers
-import { BaseManager } from './BaseManager'
+const { BaseManager } = require('./BaseManager')
 //Errors
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 // utils
-import TokenManager from '../utils/TokenManager'
-import logger from '../utils/logger'
+const TokenManager = require('../utils/TokenManager')
+const logger = require('../utils/logger')
 
 // Constants
-import { BACKEND_BASEURL } from '../config'
+const { BACKEND_BASEURL } = require('../config')
 
-export class UserManager extends BaseManager {
+exports.UserManager = class UserManager extends BaseManager {
   constructor() {
     super()
     const instance = this.constructor.instance

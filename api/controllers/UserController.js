@@ -1,16 +1,16 @@
 // Managers
-import { UserManager } from '../managers'
+const { UserManager } = require('../managers')
 
 // Controller
-import { BaseController } from './BaseController'
+const { BaseController } = require('./BaseController')
 
 // Erros
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 
-import logger from '../utils/logger'
-import { filterObj, isUndefined } from '../utils'
+const logger = require('../utils/logger')
+const { filterObj, isUndefined } = require('../utils')
 
-export class UserController extends BaseController {
+exports.UserController = class UserController extends BaseController {
   static async getCurrentUser(req, res, next) {
     const { user } = req
     if (isUndefined(user)) {

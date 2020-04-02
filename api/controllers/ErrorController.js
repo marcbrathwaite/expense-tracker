@@ -1,4 +1,4 @@
-export class ErrorController {
+exports.ErrorController =  class {
   static handleError(err, req, res, next) {
     err.statusCode = err.statusCode || 500
     err.status = err.status || 'error'

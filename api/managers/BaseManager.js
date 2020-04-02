@@ -1,7 +1,7 @@
 //Errors
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 
-export class BaseManager {
+exports.BaseManager = class BaseManager {
   constructor() {}
   static parseError(err, entity) {
     const error = new AppError('Internal Server Error', 500)

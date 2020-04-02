@@ -1,12 +1,12 @@
-import TokenManager from '../utils/TokenManager'
-import logger from '../utils/logger'
+const TokenManager = require('../utils/TokenManager')
+const logger = require('../utils/logger')
 
 // Managers
-import { UserManager } from '../managers'
+const { UserManager } = require('../managers')
 // Errors
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 
-export async function requireAuth(req, res, next) {
+exports.requireAuth = async (req, res, next) => {
   try {
     let token
     // Getting token and check if it is there

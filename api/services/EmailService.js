@@ -1,7 +1,7 @@
-import nodemailer from 'nodemailer'
-import { EMAIL_SERVICE } from '../config/keys'
+const nodemailer = require('nodemailer')
+const { EMAIL_SERVICE } = require('../config/keys')
 
-export class EmailService {
+exports.EmailService = class EmailService {
   constructor() {
     const instance = this.constructor.instance
     if (instance) {

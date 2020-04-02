@@ -1,6 +1,6 @@
-import { JWT_COOKIE_EXPIRES_IN } from '../config/keys'
+const { JWT_COOKIE_EXPIRES_IN } = require('../config/keys')
 
-export class BaseController {
+exports.BaseController = class BaseController {
   static createSendToken(user, token, statusCode, res) {
     const cookieOptions = {
       expires: new Date(

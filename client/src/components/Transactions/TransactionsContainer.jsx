@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import Modal from 'react-modal'
 
 //Components
@@ -19,10 +21,11 @@ import { fetchTransactions, setTransactionsPage } from '../../actions'
 
 // Selectors
 import { getTransactions } from '../../reducers/transactionsReducer'
+import { getAddTransaction } from '../../reducers/transactionReducer'
 
 // utils
 import { ASYNC_STATUS } from '../../utils/constants'
-const { PENDING, SUCCESS, ERROR, UNINIT } = ASYNC_STATUS
+const { PENDING, UNINIT, SUCCESS, ERROR } = ASYNC_STATUS
 
 Modal.setAppElement('#root')
 
@@ -50,11 +53,14 @@ const TransactionsContainer = ({
   fetchTransactions,
   setTransactionsPage,
   transactions,
-  page
+  page,
+  addTransactionStatus
 }) => {
   const classes = useStyles()
 
   const [showModal, setShowModal] = useState(false)
+  // state for opening alert for add transaction action
+  const [openAddAlert, setOpenAddAlert] = useState(false)
 
   useEffect(() => {
     if (user.data !== false) {
@@ -68,6 +74,13 @@ const TransactionsContainer = ({
   useEffect(() => {
     console.log('transactions', transactions)
   }, [transactions])
+
+  useEffect(() => {
+    if ([SUCCESS, ERROR].includes(addTransactionStatus)) {
+      setShowModal(false)
+      setOpenAddAlert(true)
+    }
+  }, [addTransactionStatus, showModal, setOpenAddAlert])
 
   const handlePageChange = (event, newPage) => {
     setTransactionsPage({
@@ -89,6 +102,10 @@ const TransactionsContainer = ({
 
   const handleCloseModal = () => {
     setShowModal(false)
+  }
+
+  const handleAddAlertClose = () => {
+    setOpenAddAlert(false)
   }
 
   return (
@@ -113,6 +130,11 @@ const TransactionsContainer = ({
       <Modal isOpen={showModal} style={modalStyles}>
         <AddTransaction handleCancel={handleCloseModal} />
       </Modal>
+      <Snackbar open={openAddAlert} autoHideDuration={6000} onClose={handleAddAlertClose}>
+        <MuiAlert elevation={6} variant="filled" onClose={handleAddAlertClose} severity="success">
+          Transaction successfully added!
+        </MuiAlert>
+      </Snackbar>
     </Container>
   )
 }
@@ -123,7 +145,8 @@ function mapStateToProps(state) {
   return {
     user: getUser(state),
     transactions,
-    page
+    page,
+    addTransactionStatus: getAddTransaction(state).status
   }
 }
 

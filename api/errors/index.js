@@ -1,1 +1,5 @@
-export * from './AppError'
+const { AppError } = require('./AppError')
+
+module.exports = {
+  AppError
+}

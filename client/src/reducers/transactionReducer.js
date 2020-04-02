@@ -5,40 +5,35 @@ import { ASYNC_STATUS } from '../utils/constants'
 const { UNINIT, PENDING, SUCCESS, ERROR } = ASYNC_STATUS
 
 const defaultState = {
-  ADD: {
+  add: {
     status: UNINIT,
     data: null
   },
-  UPDATE: {
+  update: {
     status: UNINIT,
     data: null
   },
-  DELETE: {
+  delete: {
     status: UNINIT
   }
 }
 
-const actions = {
-  ADD: 'ADD',
-  DELETE: 'DELETE',
-  UPDATE: 'UPDATE'
-}
 
-export default function(state = defaultState, action) {
+export default (state = defaultState, action) => {
   switch (action.type) {
     case `${ADD_TRANSACTION}_${PENDING}`:
       return {
         ...state,
-        ADD: {
-          ...state.ADD,
+        add: {
+          ...state.add,
           status: PENDING
         }
       }
     case `${ADD_TRANSACTION}_${SUCCESS}`:
       return {
         ...state,
-        ADD: {
-          ...state.ADD,
+        add: {
+          ...state.add,
           status: SUCCESS,
           data: action.payload
         }
@@ -46,8 +41,8 @@ export default function(state = defaultState, action) {
     case `${ADD_TRANSACTION}_${ERROR}`:
       return {
         ...state,
-        ADD: {
-          ...state.ADD,
+        add: {
+          ...state.add,
           status: ERROR
         }
       }
@@ -58,7 +53,7 @@ export default function(state = defaultState, action) {
   }
 }
 
-// selectos
-export function getTransaction({ transaction }) {
-  return transaction.data
+// selectors
+export const getAddTransaction = ({ currentTransaction }) => {
+  return currentTransaction.add
 }

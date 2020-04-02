@@ -1,2 +1,7 @@
-export * from './userModel'
-export * from './transactionModel'
+const { User } = require('./userModel')
+const { Transaction } = require('./transactionModel')
+
+module.exports = {
+  User,
+  Transaction
+}

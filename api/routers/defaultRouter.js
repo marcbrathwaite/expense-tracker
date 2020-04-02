@@ -1,5 +1,5 @@
-import express from 'express'
-import { AppError } from '../errors'
+const express = require('express')
+const { AppError } = require('../errors')
 
 const defaultRouter = express.Router()
 
@@ -12,4 +12,4 @@ defaultRouter.all('*', function(req, res, next) {
   )
 })
 
-export default defaultRouter
+module.exports = defaultRouter

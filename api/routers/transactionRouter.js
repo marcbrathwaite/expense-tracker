@@ -1,8 +1,8 @@
-import express from 'express'
-import { requireAuth } from '../middleware'
+const express = require('express')
+const { requireAuth } = require('../middleware')
 
 // controllers
-import { TransactionController } from '../controllers'
+const { TransactionController } = require('../controllers')
 
 const transactionRouter = express.Router()
 
@@ -22,4 +22,4 @@ transactionRouter.delete(
   TransactionController.deleteTransaction
 )
 
-export default transactionRouter
+module.exports = transactionRouter

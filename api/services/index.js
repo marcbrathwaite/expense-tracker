@@ -1,1 +1,5 @@
-export * from './EmailService'
+const { EmailService } = require('./EmailService')
+
+module.exports = {
+  EmailService
+}

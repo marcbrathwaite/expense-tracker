@@ -1,7 +1,7 @@
-import express from 'express'
-import authRouter from './routers/authRouter'
-import userRouter from './routers/userRouter'
-import transactionRouter from './routers/transactionRouter'
+const express = require('express')
+const authRouter = require('./routers/authRouter')
+const userRouter = require('./routers/userRouter')
+const transactionRouter = require('./routers/transactionRouter')
 
 const router = express.Router()
 // Authentication rotuer
@@ -11,4 +11,4 @@ router.use('/users', userRouter)
 // Transaction router
 router.use('/transactions', transactionRouter)
 
-export default router
+module.exports = router

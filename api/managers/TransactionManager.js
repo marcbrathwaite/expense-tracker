@@ -1,18 +1,17 @@
-import toNumber from 'lodash.tonumber'
-import toInteger from 'lodash.tointeger'
+const toNumber = require('lodash.tonumber')
+const toInteger = require('lodash.tointeger')
 // Model
-import { Transaction } from '../models'
+const { Transaction } = require('../models')
 // Managers
-import { BaseManager } from './BaseManager'
+const { BaseManager } = require('./BaseManager')
 // Errors
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 // Utils
-import logger from '../utils/logger'
+const logger = require('../utils/logger')
 
-// FIXME: move to validation file
 const sortParams = ['date', 'type', 'amount', '-date', '-type', '-amount']
 
-export class TransactionManager extends BaseManager {
+exports.TransactionManager = class TransactionManager extends BaseManager {
   constructor() {
     super()
     const instance = this.constructor.instance

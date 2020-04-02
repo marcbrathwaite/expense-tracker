@@ -1,8 +1,8 @@
-import crypto from 'crypto'
-import { promisify } from 'util'
-import jwt from 'jsonwebtoken'
+const crypto = require('crypto')
+const { promisify } = require('util')
+const jwt = require('jsonwebtoken')
 
-import { JWT_SECRET, JWT_EXPIRES_IN } from '../config/keys'
+const { JWT_SECRET, JWT_EXPIRES_IN } = require('../config/keys')
 
 class TokenManager {
   static signJWTToken(id) {
@@ -27,4 +27,4 @@ class TokenManager {
   }
 }
 
-export default TokenManager
+module.exports = TokenManager

@@ -1,10 +1,4 @@
-export function applyMiddleware(middlewareWrapper, router) {
-  for (const wrapper of middlewareWrapper) {
-    wrapper(router)
-  }
-}
-
-export function filterObj(obj, ...allowedFields) {
+exports.filterObj  = (obj, ...allowedFields) => {
   return allowedFields.reduce((newObj, field) => {
     if (obj[field] !== undefined) {
       return { ...newObj, [field]: obj[field] }
@@ -13,6 +7,6 @@ export function filterObj(obj, ...allowedFields) {
   }, {})
 }
 
-export function isUndefined(input) {
+exports.isUndefined =  (input) => {
   return input === undefined || input === null || input === ''
 }

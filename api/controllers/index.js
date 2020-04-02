@@ -1,5 +1,14 @@
-export * from './AuthController'
-export * from './UserController'
-export * from './BaseController'
-export * from './ErrorController'
-export * from './TransactionController'
+const { AuthController } = require('./AuthController')
+const { UserController } = require('./UserController')
+const { BaseController } = require('./BaseController')
+const { ErrorController } = require('./ErrorController')
+const { TransactionController } = require('./TransactionController')
+
+
+module.exports = {
+  AuthController,
+  UserController,
+  BaseController,
+  ErrorController,
+  TransactionController
+}

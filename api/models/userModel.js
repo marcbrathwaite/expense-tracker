@@ -1,8 +1,8 @@
-import mongoose from 'mongoose'
-import validator from 'validator'
-import bcrypt from 'bcryptjs'
+const mongoose = require('mongoose')
+const validator = require('validator')
+const bcrypt = require('bcryptjs')
 
-import TokenManager from '../utils/TokenManager'
+const TokenManager = require('../utils/TokenManager')
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -124,4 +124,4 @@ userSchema.methods.createPasswordResetToken = function() {
   return resetToken
 }
 // Takes name of model and schema
-export const User = mongoose.model('users', userSchema)
+exports.User = mongoose.model('users', userSchema)

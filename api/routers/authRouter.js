@@ -1,8 +1,8 @@
-import express from 'express'
+const express = require('express')
 
-import { requireAuth } from '../middleware'
+const { requireAuth } = require('../middleware')
 
-import { AuthController } from '../controllers'
+const { AuthController } = require('../controllers')
 
 const authRouter = express.Router()
 
@@ -12,4 +12,4 @@ authRouter.post('/logout', requireAuth, AuthController.logout)
 authRouter.post('/forgot_password', AuthController.forgotPassword)
 authRouter.patch('/reset_password/:token', AuthController.resetPassword)
 
-export default authRouter
+module.exports = authRouter

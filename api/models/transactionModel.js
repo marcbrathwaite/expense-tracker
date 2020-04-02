@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const transactionSchema = mongoose.Schema({
   date: {
@@ -45,4 +45,4 @@ transactionSchema.methods.serialize = function() {
   return { id, date, type, amount, description }
 }
 
-export const Transaction = mongoose.model('transactions', transactionSchema)
+exports.Transaction = mongoose.model('transactions', transactionSchema)

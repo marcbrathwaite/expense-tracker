@@ -1,17 +1,17 @@
 // Managers
-import { UserManager } from '../managers'
+const { UserManager } = require('../managers')
 
 // Controllers
-import { BaseController } from './BaseController'
+const { BaseController } = require('./BaseController')
 
 // Errors
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 
 // Utils
-import logger from '../utils/logger'
-import { isUndefined } from '../utils'
+const logger = require('../utils/logger')
+const { isUndefined } =  require('../utils')
 
-export class AuthController extends BaseController {
+exports.AuthController = class AuthController extends BaseController {
   static async signUp(req, res, next) {
     try {
       const { name, email, password, passwordConfirm } = req.body

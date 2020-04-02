@@ -1,13 +1,13 @@
 // Managers
-import { TransactionManager } from '../managers'
+const { TransactionManager } = require('../managers')
 // Errors
-import { AppError } from '../errors'
+const { AppError } = require('../errors')
 
 // Utils
-import logger from '../utils/logger'
-import { filterObj, isUndefined } from '../utils'
+const logger = require('../utils/logger')
+const { filterObj, isUndefined } = require('../utils')
 
-export class TransactionController {
+exports.TransactionController = class TransactionController {
   static async addTransaction(req, res, next) {
     try {
       const { user } = req
