@@ -2,11 +2,11 @@ import PasswordValidator from 'password-validator'
 import validator from 'validator'
 import isNumber from 'is-number'
 
-export function isValidEmail(input) {
+export const isValidEmail = (input) => {
   return validator.isEmail(input)
 }
 
-export function isValidPassword(input) {
+export const isValidPassword = (input) => {
   const schema = new PasswordValidator()
   schema
     .is()
@@ -26,10 +26,14 @@ export function isValidPassword(input) {
   return schema.validate(input)
 }
 
-export function isNotEmpty(input) {
+export const isNotEmpty = (input) => {
   return !validator.isEmpty(input)
 }
 
-export function isPositiveNumber(input) {
+export const isPositiveNumber = (input) => {
   return isNumber(input) && !input.includes('-')
+}
+
+export const isValidCurrency = (input) => {
+  return validator.isCurrency(input, { allow_negatives: false, thousands_separator: '' })
 }

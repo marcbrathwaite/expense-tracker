@@ -102,7 +102,7 @@ const AddTransaction = ({
               value={formInputs.amount.value}
               onChange={handleInputChange}
               onBlur={handleOnBlur}
-              helperText="Must be a positive number"
+              helperText="Enter valid dollar amount"
             />
             <TextField
               variant="outlined"
@@ -111,6 +111,7 @@ const AddTransaction = ({
               label="Description"
               value={formInputs.description.value}
               onChange={handleInputChange}
+              helperText="Enter transaction description"
             />
           </Grid>
           <Grid container justify="space-around" alignItems="center">

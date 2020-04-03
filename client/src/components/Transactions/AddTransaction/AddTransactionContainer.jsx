@@ -12,7 +12,7 @@ import { addTransaction } from '../../../actions'
 import { getAddTransaction } from '../../../reducers/transactionReducer' 
 
 // utils
-import { isNotEmpty, isPositiveNumber } from '../../../utils'
+import { isNotEmpty, isValidCurrency } from '../../../utils'
 import { ASYNC_STATUS } from '../../../utils/constants'
 
 const { PENDING } = ASYNC_STATUS
@@ -28,7 +28,7 @@ const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) =>
     amount: {
       name: 'amount',
       value: '',
-      validation: isPositiveNumber,
+      validation: isValidCurrency,
       error: false
     },
     description: {
@@ -88,7 +88,7 @@ const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) =>
       }
     })
     if (!error) {
-      const formatedDate = format(dateInput, 'yyyy-MM-dd')
+      const formatedDate = format(dateInput, 'yyyy-MM-dd\'T\'HH:mm:ss.SSSxxx')
       const transaction = {
         date: formatedDate,
         type: formInputs.type.value,

@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import Modal from 'react-modal'
 
 //Components
@@ -12,6 +10,7 @@ import TransactionsTable from './TransactionsTable'
 import Spinner from '../Common/Spinner'
 import AddTransactionCTA from './AddTransactionCTA'
 import AddTransaction from './AddTransaction'
+import Alert from './Alert'
 
 // Selectors
 import { getUser } from '../../reducers/userReducer'
@@ -24,8 +23,14 @@ import { getTransactions } from '../../reducers/transactionsReducer'
 import { getAddTransaction } from '../../reducers/transactionReducer'
 
 // utils
-import { ASYNC_STATUS } from '../../utils/constants'
+import {
+  ASYNC_STATUS,
+  ROWS_PER_PAGE,
+  TRANS_ACTIONS
+} from '../../utils/constants'
+
 const { PENDING, UNINIT, SUCCESS, ERROR } = ASYNC_STATUS
+const { ADD } = TRANS_ACTIONS
 
 Modal.setAppElement('#root')
 
@@ -34,8 +39,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5, 0)
   }
 }))
-
-const rowsPerPageOptions = [10, 25, 100]
 
 const modalStyles = {
   content: {
@@ -48,6 +51,27 @@ const modalStyles = {
   }
 }
 
+const alertMessaging = {
+  ADD: {
+    SUCCESS: 'Transaction successfully added!',
+    ERROR: 'Unable to add transaction at this time!'
+  },
+  UPDATE: {
+    SUCCESS: 'Transaction successfully updated!',
+    ERROR: 'Unable to update transaction at this time!'
+  },
+  DELETE: {
+    SUCCESS: 'Transaction successfully deleted!',
+    ERROR: 'Unable to delete transaction at this time!'
+  }
+}
+
+const alertLevel = {
+  SUCCESS: 'success',
+  ERROR: 'error'
+}
+
+
 const TransactionsContainer = ({
   user,
   fetchTransactions,
@@ -59,8 +83,12 @@ const TransactionsContainer = ({
   const classes = useStyles()
 
   const [showModal, setShowModal] = useState(false)
-  // state for opening alert for add transaction action
-  const [openAddAlert, setOpenAddAlert] = useState(false)
+  // state of alert for Adding, deleteing and updating transaction
+  const [alert, setAlert] = useState({
+    open: false,
+    level: null,
+    message: null
+  })
 
   useEffect(() => {
     if (user.data !== false) {
@@ -72,15 +100,15 @@ const TransactionsContainer = ({
   }, [user, fetchTransactions, page])
 
   useEffect(() => {
-    console.log('transactions', transactions)
-  }, [transactions])
-
-  useEffect(() => {
     if ([SUCCESS, ERROR].includes(addTransactionStatus)) {
       setShowModal(false)
-      setOpenAddAlert(true)
+      setAlert({
+        open: true,
+        level: alertLevel[addTransactionStatus],
+        message: alertMessaging[ADD][addTransactionStatus]
+      })
     }
-  }, [addTransactionStatus, showModal, setOpenAddAlert])
+  }, [addTransactionStatus, showModal, setAlert])
 
   const handlePageChange = (event, newPage) => {
     setTransactionsPage({
@@ -104,8 +132,8 @@ const TransactionsContainer = ({
     setShowModal(false)
   }
 
-  const handleAddAlertClose = () => {
-    setOpenAddAlert(false)
+  const handleAlertClose = () => {
+    setAlert(false)
   }
 
   return (
@@ -121,7 +149,7 @@ const TransactionsContainer = ({
           transactions={transactions.data}
           count={transactions.total}
           rowsPerPage={page.rows}
-          rowsPerPageOptions={rowsPerPageOptions}
+          rowsPerPageOptions={ROWS_PER_PAGE}
           page={page.current}
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
@@ -130,11 +158,15 @@ const TransactionsContainer = ({
       <Modal isOpen={showModal} style={modalStyles}>
         <AddTransaction handleCancel={handleCloseModal} />
       </Modal>
-      <Snackbar open={openAddAlert} autoHideDuration={6000} onClose={handleAddAlertClose}>
-        <MuiAlert elevation={6} variant="filled" onClose={handleAddAlertClose} severity="success">
-          Transaction successfully added!
-        </MuiAlert>
-      </Snackbar>
+
+      {alert.open && (
+        <Alert
+          isOpen={alert.open}
+          handleAlertClose={handleAlertClose}
+          severity={alert.level}
+          message={alert.message}
+        />
+      )}
     </Container>
   )
 }
