@@ -16,7 +16,6 @@ const TRANSACTION_TYPES = ['expense', 'income']
 
 const useStyles = makeStyles(theme => ({
   container: {
-    width: '500px'
   },
   row: {
     margin: theme.spacing(0, 0, 3, 0)

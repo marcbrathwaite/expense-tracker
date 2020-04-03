@@ -13,5 +13,5 @@ export const ROWS_PER_PAGE = [10, 25, 100]
 export const TRANS_ACTIONS = {
   ADD: 'ADD',
   UPDATE: 'UPDATE',
-  DETELE: 'DELETE'
+  DELETE: 'DELETE'
 }

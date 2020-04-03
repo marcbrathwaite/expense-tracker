@@ -62,7 +62,8 @@ const TransactionsTable = ({
   rowsPerPageOptions,
   page,
   handlePageChange,
-  handleRowsPerPageChange
+  handleRowsPerPageChange,
+  handleTableIconClick
 }) => {
   const classes = useStyles()
 
@@ -70,7 +71,7 @@ const TransactionsTable = ({
   const mappedRows = transactions.map(transaction => {
     return {
       ...transaction,
-      actions: [<Actions key={transaction.id} transactionId={transaction.id} />]
+      actions: [<Actions key={transaction.id} transactionId={transaction.id} actionHandler={handleTableIconClick} />]
     }
   })
 

@@ -9,18 +9,23 @@ import Modal from 'react-modal'
 import TransactionsTable from './TransactionsTable'
 import Spinner from '../Common/Spinner'
 import AddTransactionCTA from './AddTransactionCTA'
-import AddTransaction from './AddTransaction'
+import TransactionAction from './TransactionAction'
 import Alert from './Alert'
+
+// Actions
+import {
+  fetchTransactions,
+  setTransactionsPage,
+  resetTransaction
+} from '../../actions'
 
 // Selectors
 import { getUser } from '../../reducers/userReducer'
-
-// Actions
-import { fetchTransactions, setTransactionsPage } from '../../actions'
-
-// Selectors
 import { getTransactions } from '../../reducers/transactionsReducer'
-import { getAddTransaction } from '../../reducers/transactionReducer'
+import {
+  getAddTransaction,
+  getDeleteTransaction
+} from '../../reducers/transactionReducer'
 
 // utils
 import {
@@ -30,7 +35,7 @@ import {
 } from '../../utils/constants'
 
 const { PENDING, UNINIT, SUCCESS, ERROR } = ASYNC_STATUS
-const { ADD } = TRANS_ACTIONS
+const { ADD, UPDATE, DELETE } = TRANS_ACTIONS
 
 Modal.setAppElement('#root')
 
@@ -71,18 +76,18 @@ const alertLevel = {
   ERROR: 'error'
 }
 
-
 const TransactionsContainer = ({
   user,
   fetchTransactions,
   setTransactionsPage,
   transactions,
   page,
-  addTransactionStatus
+  transactionStatus,
+  resetTransaction
 }) => {
   const classes = useStyles()
 
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(null)
   // state of alert for Adding, deleteing and updating transaction
   const [alert, setAlert] = useState({
     open: false,
@@ -90,8 +95,11 @@ const TransactionsContainer = ({
     message: null
   })
 
+  // transactionID needed for updating and deleting
+  const [transactionId, setTransactionId] = useState(null)
+
   useEffect(() => {
-    if (user.data !== false) {
+    if (user.data !== null) {
       fetchTransactions({
         page: page.current + 1,
         limit: page.rows
@@ -100,15 +108,36 @@ const TransactionsContainer = ({
   }, [user, fetchTransactions, page])
 
   useEffect(() => {
-    if ([SUCCESS, ERROR].includes(addTransactionStatus)) {
-      setShowModal(false)
+    // fetch transactions after Add, delete or update action
+    if (Object.values(transactionStatus).some(val => val === SUCCESS)) {
+      fetchTransactions({
+        page: page.current + 1,
+        limit: page.rows
+      })
+      // Clear transaction state
+      resetTransaction()
+    }
+  }, [transactionStatus, fetchTransactions, resetTransaction, page])
+
+  useEffect(() => {
+    if ([SUCCESS, ERROR].includes(transactionStatus.add)) {
+      setShowModal(null)
+      // Set Alert state, so that alert would be show
       setAlert({
         open: true,
-        level: alertLevel[addTransactionStatus],
-        message: alertMessaging[ADD][addTransactionStatus]
+        level: alertLevel[transactionStatus.add],
+        message: alertMessaging[ADD][transactionStatus.add]
+      })
+    } else if ([SUCCESS, ERROR].includes(transactionStatus.delete)) {
+      setShowModal(null)
+      // Set Alert state, so that alert would be show
+      setAlert({
+        open: true,
+        level: alertLevel[transactionStatus.delete],
+        message: alertMessaging[DELETE][transactionStatus.delete]
       })
     }
-  }, [addTransactionStatus, showModal, setAlert])
+  }, [transactionStatus, showModal, setAlert])
 
   const handlePageChange = (event, newPage) => {
     setTransactionsPage({
@@ -124,24 +153,29 @@ const TransactionsContainer = ({
     })
   }
 
-  const handleShowModal = () => {
-    setShowModal(true)
-  }
 
   const handleCloseModal = () => {
-    setShowModal(false)
+    setShowModal(null)
   }
 
   const handleAlertClose = () => {
     setAlert(false)
   }
 
+  const handleTableIconClick = (id, action) => {
+    setTransactionId(id)
+    setShowModal(action)
+  }
+
+  // boolean for determining whether to open modal
+  const isModalOpen = [ADD, UPDATE, DELETE].includes(showModal)
+
   return (
     <Container component="main" maxWidth="lg" className={classes.container}>
       <Typography variant="h5" component="h2">
         Transactions
       </Typography>
-      <AddTransactionCTA handleCTAClick={handleShowModal} />
+      <AddTransactionCTA handleCTAClick={() => setShowModal(ADD)} />
       {[UNINIT, PENDING].includes(transactions.status) ? (
         <Spinner />
       ) : (
@@ -153,12 +187,19 @@ const TransactionsContainer = ({
           page={page.current}
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
+          handleTableIconClick={handleTableIconClick}
         />
       )}
-      <Modal isOpen={showModal} style={modalStyles}>
-        <AddTransaction handleCancel={handleCloseModal} />
-      </Modal>
-
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} style={modalStyles}>
+          <TransactionAction
+            action={showModal}
+            handleCancel={handleCloseModal}
+            status={transactionStatus}
+            transactionId={transactionId}
+          />
+        </Modal>
+      )}
       {alert.open && (
         <Alert
           isOpen={alert.open}
@@ -178,11 +219,15 @@ function mapStateToProps(state) {
     user: getUser(state),
     transactions,
     page,
-    addTransactionStatus: getAddTransaction(state).status
+    transactionStatus: {
+      add: getAddTransaction(state).status,
+      delete: getDeleteTransaction(state).status
+    }
   }
 }
 
 export default connect(mapStateToProps, {
   fetchTransactions,
-  setTransactionsPage
+  setTransactionsPage,
+  resetTransaction
 })(TransactionsContainer)

@@ -78,6 +78,14 @@ export class ExpenseAPIService {
     }
   }
 
+  async deleteTransaction(transactionId) {
+    try {
+      await axios.delete(`/api/v1/transactions/${transactionId}`)
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
   _parseHttpResponse(response) {
     const error = new ServiceError('Service unavailable')
     // Unauthorized Access

@@ -28,7 +28,7 @@ export function signInUser(email, password) {
         dispatch({
           type: `${SIGN_IN}_${SUCCESS}`,
           signInStatus: ERROR,
-          payload: false
+          payload: null
         })
       } else {
         // set status to Error

@@ -41,4 +41,12 @@ export class TransactionManager extends BaseManager {
       throw TransactionManager._parseError(e)
     }
   }
+
+  async deleteTransaction(transactionId) {
+    try {
+      await this._apiService.deleteTransaction(transactionId)
+    } catch (e) {
+      throw TransactionManager._parseError(e)
+    }
+  }
 }

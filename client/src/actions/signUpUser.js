@@ -33,7 +33,7 @@ export function signUpUser({ name, email, password, passwordConfirm }) {
         dispatch({
           type: `${SIGN_UP}_${SUCCESS}`,
           signUpStatus: ERROR,
-          payload: false
+          payload: null
         })
       } else {
         // set status to Error

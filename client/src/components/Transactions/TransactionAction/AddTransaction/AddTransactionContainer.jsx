@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 import { format } from 'date-fns'
 
 // Components
-import AddTransaction from './AddTransaction'
-
-// Actions
-import { addTransaction } from '../../../actions'
-
-// Selectors
-import { getAddTransaction } from '../../../reducers/transactionReducer' 
+import AddTransaction from './AddTransaction' 
 
 // utils
-import { isNotEmpty, isValidCurrency } from '../../../utils'
-import { ASYNC_STATUS } from '../../../utils/constants'
+import { isNotEmpty, isValidCurrency } from '../../../../utils'
+import { ASYNC_STATUS } from '../../../../utils/constants'
 
 const { PENDING } = ASYNC_STATUS
 
-const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) => {
+const AddTransactionContainer = ({ handleAdd, handleCancel, status }) => {
   const [dateInput, setDateInput] = useState(Date.now())
   const [formInputs, setFormInputs] = useState({
     type: {
@@ -37,8 +30,8 @@ const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) =>
     }
   })
 
-  // pending status of addTransaction action
-  const addTransactionPending = addStatus === PENDING
+  // pending status of handleAdd action
+  const addTransactionPending = status === PENDING
 
   const handleDateChange = date => {
     setDateInput(date)
@@ -95,7 +88,7 @@ const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) =>
         amount: formInputs.amount.value,
         description: formInputs.description.value
       }
-      addTransaction(transaction)
+      handleAdd(transaction)
     }
   }
 
@@ -113,10 +106,4 @@ const AddTransactionContainer = ({ addTransaction, handleCancel, addStatus }) =>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    addStatus: getAddTransaction(state).status
-  }
-}
-
-export default connect(mapStateToProps, { addTransaction })(AddTransactionContainer)
+export default AddTransactionContainer
