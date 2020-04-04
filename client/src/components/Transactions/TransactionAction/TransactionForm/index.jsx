@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { makeStyles } from '@material-ui/core/styles'
 
+
+// TODO: move to constants
 const TRANSACTION_TYPES = ['expense', 'income']
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const AddTransaction = ({
+const TransactionForm = ({
   handleDateChange,
   handleInputChange,
   handleSubmit,
@@ -40,7 +42,8 @@ const AddTransaction = ({
   dateInput,
   handleCancel,
   handleOnBlur,
-  addTransactionPending
+  isSubmitPending,
+  submitBtnText
 }) => {
   const classes = useStyles()
   return (
@@ -119,12 +122,12 @@ const AddTransaction = ({
                 type="submit"
                 color="primary"
                 variant="contained"
-                disabled={addTransactionPending}
+                disabled={isSubmitPending}
                 onClick={handleSubmit}
               >
-                Add Transaction
+                {submitBtnText}
               </Button>
-              {addTransactionPending && (
+              {isSubmitPending && (
                 <CircularProgress
                   size={24}
                   className={classes.circularProgress}
@@ -145,4 +148,4 @@ const AddTransaction = ({
   )
 }
 
-export default AddTransaction
+export default TransactionForm

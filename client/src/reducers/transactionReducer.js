@@ -1,7 +1,8 @@
 import {
   ADD_TRANSACTION,
   RESET_TRANSACTION,
-  DELETE_TRANSACTION
+  DELETE_TRANSACTION,
+  UPDATE_TRANSACTION
 } from '../actions'
 
 import { ASYNC_STATUS } from '../utils/constants'
@@ -40,6 +41,14 @@ export default (state = defaultState, action) => {
           status: PENDING
         }
       }
+    case `${UPDATE_TRANSACTION}_${PENDING}`:
+      return {
+        ...state,
+        update: {
+          ...state.update,
+          status: PENDING
+        }
+      }
     case `${ADD_TRANSACTION}_${SUCCESS}`:
       return {
         ...state,
@@ -54,6 +63,14 @@ export default (state = defaultState, action) => {
         ...state,
         delete: {
           ...state.delete,
+          status: SUCCESS
+        }
+      }
+    case `${UPDATE_TRANSACTION}_${SUCCESS}`:
+      return {
+        ...state,
+        update: {
+          ...state.update,
           status: SUCCESS
         }
       }
@@ -73,6 +90,14 @@ export default (state = defaultState, action) => {
           status: ERROR
         }
       }
+    case `${UPDATE_TRANSACTION}_${ERROR}`:
+      return {
+        ...state,
+        update: {
+          ...state.update,
+          status: ERROR
+        }
+      }
     case RESET_TRANSACTION:
       return defaultState
     default:
@@ -87,4 +112,8 @@ export const getAddTransaction = ({ currentTransaction }) => {
 
 export const getDeleteTransaction = ({ currentTransaction }) => {
   return currentTransaction.delete
+}
+
+export const getUpdateTransaction = ({ currentTransaction }) => {
+  return currentTransaction.update
 }

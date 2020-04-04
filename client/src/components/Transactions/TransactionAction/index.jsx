@@ -4,9 +4,17 @@ import { connect } from 'react-redux'
 // Components
 import AddTransaction from './AddTransaction'
 import DeleteTransaction from './DeleteTransaction'
+import UpdateTransaction from './UpdateTransaction'
 
 // Actions
-import { addTransaction, deleteTransaction } from '../../../actions'
+import {
+  addTransaction,
+  deleteTransaction,
+  updateTransaction
+} from '../../../actions'
+
+// Selectors
+import { getTransactions } from '../../../reducers/transactionsReducer'
 
 // utils
 import { TRANS_ACTIONS } from '../../../utils/constants'
@@ -16,9 +24,11 @@ const TransactionAction = ({
   action,
   addTransaction,
   deleteTransaction,
+  updateTransaction,
   handleCancel,
   status,
-  transactionId
+  transactionId,
+  transactions
 }) => {
   switch (action) {
     case DELETE:
@@ -30,7 +40,23 @@ const TransactionAction = ({
         />
       )
     case UPDATE:
-      return <div> Update {transactionId}</div>
+      // Get transaction with matching id
+      const foundTransaction = transactions.find(
+        trans => trans.id === transactionId
+      )
+      // Format date 
+      const formattedTrans = {
+        ...foundTransaction,
+        date: new Date(foundTransaction.date)
+      }
+      return (
+        <UpdateTransaction
+          handleUpdate={updateTransaction}
+          handleCancel={handleCancel}
+          status={status.update}
+          transactionToUpdate={formattedTrans}
+        />
+      )
     default:
       return (
         <AddTransaction
@@ -42,7 +68,14 @@ const TransactionAction = ({
   }
 }
 
-export default connect(null, {
+const mapStateToProps = state => {
+  return {
+    transactions: getTransactions(state).data
+  }
+}
+
+export default connect(mapStateToProps, {
   addTransaction,
-  deleteTransaction
+  deleteTransaction,
+  updateTransaction
 })(TransactionAction)

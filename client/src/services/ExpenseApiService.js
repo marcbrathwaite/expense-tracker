@@ -86,6 +86,25 @@ export class ExpenseAPIService {
     }
   }
 
+  async updateTransaction(transactionId, {
+    date,
+    type,
+    amount,
+    description
+  }) {
+    try {
+      const res = await axios.patch(`/api/v1/transactions/${transactionId}`, {
+        date,
+        type,
+        amount,
+        description
+      })
+      return res.data
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
   _parseHttpResponse(response) {
     const error = new ServiceError('Service unavailable')
     // Unauthorized Access

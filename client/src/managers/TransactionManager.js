@@ -49,4 +49,13 @@ export class TransactionManager extends BaseManager {
       throw TransactionManager._parseError(e)
     }
   }
+
+  async updateTransaction(transactionId, transaction) {
+    try {
+      const res = await this._apiService.updateTransaction(transactionId, transaction)
+      return res
+    } catch (e) {
+      throw TransactionManager._parseError(e)
+    }
+  }
 }

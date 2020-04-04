@@ -24,7 +24,8 @@ import { getUser } from '../../reducers/userReducer'
 import { getTransactions } from '../../reducers/transactionsReducer'
 import {
   getAddTransaction,
-  getDeleteTransaction
+  getDeleteTransaction,
+  getUpdateTransaction
 } from '../../reducers/transactionReducer'
 
 // utils
@@ -116,6 +117,9 @@ const TransactionsContainer = ({
       })
       // Clear transaction state
       resetTransaction()
+    } else if (Object.values(transactionStatus).some(val => val === ERROR)) {
+      // Clear transaction state
+      resetTransaction()
     }
   }, [transactionStatus, fetchTransactions, resetTransaction, page])
 
@@ -135,6 +139,14 @@ const TransactionsContainer = ({
         open: true,
         level: alertLevel[transactionStatus.delete],
         message: alertMessaging[DELETE][transactionStatus.delete]
+      })
+    } else if ([SUCCESS, ERROR].includes(transactionStatus.update)) {
+      setShowModal(null)
+      // Set Alert state, so that alert would be show
+      setAlert({
+        open: true,
+        level: alertLevel[transactionStatus.update],
+        message: alertMessaging[UPDATE][transactionStatus.update]
       })
     }
   }, [transactionStatus, showModal, setAlert])
@@ -221,7 +233,8 @@ function mapStateToProps(state) {
     page,
     transactionStatus: {
       add: getAddTransaction(state).status,
-      delete: getDeleteTransaction(state).status
+      delete: getDeleteTransaction(state).status,
+      update: getUpdateTransaction(state).status
     }
   }
 }

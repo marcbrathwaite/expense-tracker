@@ -48,5 +48,4 @@ export default (state = defaultState, action) => {
 }
 
 // selectors
-
 export const getTransactions = ({ transactions }) => transactions

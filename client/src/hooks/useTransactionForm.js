@@ -1,38 +1,44 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { format } from 'date-fns'
 
-// Components
-import AddTransaction from './AddTransaction' 
-
 // utils
-import { isNotEmpty, isValidCurrency } from '../../../../utils'
-import { ASYNC_STATUS } from '../../../../utils/constants'
+import { isNotEmpty, isValidCurrency } from '../utils'
+import { ASYNC_STATUS } from '../utils/constants'
 
 const { PENDING } = ASYNC_STATUS
 
-const AddTransactionContainer = ({ handleAdd, handleCancel, status }) => {
-  const [dateInput, setDateInput] = useState(Date.now())
+
+const useTransactionForm = (
+  submitAction,
+  submitActionStatus,
+  { 
+    date = Date.now(),
+    type = 'expense',
+    amount = '',
+    description = ''
+  } = {}
+) => {
+  const [dateInput, setDateInput] = useState(date)
   const [formInputs, setFormInputs] = useState({
     type: {
       name: 'type',
-      value: 'expense',
+      value: type,
       validation: isNotEmpty
     },
     amount: {
       name: 'amount',
-      value: '',
+      value: amount,
       validation: isValidCurrency,
       error: false
     },
     description: {
       name: 'description',
-      value: ''
+      value: description
     }
   })
 
-  // pending status of handleAdd action
-  const addTransactionPending = status === PENDING
-
+  const isPending = submitActionStatus === PENDING
+  
   const handleDateChange = date => {
     setDateInput(date)
   }
@@ -88,22 +94,19 @@ const AddTransactionContainer = ({ handleAdd, handleCancel, status }) => {
         amount: formInputs.amount.value,
         description: formInputs.description.value
       }
-      handleAdd(transaction)
+      submitAction(transaction)
     }
   }
 
-  return (
-    <AddTransaction
-      handleDateChange={handleDateChange}
-      handleInputChange={handleInputChange}
-      handleOnBlur={handleOnBlur}
-      formInputs={formInputs}
-      dateInput={dateInput}
-      handleSubmit={handleSubmit}
-      handleCancel={handleCancel}
-      addTransactionPending={addTransactionPending}
-    />
-  )
+  return {
+    dateInput,
+    formInputs,
+    isPending,
+    handleDateChange,
+    handleInputChange,
+    handleOnBlur,
+    handleSubmit
+  }
 }
 
-export default AddTransactionContainer
+export default useTransactionForm
