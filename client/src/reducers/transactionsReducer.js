@@ -1,4 +1,8 @@
-import { FETCH_TRANSACTIONS, SET_TRANSACTIONS_PAGE } from '../actions'
+import {
+  FETCH_TRANSACTIONS,
+  SET_TRANSACTIONS_PAGE,
+  GET_SUMMARY
+} from '../actions'
 
 import { ASYNC_STATUS } from '../utils/constants'
 
@@ -12,6 +16,10 @@ const defaultState = {
   page: {
     current: 0,
     rows: 10
+  },
+  summary: {
+    status: UNINIT,
+    data: null
   }
 }
 
@@ -22,6 +30,14 @@ export default (state = defaultState, action) => {
         ...state,
         status: PENDING
       }
+    case `${GET_SUMMARY}_${PENDING}`:
+      return {
+        ...state,
+        summary: {
+          ...state.summary,
+          status: PENDING
+        }
+      }
     case `${FETCH_TRANSACTIONS}_${SUCCESS}`:
       return {
         ...state,
@@ -29,11 +45,28 @@ export default (state = defaultState, action) => {
         data: action.payload,
         total: action.meta.searchCount
       }
+    case `${GET_SUMMARY}_${SUCCESS}`:
+      return {
+        ...state,
+        summary: {
+          ...state.summary,
+          status: SUCCESS,
+          data: action.payload
+        }
+      }
     case `${FETCH_TRANSACTIONS}_${ERROR}`:
       return {
         ...state,
         status: ERROR,
         error: action.error
+      }
+    case `${GET_SUMMARY}_${ERROR}`:
+      return {
+        ...state,
+        summary: {
+          ...state.summary,
+          status: ERROR
+        }
       }
     case SET_TRANSACTIONS_PAGE:
       return {
@@ -49,3 +82,5 @@ export default (state = defaultState, action) => {
 
 // selectors
 export const getTransactions = ({ transactions }) => transactions
+
+export const getTransactionsSummary = ({ transactions }) => transactions.summary

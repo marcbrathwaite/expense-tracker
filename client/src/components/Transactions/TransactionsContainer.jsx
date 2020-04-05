@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 
 //Components
 import TransactionsTable from './TransactionsTable'
+import Summary from '../Summary'
 import Spinner from '../Common/Spinner'
 import AddTransactionCTA from './AddTransactionCTA'
 import TransactionAction from './TransactionAction'
@@ -165,7 +166,6 @@ const TransactionsContainer = ({
     })
   }
 
-
   const handleCloseModal = () => {
     setShowModal(null)
   }
@@ -187,20 +187,23 @@ const TransactionsContainer = ({
       <Typography variant="h5" component="h2">
         Transactions
       </Typography>
-      <AddTransactionCTA handleCTAClick={() => setShowModal(ADD)} />
       {[UNINIT, PENDING].includes(transactions.status) ? (
         <Spinner />
       ) : (
-        <TransactionsTable
-          transactions={transactions.data}
-          count={transactions.total}
-          rowsPerPage={page.rows}
-          rowsPerPageOptions={ROWS_PER_PAGE}
-          page={page.current}
-          handlePageChange={handlePageChange}
-          handleRowsPerPageChange={handleRowsPerPageChange}
-          handleTableIconClick={handleTableIconClick}
-        />
+        <>
+          <Summary />
+          <TransactionsTable
+            transactions={transactions.data}
+            count={transactions.total}
+            rowsPerPage={page.rows}
+            rowsPerPageOptions={ROWS_PER_PAGE}
+            page={page.current}
+            handlePageChange={handlePageChange}
+            handleRowsPerPageChange={handleRowsPerPageChange}
+            handleTableIconClick={handleTableIconClick}
+          />
+          <AddTransactionCTA handleCTAClick={() => setShowModal(ADD)} />
+        </>
       )}
       {isModalOpen && (
         <Modal isOpen={isModalOpen} style={modalStyles}>

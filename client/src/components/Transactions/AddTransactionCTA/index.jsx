@@ -33,12 +33,12 @@ const AddTransactionCTA = ({ handleCTAClick }) => {
   const classes = useStyles()
   return (
     <div className={classes.container}>
-      <Typography variant="subtitle2" component="span" className={classes.text}>
-        Add a Transaction
-      </Typography>
       <IconButton className={classes.button} onClick={handleCTAClick}>
         <AddIcon className={classes.addIcon} />
       </IconButton>
+      <Typography variant="subtitle2" component="span" className={classes.text}>
+        Add a Transaction
+      </Typography>
     </div>
   )
 }

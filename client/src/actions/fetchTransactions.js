@@ -1,13 +1,15 @@
 import { TransactionManager } from '../managers'
 
+import { getSummary } from '.'
+
 import { ASYNC_STATUS } from '../utils/constants'
 
 const { PENDING, SUCCESS, ERROR } = ASYNC_STATUS
 
 export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
 
-export function fetchTransactions({ page, limit }) {
-  return async function(dispatch) {
+export const fetchTransactions = ({ page, limit }) => {
+  return async dispatch => {
     try {
       dispatch({
         type: `${FETCH_TRANSACTIONS}_${PENDING}`
@@ -23,6 +25,7 @@ export function fetchTransactions({ page, limit }) {
         meta: res.data.meta,
         payload: res.data.transactions
       })
+      dispatch(getSummary())
     } catch (error) {
       dispatch({
         type: `${FETCH_TRANSACTIONS}_${ERROR}`,

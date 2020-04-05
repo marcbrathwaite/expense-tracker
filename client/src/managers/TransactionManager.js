@@ -58,4 +58,20 @@ export class TransactionManager extends BaseManager {
       throw TransactionManager._parseError(e)
     }
   }
+
+  async getSummary() {
+    try {
+      const res = await this._apiService.getSummary()
+      const { summary } = res
+      const transformedSummary = Object.keys(summary).map((key) => {
+        return {
+          type: key,
+          value: summary[key]
+        }
+      })
+      return transformedSummary
+    } catch (e) {
+      throw TransactionManager._parseError(e)
+    }
+  }
 }

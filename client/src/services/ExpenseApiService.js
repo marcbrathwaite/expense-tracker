@@ -105,6 +105,15 @@ export class ExpenseAPIService {
     }
   }
 
+  async getSummary() {
+    try {
+      const res = await axios.get('/api/v1/transactions/summary')
+      return res.data
+    } catch (e) {
+      throw this._parseHttpResponse(e.response)
+    }
+  }
+
   _parseHttpResponse(response) {
     const error = new ServiceError('Service unavailable')
     // Unauthorized Access

@@ -228,7 +228,11 @@ exports.TransactionManager = class TransactionManager extends BaseManager {
       }
     })
 
-    formattedSummary.net = formattedSummary.income - formattedSummary.expense
-    return formattedSummary
+    const balance = formattedSummary.income - formattedSummary.expense
+    return {
+      income: formattedSummary.income,
+      expenses: formattedSummary.expense,
+      balance
+    }
   }
 }
