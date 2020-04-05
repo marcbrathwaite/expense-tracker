@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
   },
   tableContainer: {
     maxHeight: 440
+  },
+  tableHead: {
+    backgroundColor: '#3F51B5'
   }
 }))
 
@@ -27,7 +30,7 @@ const columns = [
   {
     id: 'date',
     label: 'Date',
-    minWidth: 50,
+    minWidth: 20,
     maxWidth: 60,
     format: value => format(new Date(value), 'yyyy-MM-dd')
   },
@@ -35,7 +38,7 @@ const columns = [
   {
     id: 'amount',
     label: 'Amount',
-    minWidth: 30,
+    minWidth: 20,
     maxWidth: 150,
     align: 'center',
     format: value => value.toFixed(2)
@@ -43,14 +46,14 @@ const columns = [
   {
     id: 'description',
     label: 'Description',
-    minWidth: 100,
+    minWidth: 20,
     maxWidth: 200
   },
   {
     id: 'actions',
     label: 'Actions',
     align: 'center',
-    minWidth: 50,
+    minWidth: 20,
     maxWidth: 70
   }
 ]
@@ -78,8 +81,8 @@ const TransactionsTable = ({
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.tableContainer}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+        <Table aria-label="table">
+          <TableHead className={classes.tableHead}>
             <TableRow>
               {columns.map(({ id, label, align, maxWidth, minWidth }) => {
                 return (
@@ -88,7 +91,8 @@ const TransactionsTable = ({
                     align={align}
                     style={{
                       minWidth,
-                      maxWidth
+                      maxWidth,
+                      color: '#FFF'
                     }}
                   >
                     {label}

@@ -198,9 +198,11 @@ exports.TransactionManager = class TransactionManager extends BaseManager {
     }
   }
 
-  async getSummary() {
+  async getSummary(id) {
     try {
-      const summary = await this._transaction.aggregate().group({
+      const summary = await this._transaction.aggregate().match({
+        _user: id
+      }).group({
         _id: '$type',
         total: {
           $sum: '$amount'

@@ -9,12 +9,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
   text: {
-    marginRight: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
   },
   button: {
+    marginRight: theme.spacing(1),
     background: '#3F51B5',
     padding: theme.spacing(1),
     '&:hover': {
@@ -22,10 +22,14 @@ const useStyles = makeStyles(theme => ({
     },
     '&:hover svg': {
       color: '#000000'
+    },
+    '&:hover + span': {
+      textDecoration: 'underline'
     }
   },
   addIcon: {
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    fontSize: 12
   }
 }))
 

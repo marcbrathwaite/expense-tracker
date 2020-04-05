@@ -15,7 +15,7 @@ const SummaryRow = ({ columns, summaryData }) => {
               style={{
                 minWidth,
                 maxWidth,
-                backgroundColor: isHeader ? '#000' : '#FFF',
+                backgroundColor: isHeader ? '#3F51B5' : '#FFF',
                 color: isHeader ? '#FFF' : '#000'
               }}
             >

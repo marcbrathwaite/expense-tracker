@@ -218,7 +218,16 @@ exports.TransactionController = class TransactionController {
 
   static async getSummary(req, res, next) {
     try {
-      const summary = await TransactionManager.shareInstance.getSummary()
+      const { user } = req
+      if (isUndefined(user)) {
+        // TODO: logger
+        return next(new AppError('User not found', 404))
+      }
+
+      // get userId
+      const { id } = user
+
+      const summary = await TransactionManager.shareInstance.getSummary(id)
 
       res.status(200).json({
         statusCd: 200,

@@ -36,12 +36,12 @@ const App = ({ fetchUser, user }) => {
   return (
     <>
       <CssBaseline />
-      <Header />
+      <Header user={user} />
       {[PENDING, UNINIT].includes(user.status) ? (
         <Spinner verticalPadding={20} />
       ) : (
         <Switch>
-          <Route exact path="/" component={Landing} />
+          <Route exact path="/" render={() => <Landing user={user} />} />
           <Route
             path="/users/sign-up"
             exact

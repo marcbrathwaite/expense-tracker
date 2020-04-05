@@ -33,7 +33,9 @@ import {
 import {
   ASYNC_STATUS,
   ROWS_PER_PAGE,
-  TRANS_ACTIONS
+  TRANS_ACTIONS,
+  ALERT_LEVEL,
+  ALERT_MESSAGING
 } from '../../utils/constants'
 
 const { PENDING, UNINIT, SUCCESS, ERROR } = ASYNC_STATUS
@@ -44,6 +46,26 @@ Modal.setAppElement('#root')
 const useStyles = makeStyles(theme => ({
   container: {
     padding: theme.spacing(5, 0)
+  },
+  summaryContainer: {
+    margin: theme.spacing(0, 0, 6, 0)
+  },
+  title: {
+    margin: theme.spacing(0, 0, 2, 0),
+    textDecoration: 'underline'
+  },
+  summaryContentWrapper: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  summary: {
+    minWidth: 320,
+    width: '30%'
+  },
+  ctaWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    margin: theme.spacing(0, 0, 2, 0)
   }
 }))
 
@@ -56,26 +78,6 @@ const modalStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
   }
-}
-
-const alertMessaging = {
-  ADD: {
-    SUCCESS: 'Transaction successfully added!',
-    ERROR: 'Unable to add transaction at this time!'
-  },
-  UPDATE: {
-    SUCCESS: 'Transaction successfully updated!',
-    ERROR: 'Unable to update transaction at this time!'
-  },
-  DELETE: {
-    SUCCESS: 'Transaction successfully deleted!',
-    ERROR: 'Unable to delete transaction at this time!'
-  }
-}
-
-const alertLevel = {
-  SUCCESS: 'success',
-  ERROR: 'error'
 }
 
 const TransactionsContainer = ({
@@ -130,24 +132,24 @@ const TransactionsContainer = ({
       // Set Alert state, so that alert would be show
       setAlert({
         open: true,
-        level: alertLevel[transactionStatus.add],
-        message: alertMessaging[ADD][transactionStatus.add]
+        level: ALERT_LEVEL[transactionStatus.add],
+        message: ALERT_MESSAGING[ADD][transactionStatus.add]
       })
     } else if ([SUCCESS, ERROR].includes(transactionStatus.delete)) {
       setShowModal(null)
       // Set Alert state, so that alert would be show
       setAlert({
         open: true,
-        level: alertLevel[transactionStatus.delete],
-        message: alertMessaging[DELETE][transactionStatus.delete]
+        level: ALERT_LEVEL[transactionStatus.delete],
+        message: ALERT_MESSAGING[DELETE][transactionStatus.delete]
       })
     } else if ([SUCCESS, ERROR].includes(transactionStatus.update)) {
       setShowModal(null)
       // Set Alert state, so that alert would be show
       setAlert({
         open: true,
-        level: alertLevel[transactionStatus.update],
-        message: alertMessaging[UPDATE][transactionStatus.update]
+        level: ALERT_LEVEL[transactionStatus.update],
+        message: ALERT_MESSAGING[UPDATE][transactionStatus.update]
       })
     }
   }, [transactionStatus, showModal, setAlert])
@@ -166,13 +168,9 @@ const TransactionsContainer = ({
     })
   }
 
-  const handleCloseModal = () => {
-    setShowModal(null)
-  }
+  const handleCloseModal = () => setShowModal(null)
 
-  const handleAlertClose = () => {
-    setAlert(false)
-  }
+  const handleAlertClose = () => setAlert(false)
 
   const handleTableIconClick = (id, action) => {
     setTransactionId(id)
@@ -184,14 +182,30 @@ const TransactionsContainer = ({
 
   return (
     <Container component="main" maxWidth="lg" className={classes.container}>
-      <Typography variant="h5" component="h2">
-        Transactions
-      </Typography>
       {[UNINIT, PENDING].includes(transactions.status) ? (
         <Spinner />
       ) : (
         <>
-          <Summary />
+          <div className={classes.summaryContainer}>
+            <Typography
+              variant="h5"
+              component="h2"
+              className={classes.title}
+            >
+              Summary
+            </Typography>
+            <div className={classes.summaryContentWrapper}>
+              <div className={classes.summary}>
+                <Summary />
+              </div>
+            </div>
+          </div>
+          <Typography variant="h5" component="h2" className={classes.title}>
+              Transactions
+          </Typography>
+            <div className={classes.ctaWrapper}>
+              <AddTransactionCTA handleCTAClick={() => setShowModal(ADD)} /> 
+            </div>
           <TransactionsTable
             transactions={transactions.data}
             count={transactions.total}
@@ -202,7 +216,6 @@ const TransactionsContainer = ({
             handleRowsPerPageChange={handleRowsPerPageChange}
             handleTableIconClick={handleTableIconClick}
           />
-          <AddTransactionCTA handleCTAClick={() => setShowModal(ADD)} />
         </>
       )}
       {isModalOpen && (
