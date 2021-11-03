@@ -33,7 +33,7 @@
     "lodash.tonumber": "^4.0.3",
     "mongoose": "^5.7.10",
     "nodemailer": "^6.3.1",
-    "validator": "^12.1.0",
+    "validator": "^13.7.0",
     "winston": "^3.2.1",
     "xss-clean": "^0.1.1"
   },
